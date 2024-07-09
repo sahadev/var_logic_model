@@ -9,11 +9,10 @@ class Graph {
     graph: LGraph;
 
     constructor() {
-
         this.graph = new LGraph();
         const canvas = new LGraphCanvas("#mycanvas", this.graph);
-        canvas.resize(1200, 1000)
-        this.graph.start(1000);
+        canvas.resize(window.innerWidth, window.innerHeight)
+        // this.graph.start(1000);
     }
 
     addNode() {

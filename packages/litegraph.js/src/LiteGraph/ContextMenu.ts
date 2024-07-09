@@ -1,3 +1,5 @@
+// @ts-nocheck
+import { LiteGraph } from "./LiteGraph";
 
 /**
  * ContextMenu from LiteGUI

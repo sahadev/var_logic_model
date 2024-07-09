@@ -2486,7 +2486,7 @@ LGraphCanvas.prototype.computeVisibleNodes = function (nodes, out) {
 
 /**
  * renders the whole canvas content, by rendering in two separated canvas, one containing the background grid and the connections, and one containing the nodes)
- * @method draw
+ * @method draw 绘制
  **/
 LGraphCanvas.prototype.draw = function (force_canvas, force_bgcanvas) {
     if (!this.canvas || this.canvas.width == 0 || this.canvas.height == 0) {

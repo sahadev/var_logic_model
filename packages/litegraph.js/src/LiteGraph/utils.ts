@@ -99,7 +99,7 @@ export function hex2num(hex) {
 
 //Give a array with three values as the argument and the function will return
 //	the corresponding hex triplet.
-function num2hex(triplet) {
+export function num2hex(triplet) {
     let hex_alphabets = "0123456789ABCDEF";
     let hex = "#";
     let int1, int2;

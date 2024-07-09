@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 //this is the class in charge of storing link information
 export class LLink {
     constructor(id, type, origin_id, origin_slot, target_id, target_slot) {
