@@ -26,7 +26,7 @@ OutputNode.prototype.onExecute = function () {
     // 从输入端取到的值是没有延迟的
     this._value = this.getInputData(0) || this.getInputData(1) || this.getInputData(2);
 
-    this.value_widget.value = `computed:${this._value}`;
+    this.value_widget.value = `computed:${this._value || 0}`;
 }
 
 //register in the system

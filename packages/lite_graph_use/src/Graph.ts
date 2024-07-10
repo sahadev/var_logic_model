@@ -89,8 +89,11 @@ class Graph {
         return output;
     }
 
-    addEqualNode(index: number = 0) {
-        const output = LiteGraph.createNode("build/equal", "表达式");
+    addEqualNode(index: number = 0, title: string = '表达式', expression?: string) {
+        console.info(`expression`, expression)
+        const output = LiteGraph.createNode("build/equal", title, {
+            expression
+        });
         output.pos = gridStartPostion[1][index];
         this.graph.add(output);
         return output;
