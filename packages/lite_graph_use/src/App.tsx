@@ -3,8 +3,8 @@ import "./App.css";
 import { getInstance } from "./Graph";
 
 const graphInstance = getInstance();
-const addNode = graphInstance.addAddNode();
-// const input = graphInstance.addInput();
+// const addNode = graphInstance.addAddNode();
+const input = graphInstance.addConstInput();
 // const output = graphInstance.addOutput();
 
 // input.connect(0, addNode, 0);

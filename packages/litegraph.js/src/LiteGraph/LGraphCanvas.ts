@@ -69,7 +69,7 @@ export function LGraphCanvas(canvas, graph, options) {
     this.allow_dragnodes = true;
     this.allow_interaction = true; //allow to control widgets, buttons, collapse, etc
     this.multi_select = false; //allow selecting multi nodes without pressing extra keys
-    this.allow_searchbox = true;
+    this.allow_searchbox = false;
     this.allow_reconnect_links = true; //allows to change a connection with having to redo it again
     this.align_to_grid = false; //snap to grid
 
@@ -4524,6 +4524,7 @@ LGraphCanvas.prototype.drawExecutionOrder = function (ctx) {
 
 /**
  * draws the widgets stored inside a node
+ * 决定了绘制什么样的控件
  * @method drawNodeWidgets
  **/
 LGraphCanvas.prototype.drawNodeWidgets = function (
@@ -4646,6 +4647,7 @@ LGraphCanvas.prototype.drawNodeWidgets = function (
                 break;
             case "number":
             case "combo":
+                debugger
                 ctx.textAlign = "left";
                 ctx.strokeStyle = outline_color;
                 ctx.fillStyle = background_color;
@@ -5930,13 +5932,13 @@ LGraphCanvas.prototype.showConnectionMenu = function (optPass) { // addNodeMenu 
                     }
                 });
                 break;
-            case "Search":
-                if (isFrom) {
-                    that.showSearchBox(e, { node_from: opts.nodeFrom, slot_from: slotX, type_filter_in: fromSlotType });
-                } else {
-                    that.showSearchBox(e, { node_to: opts.nodeTo, slot_from: slotX, type_filter_out: fromSlotType });
-                }
-                break;
+            // case "Search":
+            //     if (isFrom) {
+            //         that.showSearchBox(e, { node_from: opts.nodeFrom, slot_from: slotX, type_filter_in: fromSlotType });
+            //     } else {
+            //         that.showSearchBox(e, { node_to: opts.nodeTo, slot_from: slotX, type_filter_out: fromSlotType });
+            //     }
+            //     break;
             default:
                 // check for defaults nodes for this slottype
                 var nodeCreated = that.createDefaultNodeForSlot(Object.assign(opts, {

@@ -42,14 +42,20 @@ class Graph {
     addInput() {
         const input = LiteGraph.createNode("graph/input");
 
-        console.info(`input`, input.name_widget)
-
         input.name_widget.value = 'PackageLevel';
         input.value_widget.value = 2;
 
         input.pos = [200, 450];
         this.graph.add(input);
         return input;
+    }
+
+    addConstInput() {
+        const input = LiteGraph.createNode("basic/const");
+        input.pos = [200, 450];
+        this.graph.add(input);
+        return input;
+
     }
 
     addOutput() {

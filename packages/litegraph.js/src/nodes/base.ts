@@ -759,8 +759,10 @@ import { LiteGraph } from "../LiteGraph/LiteGraph";
     //Constant
     function ConstantNumber() {
         this.addOutput("value", "number");
-        this.addProperty("value", 1.0);
-        this.widget = this.addWidget("number", "value", 1, "value");
+        this.addProperty("value", 11.0);
+        this.widget = this.addWidget("number", "value", 12, { // type name value option
+            options: 0
+        }); // number决定了什么样的控件类型
         this.widgets_up = true;
         this.size = [180, 30];
     }
@@ -769,7 +771,7 @@ import { LiteGraph } from "../LiteGraph/LiteGraph";
     ConstantNumber.desc = "Constant number";
 
     ConstantNumber.prototype.onExecute = function () {
-        this.setOutputData(0, parseFloat(this.properties["value"]));
+        this.setOutputData(0, parseInt(this.properties["value"]));
     };
 
     ConstantNumber.prototype.getTitle = function () {
@@ -780,7 +782,7 @@ import { LiteGraph } from "../LiteGraph/LiteGraph";
     };
 
     ConstantNumber.prototype.setValue = function (v) {
-        this.setProperty("value", v);
+        this.setProperty("value", 10);
     }
 
     ConstantNumber.prototype.onDrawBackground = function (ctx) {

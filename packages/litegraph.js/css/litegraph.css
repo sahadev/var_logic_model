@@ -87,7 +87,7 @@
 
 .litegraph .litemenu-entry,
 .litemenu-title {
-    font-size: 12px;
+    font-size: 14px;
     color: #2e2e2e;
     padding: 0 0 0 4px;
     margin: 2px;
@@ -268,7 +268,7 @@
     margin: 4px;
     margin-right: 10px;
     cursor: pointer;
-    font-size: 1.4em;
+    font-size: 14px;
 }
 
 .litegraph .dialog .close:hover {
@@ -323,7 +323,7 @@
 }
 
 .litegraph .dialog .node_type {
-    font-size: 1.2em;
+    font-size: 14px;
     display: block;
     margin: 10px;
 }
@@ -435,7 +435,7 @@
 }
 
 .litegraph .subgraph_property span.name {
-    font-size: 1.3em;
+    font-size: 14px;
     padding-left: 4px;
 }
 
@@ -573,9 +573,11 @@
     left: 10px;
     min-height: 2em;
     background-color: #333;
-    font-size: 1.2em;
+    font-size: 14px;
     box-shadow: 0 0 10px white !important;
     z-index: 10;
+    display: flex;
+    align-items: center;
 }
 
 .graphdialog.rounded {
@@ -588,6 +590,7 @@
     min-width: 60px;
     min-height: 1.5em;
     padding-left: 10px;
+    color: white;
 }
 
 .graphdialog input,
@@ -598,7 +601,7 @@
     min-height: 1.5em;
     background-color: white;
     border: 0;
-    color: white;
+    color: #2e2e2e;
     padding-left: 10px;
     outline: none;
 }
@@ -608,7 +611,6 @@
 }
 
 .graphdialog button {
-    margin-top: 3px;
     vertical-align: top;
     background-color: #999;
     border: 0;
