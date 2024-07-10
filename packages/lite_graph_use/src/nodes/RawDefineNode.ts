@@ -1,10 +1,13 @@
 // @ts-nocheck
 import { LiteGraph } from "litegraph";
 
-//node constructor class
+/**
+ * 原始定义节点
+ * @param title 
+ */
 function RawDefineNode(title: string) {
     this._ctor("原始数据定义节点");
-    this.properties = { precision: 0, value: 1, step: 10 };
+    this.properties = { precision: 0, value: 0, step: 10 };
     this.value_widget = this.addWidget(
         "number",
         title,

@@ -1,10 +1,34 @@
 // eslint-disable
 // @ts-nocheck
 import { LGraph, LGraphCanvas, LiteGraph } from "litegraph";
-import 'litegraph/css/litegraph.css'
-import './nodes/AddNode';
-import './nodes/OutputNode';
-import './nodes/RawDefineNode';
+import "litegraph/css/litegraph.css";
+import "./nodes/AddNode";
+import "./nodes/OutputNode";
+import "./nodes/RawDefineNode";
+import "./nodes/EqualAssertNode";
+
+// 网格大小
+const GRID_WIDTH = 300;
+const GRID_HEIGHT = 200;
+
+// 构建坐标表格
+const x_num: number = 10,
+    y_num: number = 6;
+
+// 起始坐标偏移量
+const x_offset: number = 100;
+
+const gridStartPostion = [];
+
+// x不动y先动，按列构建
+for (let i = 0; i < x_num; i++) {
+    const rowPosition = [];
+    for (let j = 0; j < y_num; j++) {
+        rowPosition.push([x_offset + i * GRID_WIDTH, x_offset + j * GRID_HEIGHT]);
+    }
+    gridStartPostion.push(rowPosition);
+}
+
 
 class Graph {
     graph: LGraph;
@@ -12,7 +36,7 @@ class Graph {
     constructor() {
         this.graph = new LGraph();
         const canvas = new LGraphCanvas("#mycanvas", this.graph);
-        canvas.resize(window.innerWidth, window.innerHeight)
+        canvas.resize(window.innerWidth, window.innerHeight);
         this.graph.start(200); // 控制真正的渲染间隔
     }
 
@@ -43,7 +67,7 @@ class Graph {
     addInput() {
         const input = LiteGraph.createNode("graph/input");
 
-        input.name_widget.value = 'PackageLevel';
+        input.name_widget.value = "PackageLevel";
         input.value_widget.value = 2;
 
         input.pos = [200, 450];
@@ -56,32 +80,37 @@ class Graph {
         input.pos = [200, 450];
         this.graph.add(input);
         return input;
-
     }
 
-    addOutput() {
-        const output = LiteGraph.createNode('basic/output');
-        output.pos = [800, 450]
-
+    addRawNode(index: number = 0) {
+        const output = LiteGraph.createNode("build/raw", "packageLevel");
+        output.pos = gridStartPostion[0][index];
         this.graph.add(output);
         return output;
     }
 
-    addRawNode() {
-        const output = LiteGraph.createNode('build/raw', 'packageLevel');
-        output.pos = [400, 450]
+    addEqualNode(index: number = 0) {
+        const output = LiteGraph.createNode("build/equal", "表达式");
+        output.pos = gridStartPostion[1][index];
         this.graph.add(output);
         return output;
-
     }
 
+    addOutput(index: number = 0) {
+        const output = LiteGraph.createNode("basic/output");
+
+        output.pos = gridStartPostion[2][index];
+
+        this.graph.add(output);
+        return output;
+    }
 }
 
 let graphInstance: Graph | null = null;
 
 export const getInstance = () => {
     if (!graphInstance) {
-        graphInstance = new Graph()
+        graphInstance = new Graph();
     }
     return graphInstance;
 };
