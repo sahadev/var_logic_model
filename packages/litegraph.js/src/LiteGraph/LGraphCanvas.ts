@@ -79,7 +79,7 @@ export function LGraphCanvas(canvas, graph, options) {
     this.filter = null; //allows to filter to only accept some type of nodes in a graph
 
     this.set_canvas_dirty_on_mouse_event = true; //forces to redraw the canvas if the mouse does anything
-    this.always_render_background = false;
+    this.always_render_background = true;
     this.render_shadows = true;
     this.render_canvas_border = true;
     this.render_connections_shadows = false; //too much cpu
@@ -578,10 +578,15 @@ LGraphCanvas.prototype.startRendering = function () {
         return;
     } //already rendering
 
+    console.info(`startRendering`)
+
     this.is_rendering = true;
     renderFrame.call(this);
 
     function renderFrame() {
+
+        // console.info(`loop rendering`, this.pause_rendering, this.is_rendering)
+
         if (!this.pause_rendering) {
             this.draw();
         }
@@ -617,7 +622,10 @@ LGraphCanvas.prototype.blockClick = function () {
     this.last_mouseclick = 0;
 }
 
+// 鼠标点击
 LGraphCanvas.prototype.processMouseDown = function (e) {
+
+    // console.info(`mouse click`, e);
 
     if (this.set_canvas_dirty_on_mouse_event)
         this.dirty_canvas = true;
@@ -652,7 +660,11 @@ LGraphCanvas.prototype.processMouseDown = function (e) {
         return;
     }
 
+    // 获取位置上的节点
     var node = this.graph.getNodeOnPos(e.canvasX, e.canvasY, this.visible_nodes, 5);
+
+    // console.info(`node on pos`, node)
+
     var skip_dragging = false;
     var skip_action = false;
     var now = LiteGraph.getTime();
@@ -759,6 +771,7 @@ LGraphCanvas.prototype.processMouseDown = function (e) {
                                 this.connecting_output = output;
                                 this.connecting_output.slot_index = i;
                                 this.connecting_pos = node.getConnectionPos(false, i);
+                                console.info(`connected`, this.connecting_pos)
                                 this.connecting_slot = i;
 
                                 if (LiteGraph.shift_click_do_break_link_from) {
@@ -1107,6 +1120,7 @@ if( (this.dirty_canvas || this.dirty_bgcanvas) && this.rendering_timer_id == nul
 
 /**
  * Called when a mouse move event has to be processed
+ * 鼠标移动
  * @method processMouseMove
  **/
 LGraphCanvas.prototype.processMouseMove = function (e) {
@@ -2523,6 +2537,7 @@ LGraphCanvas.prototype.draw = function (force_canvas, force_bgcanvas) {
 
 /**
  * draws the front canvas (the one containing all the nodes)
+ * 圆点高亮在这里
  * @method drawFrontCanvas
  **/
 LGraphCanvas.prototype.drawFrontCanvas = function () {
@@ -2657,6 +2672,9 @@ LGraphCanvas.prototype.drawFrontCanvas = function () {
             );
 
             ctx.beginPath();
+
+            // 这部分是用于输出点高亮的
+            // console.info(`shape info`, connType, connShape)
             if (
                 connType === LiteGraph.EVENT ||
                 connShape === LiteGraph.BOX_SHAPE
@@ -2682,21 +2700,22 @@ LGraphCanvas.prototype.drawFrontCanvas = function () {
                 ctx.closePath();
             }
             else {
+                // 高亮小圆点
                 ctx.arc(
                     this.connecting_pos[0],
                     this.connecting_pos[1],
-                    4,
+                    6,
                     0,
-                    Math.PI * 2
+                    Math.PI * 11
                 );
                 ctx.fill();
                 ctx.beginPath();
                 ctx.arc(
                     this.graph_mouse[0],
                     this.graph_mouse[1],
-                    4,
+                    6,
                     0,
-                    Math.PI * 2
+                    Math.PI * 3
                 );
             }
             ctx.fill();
@@ -2716,7 +2735,7 @@ LGraphCanvas.prototype.drawFrontCanvas = function () {
                         this._highlight_input[1],
                         6,
                         0,
-                        Math.PI * 2
+                        Math.PI * 5
                     );
                 }
                 ctx.fill();
@@ -2734,7 +2753,7 @@ LGraphCanvas.prototype.drawFrontCanvas = function () {
                         this._highlight_output[1],
                         6,
                         0,
-                        Math.PI * 2
+                        Math.PI * 6
                     );
                 }
                 ctx.fill();
@@ -2856,7 +2875,7 @@ LGraphCanvas.prototype.drawSubgraphPanelLeft = function (subgraph, subnode, ctx)
             }
             ctx.fillStyle = "#9C9";
             ctx.beginPath();
-            ctx.arc(w - 16, y + h * 0.5, 5, 0, 2 * Math.PI);
+            ctx.arc(w - 16, y + h * 0.5, 15, 0, 7 * Math.PI);
             ctx.fill();
             ctx.fillStyle = "#AAA";
             ctx.fillText(input.name, 30, y + h * 0.75);
@@ -2926,7 +2945,7 @@ LGraphCanvas.prototype.drawSubgraphPanelRight = function (subgraph, subnode, ctx
             }
             ctx.fillStyle = "#9C9";
             ctx.beginPath();
-            ctx.arc(canvas_w - w + 16, y + h * 0.5, 5, 0, 2 * Math.PI);
+            ctx.arc(canvas_w - w + 16, y + h * 0.5, 15, 0, 8 * Math.PI);
             ctx.fill();
             ctx.fillStyle = "#AAA";
             ctx.fillText(output.name, canvas_w - w + 30, y + h * 0.75);
@@ -3021,6 +3040,7 @@ LGraphCanvas.prototype.renderInfo = function (ctx, x, y) {
  * @method drawBackCanvas
  **/
 LGraphCanvas.prototype.drawBackCanvas = function () {
+
     var canvas = this.bgcanvas;
     if (
         canvas.width != this.canvas.width ||
@@ -3204,6 +3224,9 @@ var temp_vec2 = new Float32Array(2);
 
 /**
  * draws the given node inside the canvas
+ * 
+ * 绘制节点的出口或入口
+ * 
  * @method drawNode
  **/
 LGraphCanvas.prototype.drawNode = function (node, ctx) {
@@ -3284,9 +3307,9 @@ LGraphCanvas.prototype.drawNode = function (node, ctx) {
             ctx.arc(
                 size[0] * 0.5,
                 size[1] * 0.5,
-                size[0] * 0.5,
+                size[0] * 1.5,
                 0,
-                Math.PI * 2
+                Math.PI * 9
             );
         }
         ctx.clip();
@@ -3405,7 +3428,7 @@ LGraphCanvas.prototype.drawNode = function (node, ctx) {
                     if (low_quality)
                         ctx.rect(pos[0] - 4, pos[1] - 4, 8, 8); //faster
                     else
-                        ctx.arc(pos[0], pos[1], 4, 0, Math.PI * 2);
+                        ctx.arc(pos[0], pos[1], 5, 0, Math.PI * 4); // 绘制高亮的输入点
                 }
                 ctx.fill();
 
@@ -3504,7 +3527,7 @@ LGraphCanvas.prototype.drawNode = function (node, ctx) {
                     if (low_quality)
                         ctx.rect(pos[0] - 4, pos[1] - 4, 8, 8);
                     else
-                        ctx.arc(pos[0], pos[1], 4, 0, Math.PI * 2);
+                        ctx.arc(pos[0], pos[1], 7, 0, Math.PI * 5); // 绘制高亮的输出点
                 }
 
                 //trigger
@@ -3596,7 +3619,7 @@ LGraphCanvas.prototype.drawNode = function (node, ctx) {
                 ctx.lineTo(x + -4, y + 4);
                 ctx.closePath();
             } else {
-                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.arc(x, y, 4, 0, Math.PI * 6);
             }
             ctx.fill();
         }
@@ -3622,7 +3645,7 @@ LGraphCanvas.prototype.drawNode = function (node, ctx) {
                 ctx.lineTo(x - 6, y + 4);
                 ctx.closePath();
             } else {
-                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.arc(x, y, 4, 0, Math.PI * 7);
             }
             ctx.fill();
             //ctx.stroke();
@@ -3641,7 +3664,7 @@ LGraphCanvas.prototype.drawLinkTooltip = function (ctx, link) {
     var pos = link._pos;
     ctx.fillStyle = "black";
     ctx.beginPath();
-    ctx.arc(pos[0], pos[1], 3, 0, Math.PI * 2);
+    ctx.arc(pos[0], pos[1], 3, 0, Math.PI * 8);
     ctx.fill();
 
     if (link.data == null)
@@ -3756,7 +3779,7 @@ LGraphCanvas.prototype.drawNodeShape = function (
                 size[1] * 0.5,
                 size[0] * 0.5,
                 0,
-                Math.PI * 2
+                Math.PI * 9
             );
         }
         ctx.fill();
@@ -3846,7 +3869,7 @@ LGraphCanvas.prototype.drawNodeShape = function (
                     title_height * -0.5,
                     box_size * 0.5 + 1,
                     0,
-                    Math.PI * 2
+                    Math.PI * 5
                 );
                 ctx.fill();
             }
@@ -3861,7 +3884,7 @@ LGraphCanvas.prototype.drawNodeShape = function (
                     title_height * -0.5,
                     box_size * 0.5,
                     0,
-                    Math.PI * 2
+                    Math.PI * 10
                 );
                 ctx.fill();
             }
@@ -3999,7 +4022,7 @@ LGraphCanvas.prototype.drawNodeShape = function (
                 size[1] * 0.5,
                 size[0] * 0.5 + 6,
                 0,
-                Math.PI * 2
+                Math.PI * 11
             );
         }
         ctx.strokeStyle = LiteGraph.NODE_BOX_OUTLINE_COLOR;
@@ -4407,7 +4430,7 @@ LGraphCanvas.prototype.renderLink = function (
 
         //circle
         ctx.beginPath();
-        ctx.arc(pos[0], pos[1], 5, 0, Math.PI * 2);
+        ctx.arc(pos[0], pos[1], 5, 0, Math.PI * 13);
         ctx.fill();
     }
 
@@ -4424,7 +4447,7 @@ LGraphCanvas.prototype.renderLink = function (
                 end_dir
             );
             ctx.beginPath();
-            ctx.arc(pos[0], pos[1], 5, 0, 2 * Math.PI);
+            ctx.arc(pos[0], pos[1], 5, 0, 14 * Math.PI);
             ctx.fill();
         }
     }
@@ -4594,7 +4617,7 @@ LGraphCanvas.prototype.drawNodeWidgets = function (
                     ctx.stroke();
                 ctx.fillStyle = w.value ? "#89A" : "#333";
                 ctx.beginPath();
-                ctx.arc(widget_width - margin * 2, y + H * 0.5, H * 0.36, 0, Math.PI * 2);
+                ctx.arc(widget_width - margin * 2, y + H * 0.5, H * 0.36, 0, Math.PI * 15);
                 ctx.fill();
                 if (show_text) {
                     ctx.fillStyle = secondary_text_color;
@@ -4647,7 +4670,7 @@ LGraphCanvas.prototype.drawNodeWidgets = function (
                 break;
             case "number":
             case "combo":
-                debugger
+                // 绘制节点
                 ctx.textAlign = "left";
                 ctx.strokeStyle = outline_color;
                 ctx.fillStyle = background_color;
@@ -4662,6 +4685,7 @@ LGraphCanvas.prototype.drawNodeWidgets = function (
                         ctx.stroke();
                     ctx.fillStyle = text_color;
                     if (!w.disabled) {
+                        // 加减三角形
                         ctx.beginPath();
                         ctx.moveTo(margin + 16, y + 5);
                         ctx.lineTo(margin + 6, y + H * 0.5);
@@ -4752,6 +4776,8 @@ LGraphCanvas.prototype.drawNodeWidgets = function (
 /**
  * process an event on widgets
  * @method processNodeWidgets
+ * 
+ * 绘制控件
  **/
 LGraphCanvas.prototype.processNodeWidgets = function (
     node,

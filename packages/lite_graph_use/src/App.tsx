@@ -1,15 +1,10 @@
 // eslint-disable
+// @ts-ignore
 import "./App.css";
 import { getInstance } from "./Graph";
 
 const graphInstance = getInstance();
-// const addNode = graphInstance.addAddNode();
-const input = graphInstance.addConstInput();
-// const output = graphInstance.addOutput();
-
-// input.connect(0, addNode, 0);
-// input.connect(0, addNode, 1);
-// addNode.connect(0, output, 0);
+graphInstance.addRawNode().connect(0, graphInstance.addOutput(), 0);
 
 function App() {
   return (

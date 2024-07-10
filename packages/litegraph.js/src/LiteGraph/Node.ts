@@ -868,6 +868,8 @@ LGraphNode.prototype.trigger = function (action, param, options) {
         return;
     }
 
+    console.info(`node trigger`)
+
     if (this.graph)
         this.graph._last_trigger_time = LiteGraph.getTime();
 
@@ -1288,7 +1290,10 @@ LGraphNode.prototype.computeSize = function (out) {
         }
     }
 
-    size[0] = Math.max(input_width + output_width + 10, title_width);
+    const contentWidth = input_width + output_width + 10;
+
+    // console.info(`node width`, contentWidth, title_width);
+    size[0] = Math.max(contentWidth, title_width);
     size[0] = Math.max(size[0], LiteGraph.NODE_WIDTH);
     if (this.widgets && this.widgets.length) {
         size[0] = Math.max(size[0], LiteGraph.NODE_WIDTH * 1.5);
@@ -1296,6 +1301,7 @@ LGraphNode.prototype.computeSize = function (out) {
 
     size[1] = (this.constructor.slot_start_y || 0) + rows * LiteGraph.NODE_SLOT_HEIGHT;
 
+    // 计算高度
     var widgets_height = 0;
     if (this.widgets && this.widgets.length) {
         for (var i = 0, l = this.widgets.length; i < l; ++i) {
@@ -1319,7 +1325,7 @@ LGraphNode.prototype.computeSize = function (out) {
         if (!text) {
             return 0;
         }
-        return font_size * text.length * 0.6;
+        return font_size * text.length * 1; // 放大节点宽度
     }
 
     if (
@@ -1330,6 +1336,8 @@ LGraphNode.prototype.computeSize = function (out) {
     }
 
     size[1] += 6; //margin
+
+    // console.info(`computed size`, size)
 
     return size;
 };

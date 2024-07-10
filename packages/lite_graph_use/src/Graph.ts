@@ -4,6 +4,7 @@ import { LGraph, LGraphCanvas, LiteGraph } from "litegraph";
 import 'litegraph/css/litegraph.css'
 import './nodes/AddNode';
 import './nodes/OutputNode';
+import './nodes/RawDefineNode';
 
 class Graph {
     graph: LGraph;
@@ -12,7 +13,7 @@ class Graph {
         this.graph = new LGraph();
         const canvas = new LGraphCanvas("#mycanvas", this.graph);
         canvas.resize(window.innerWidth, window.innerHeight)
-        // this.graph.start(1000);
+        this.graph.start(200); // 控制真正的渲染间隔
     }
 
     addNode() {
@@ -64,6 +65,14 @@ class Graph {
 
         this.graph.add(output);
         return output;
+    }
+
+    addRawNode() {
+        const output = LiteGraph.createNode('build/raw', 'packageLevel');
+        output.pos = [400, 450]
+        this.graph.add(output);
+        return output;
+
     }
 
 }
