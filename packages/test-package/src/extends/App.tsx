@@ -3,6 +3,7 @@
 import React from "react";
 import "./App.css";
 import { getInstance } from "./Graph";
+import { Test } from "../components/index";
 const graphInstance = getInstance();
 
 const rawNode = graphInstance.addRawNode();
@@ -27,6 +28,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header"></header>
+      <Test />
     </div>
   );
 }
