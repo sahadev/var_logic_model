@@ -1,6 +1,8 @@
 // eslint-disable
 // @ts-ignore
 import React from "react";
+import { MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
 import "./App.css";
 import { getInstance } from "./Graph";
 import { Test } from "../components/index";
@@ -27,8 +29,10 @@ rawNode.connect(0, graphInstance.addOutput(), 0);
 function App() {
   return (
     <div className="App">
-      <header className="App-header"></header>
-      <Test />
+      <MantineProvider>
+        <header className="App-header"></header>
+        <Test />
+      </MantineProvider>
     </div>
   );
 }
