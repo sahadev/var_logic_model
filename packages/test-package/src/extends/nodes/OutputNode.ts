@@ -8,7 +8,7 @@ function OutputNode() {
     this.addInput("String Input", 'string');
     this.addInput("Boolean Input", 'boolean');
 
-    this.properties = { value: 1 };
+    this.properties = { value: 1, disabled: true };
     this.value_widget = this.addWidget(
         "string",
         "Value",
@@ -17,6 +17,9 @@ function OutputNode() {
         },
         this.properties
     );
+
+    // 这种组件需要用这种方式设置禁止操作
+    // this.value_widget.disabled = true;
 }
 
 //name to show

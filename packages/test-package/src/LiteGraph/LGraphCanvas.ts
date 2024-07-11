@@ -4586,7 +4586,7 @@ LGraphCanvas.prototype.drawNodeWidgets = function (
         ctx.textAlign = "left";
         //ctx.lineWidth = 2;
         if (w.disabled)
-            ctx.globalAlpha *= 0.5;
+            ctx.globalAlpha *= 0.5; // 置灰操作
         var widget_width = w.width || width;
 
         switch (w.type) {
@@ -4800,7 +4800,7 @@ LGraphCanvas.prototype.processNodeWidgets = function (
 
     for (var i = 0; i < node.widgets.length; ++i) {
         var w = node.widgets[i];
-        if (!w || w.disabled)
+        if (!w || w.disabled || w.options?.disabled)
             continue;
         var widget_height = w.computeSize ? w.computeSize(width)[1] : LiteGraph.NODE_WIDGET_HEIGHT;
         var widget_width = w.width || width;
@@ -6085,7 +6085,12 @@ LGraphCanvas.onShowPropertyEditor = function (item, options, e, menu, node) {
 // refactor: there are different dialogs, some uses createDialog some dont
 // 编辑弹框 生效处
 LGraphCanvas.prototype.prompt = function (title, value, callback, event, multiline) {
-    useBearStore.getState().increasePopulation();
+    debugger
+    useBearStore.getState().onValueModify({
+        title,
+        value,
+        onCallback: callback
+    });
     return
     debugger
     var that = this;
