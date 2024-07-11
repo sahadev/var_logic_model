@@ -1,13 +1,12 @@
 // eslint-disable
 // @ts-ignore
+import React from "react";
 import "./App.css";
-// import { getInstance } from "./Graph";
-// import { Test } from "litegraph";
-import { TestComponent } from "test-package";
-// const graphInstance = getInstance();
+import { getInstance } from "./Graph";
+const graphInstance = getInstance();
 
-// const rawNode = graphInstance.addRawNode();
-// rawNode.connect(0, graphInstance.addOutput(), 0);
+const rawNode = graphInstance.addRawNode();
+rawNode.connect(0, graphInstance.addOutput(), 0);
 
 // const isVip = graphInstance.addEqualNode(1, "是否会员");
 // const isBasicVip = graphInstance.addEqualNode(
@@ -27,9 +26,7 @@ import { TestComponent } from "test-package";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <TestComponent></TestComponent>
-      </header>
+      <header className="App-header"></header>
     </div>
   );
 }

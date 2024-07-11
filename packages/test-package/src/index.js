@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { TestComponent } from './test.tsx';
+import App from './extends/App.tsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <TestComponent />
+        <App />
     </React.StrictMode>
 );
 
