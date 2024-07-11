@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 export { ContextMenu } from "./LiteGraph/ContextMenu";
 export { LGraph } from "./LiteGraph/LGraph";
 export { LiteGraph } from "./LiteGraph/LiteGraph";

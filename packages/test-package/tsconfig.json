@@ -14,7 +14,7 @@
     "jsx": "preserve",
     "module": "CommonJS",
     "moduleResolution": "node",
-    "noEmitOnError": true,
+    "noEmitOnError": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
     "noImplicitReturns": true,

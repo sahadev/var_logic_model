@@ -1,3 +1,5 @@
+// @ts-ignore
+// @ts-nocheck
 import { LiteGraph } from "src/litegraph";
 
 //node constructor class

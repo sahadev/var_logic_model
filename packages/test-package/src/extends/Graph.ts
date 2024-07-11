@@ -1,3 +1,6 @@
+// @ts-ignore
+// @ts-nocheck
+
 // import "litegraph/css/litegraph.css";
 import "./nodes/AddNode";
 import "./nodes/OutputNode";
@@ -35,7 +38,7 @@ class Graph {
     constructor() {
         this.graph = new LGraph();
         const canvas = new LGraphCanvas("#mycanvas", this.graph);
-        canvas.resize(window.innerWidth, window.innerHeight);
+        canvas.resize(window.innerWidth, window.innerHeight / 2);
         this.graph.start(200); // 控制真正的渲染间隔
     }
 

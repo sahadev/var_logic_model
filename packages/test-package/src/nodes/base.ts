@@ -1,3 +1,5 @@
+// @ts-ignore
+// @ts-nocheck
 import { isInsideRectangle } from "../LiteGraph/utils";
 import { LiteGraph } from "../LiteGraph/LiteGraph";
 

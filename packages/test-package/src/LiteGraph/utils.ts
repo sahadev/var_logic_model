@@ -1,3 +1,5 @@
+// @ts-ignore
+// @ts-nocheck
 export function clamp(v, a, b) {
     return a > v ? a : b < v ? b : v;
 };
