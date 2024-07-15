@@ -7,10 +7,10 @@ import { LiteGraph } from "src/litegraph";
  * @param title 表达式含义
  */
 function EqualAssertNode(title: string) {
-    this._ctor("等式断言节点");
+    this._ctor(title || "等式断言节点");
     this.properties = { value: "input > 0" };
 
-    // 表达式输入框
+    // 表达式输入框，可以修改表达式的值
     this.value_widget = this.addWidget(
         "string",
         "表达式",
@@ -21,13 +21,21 @@ function EqualAssertNode(title: string) {
         this.properties
     );
     
-    // 计算结果展示框
+    // 计算结果展示框，可以修改标题
     this.result_widget = this.addWidget(
         "string",
         title,
         false,
         (v: any) => {
+            // 修改标题
+            // this.setProperty("title", v); // 设置控件的属性，这里是title的属性。如果控件有title的属性，则会更新title这个属性
+            this.result_widget.name = v;
+            this.title = v;
         },
+        {
+            modifyName: true,
+            title: '' // 申明了title后，才能通过setProperty修改这个属性的值
+        }
     );
 
     // 外部输入节点

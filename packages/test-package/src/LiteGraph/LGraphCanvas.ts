@@ -3943,6 +3943,7 @@ LGraphCanvas.prototype.drawNodeShape = function (
                     ctx.textAlign = "left";
                 } else {
                     ctx.textAlign = "left";
+                    // 绘制节点标题
                     ctx.fillText(
                         title,
                         title_height,
@@ -4799,84 +4800,84 @@ LGraphCanvas.prototype.processNodeWidgets = function (
     var ref_window = this.getCanvasWindow();
 
     for (var i = 0; i < node.widgets.length; ++i) {
-        var w = node.widgets[i];
-        if (!w || w.disabled || w.options?.disabled) {
+        var widget = node.widgets[i];
+        if (!widget || widget.disabled || widget.options?.disabled) {
             console.info(`禁止修改`)
             continue;
         }
-        var widget_height = w.computeSize ? w.computeSize(width)[1] : LiteGraph.NODE_WIDGET_HEIGHT;
-        var widget_width = w.width || width;
+        var widget_height = widget.computeSize ? widget.computeSize(width)[1] : LiteGraph.NODE_WIDGET_HEIGHT;
+        var widget_width = widget.width || width;
         //outside
-        if (w != active_widget &&
-            (x < 6 || x > widget_width - 12 || y < w.last_y || y > w.last_y + widget_height || w.last_y === undefined))
+        if (widget != active_widget &&
+            (x < 6 || x > widget_width - 12 || y < widget.last_y || y > widget.last_y + widget_height || widget.last_y === undefined))
             continue;
 
-        var old_value = w.value;
+        var old_value = widget.value;
 
         //if ( w == active_widget || (x > 6 && x < widget_width - 12 && y > w.last_y && y < w.last_y + widget_height) ) {
         //inside widget
-        switch (w.type) {
+        switch (widget.type) {
             case "button":
                 if (event.type === LiteGraph.pointerevents_method + "down") {
-                    if (w.callback) {
+                    if (widget.callback) {
                         setTimeout(function () {
-                            w.callback(w, that, node, pos, event);
+                            widget.callback(widget, that, node, pos, event);
                         }, 20);
                     }
-                    w.clicked = true;
+                    widget.clicked = true;
                     this.dirty_canvas = true;
                 }
                 break;
             case "slider":
-                var old_value = w.value;
+                var old_value = widget.value;
                 var nvalue = clamp((x - 15) / (widget_width - 30), 0, 1);
-                if (w.options.read_only) break;
-                w.value = w.options.min + (w.options.max - w.options.min) * nvalue;
-                if (old_value != w.value) {
+                if (widget.options.read_only) break;
+                widget.value = widget.options.min + (widget.options.max - widget.options.min) * nvalue;
+                if (old_value != widget.value) {
                     setTimeout(function () {
-                        inner_value_change(w, w.value);
+                        inner_value_change(widget, widget.value);
                     }, 20);
                 }
                 this.dirty_canvas = true;
                 break;
             case "number":
             case "combo":
-                var old_value = w.value;
-                if (event.type == LiteGraph.pointerevents_method + "move" && w.type == "number") {
+                var old_value = widget.value;
+                if (event.type == LiteGraph.pointerevents_method + "move" && widget.type == "number") {
                     if (deltaX)
-                        w.value += deltaX * 0.1 * (w.options.step || 1);
-                    if (w.options.min != null && w.value < w.options.min) {
-                        w.value = w.options.min;
+                        widget.value += deltaX * 0.1 * (widget.options.step || 1);
+                    if (widget.options.min != null && widget.value < widget.options.min) {
+                        widget.value = widget.options.min;
                     }
-                    if (w.options.max != null && w.value > w.options.max) {
-                        w.value = w.options.max;
+                    if (widget.options.max != null && widget.value > widget.options.max) {
+                        widget.value = widget.options.max;
                     }
                 } else if (event.type == LiteGraph.pointerevents_method + "down") {
-                    var values = w.options.values;
+                    var values = widget.options.values;
                     if (values && values.constructor === Function) {
-                        values = w.options.values(w, node);
+                        values = widget.options.values(widget, node);
                     }
                     var values_list = null;
 
-                    if (w.type != "number")
+                    if (widget.type != "number")
                         values_list = values.constructor === Array ? values : Object.keys(values);
 
                     var delta = x < 40 ? -1 : x > widget_width - 40 ? 1 : 0;
-                    if (w.type == "number") {
-                        w.value += delta * 0.1 * (w.options.step || 1);
-                        if (w.options.min != null && w.value < w.options.min) {
-                            w.value = w.options.min;
+                    if (widget.type == "number") {
+                        widget.value += delta * 0.1 * (widget.options.step || 1);
+                        if (widget.options.min != null && widget.value < widget.options.min) {
+                            widget.value = widget.options.min;
                         }
-                        if (w.options.max != null && w.value > w.options.max) {
-                            w.value = w.options.max;
+                        if (widget.options.max != null && widget.value > widget.options.max) {
+                            widget.value = widget.options.max;
                         }
                     } else if (delta) { //clicked in arrow, used for combos 
                         var index = -1;
                         this.last_mouseclick = 0; //avoids dobl click event
                         if (values.constructor === Object)
-                            index = values_list.indexOf(String(w.value)) + delta;
+                            index = values_list.indexOf(String(widget.value)) + delta;
                         else
-                            index = values_list.indexOf(w.value) + delta;
+                            index = values_list.indexOf(widget.value) + delta;
                         if (index >= values_list.length) {
                             index = values_list.length - 1;
                         }
@@ -4884,16 +4885,16 @@ LGraphCanvas.prototype.processNodeWidgets = function (
                             index = 0;
                         }
                         if (values.constructor === Array)
-                            w.value = values[index];
+                            widget.value = values[index];
                         else
-                            w.value = index;
+                            widget.value = index;
                     } else { //combo clicked 
                         var text_values = values != values_list ? Object.values(values) : values;
                         var menu = new LiteGraph.ContextMenu(text_values, {
                             scale: Math.max(1, this.ds.scale),
                             event: event,
                             className: "dark",
-                            callback: inner_clicked.bind(w)
+                            callback: inner_clicked.bind(widget)
                         },
                             ref_window);
                         function inner_clicked(v, option, event) {
@@ -4906,10 +4907,10 @@ LGraphCanvas.prototype.processNodeWidgets = function (
                         }
                     }
                 } //end mousedown
-                else if (event.type == LiteGraph.pointerevents_method + "up" && w.type == "number") {
+                else if (event.type == LiteGraph.pointerevents_method + "up" && widget.type == "number") {
                     var delta = x < 40 ? -1 : x > widget_width - 40 ? 1 : 0;
                     if (event.click_time < 200 && delta == 0) {
-                        this.prompt("Value", w.value, function (v) {
+                        this.prompt(widget.name, widget.value, function (v) {
                             // check if v is a valid equation or a number
                             if (/^[0-9+\-*/()\s]+|\d+\.\d+$/.test(v)) {
                                 try {//solve the equation if possible
@@ -4918,25 +4919,25 @@ LGraphCanvas.prototype.processNodeWidgets = function (
                             }
                             this.value = Number(v);
                             inner_value_change(this, this.value);
-                        }.bind(w),
+                        }.bind(widget),
                             event);
                     }
                 }
 
-                if (old_value != w.value)
+                if (old_value != widget.value)
                     setTimeout(
                         function () {
                             inner_value_change(this, this.value);
-                        }.bind(w),
+                        }.bind(widget),
                         20
                     );
                 this.dirty_canvas = true;
                 break;
             case "toggle":
                 if (event.type == LiteGraph.pointerevents_method + "down") {
-                    w.value = !w.value;
+                    widget.value = !widget.value;
                     setTimeout(function () {
-                        inner_value_change(w, w.value);
+                        inner_value_change(widget, widget.value);
                     }, 20);
                 }
                 break;
@@ -4944,27 +4945,36 @@ LGraphCanvas.prototype.processNodeWidgets = function (
             case "text":
                 // 事件甄别
                 if (event.type == LiteGraph.pointerevents_method + "down") {
-                    this.prompt("Value", w.value, function (v) {
+                    let name, value;
+                    if (widget?.options.modifyName) {
+                        name = '节点名称';
+                        value = widget.name;
+                    } else {
+                        name = widget.name;
+                        value = widget.value;
+                    }
+
+                    this.prompt(name, value, function (v) {
                         inner_value_change(this, v);
-                    }.bind(w),
-                        event, w.options ? w.options.multiline : false);
+                    }.bind(widget),
+                        event, widget.options ? widget.options.multiline : false);
                 }
                 break;
             default:
-                if (w.mouse) {
-                    this.dirty_canvas = w.mouse(event, [x, y], node);
+                if (widget.mouse) {
+                    this.dirty_canvas = widget.mouse(event, [x, y], node);
                 }
                 break;
         } //end switch
 
         //value changed
-        if (old_value != w.value) {
+        if (old_value != widget.value) {
             if (node.onWidgetChanged)
-                node.onWidgetChanged(w.name, w.value, old_value, w);
+                node.onWidgetChanged(widget.name, widget.value, old_value, widget);
             node.graph._version++;
         }
 
-        return w;
+        return widget;
     }//end for
 
     function inner_value_change(widget, value) {
