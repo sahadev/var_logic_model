@@ -5,7 +5,7 @@ import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "./App.css";
 import { getInstance } from "./Graph";
-import { Test } from "../components/index";
+import { ModifyModal } from "../components/index";
 const graphInstance = getInstance();
 
 const rawNode = graphInstance.addRawNode();
@@ -31,7 +31,7 @@ function App() {
     <div className="App">
       <MantineProvider>
         <header className="App-header"></header>
-        <Test />
+        <ModifyModal />
       </MantineProvider>
     </div>
   );

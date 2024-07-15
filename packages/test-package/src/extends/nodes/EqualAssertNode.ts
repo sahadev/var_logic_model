@@ -9,16 +9,19 @@ import { LiteGraph } from "src/litegraph";
 function EqualAssertNode(title: string) {
     this._ctor("等式断言节点");
     this.properties = { value: "input > 0" };
+
+    // 表达式输入框
     this.value_widget = this.addWidget(
         "string",
         "表达式",
         this.properties.value,
         (v: any) => {
             this.setProperty("value", v);
-            this.setOutputData(0, v);
         },
         this.properties
     );
+    
+    // 计算结果展示框
     this.result_widget = this.addWidget(
         "string",
         title,

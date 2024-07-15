@@ -38,7 +38,7 @@ class Graph {
     constructor() {
         this.graph = new LGraph();
         const canvas = new LGraphCanvas("#mycanvas", this.graph);
-        canvas.resize(window.innerWidth, window.innerHeight / 2);
+        canvas.resize(window.innerWidth, window.innerHeight);
         this.graph.start(200); // 控制真正的渲染间隔
     }
 
