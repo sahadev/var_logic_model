@@ -31,9 +31,14 @@ for (let i = 0; i < x_num; i++) {
     gridStartPostion.push(rowPosition);
 }
 
+export type NodeParams = {
+    position: number; // 所处的位置顺序
+    title: string; // 节点的标题
+    value?: any; // 节点的值，可变更的值。
+}
 
 class Graph {
-    graph;
+    graph: LGraph;
 
     constructor() {
         this.graph = new LGraph();
@@ -42,69 +47,26 @@ class Graph {
         this.graph.start(200); // 控制真正的渲染间隔
     }
 
-    addNode() {
-        const node_const = LiteGraph.createNode("basic/const");
-        node_const.pos = [200, 200];
-        this.graph.add(node_const);
-
-        // @ts-ignore
-        node_const.setValue(5.5);
-        return node_const;
-    }
-
-    addWatchNode() {
-        const node_watch = LiteGraph.createNode("basic/watch");
-        node_watch.pos = [700, 200];
-        this.graph.add(node_watch);
-        return node_watch;
-    }
-
-    addAddNode() {
-        const addNode = LiteGraph.createNode("basic/sum");
-        addNode.pos = [550, 450];
-        this.graph.add(addNode);
-        return addNode;
-    }
-
-    addInput() {
-        const input = LiteGraph.createNode("graph/input");
-
-        input.name_widget.value = "PackageLevel";
-        input.value_widget.value = 2;
-
-        input.pos = [200, 450];
-        this.graph.add(input);
-        return input;
-    }
-
-    addConstInput() {
-        const input = LiteGraph.createNode("basic/const");
-        input.pos = [200, 450];
-        this.graph.add(input);
-        return input;
-    }
-
-    addRawNode(index: number = 0) {
+    addRawNode(params: NodeParams) {
         const output = LiteGraph.createNode("build/raw", "packageLevel");
-        output.pos = gridStartPostion[0][index];
+        output.pos = gridStartPostion[0][params.position];
         this.graph.add(output);
         return output;
     }
 
-    addEqualNode(index: number = 0, title: string = '表达式', expression?: string) {
-        console.info(`expression`, expression)
-        const output = LiteGraph.createNode("build/equal", title, {
-            expression
+    addEqualNode(params: NodeParams) {
+        const output = LiteGraph.createNode("build/equal", params.title, {
+            expression: params.value
         });
-        output.pos = gridStartPostion[1][index];
+        output.pos = gridStartPostion[1][params.position];
         this.graph.add(output);
         return output;
     }
 
-    addOutput(index: number = 0) {
-        const output = LiteGraph.createNode("basic/output");
+    addOutput(params: NodeParams) {
+        const output = LiteGraph.createNode("basic/output", params.title);
 
-        output.pos = gridStartPostion[2][index];
+        output.pos = gridStartPostion[2][params.position];
 
         this.graph.add(output);
         return output;

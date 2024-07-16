@@ -9,7 +9,7 @@ class RawDefineNode extends LGraphNode{
     properties: any;
 
     constructor(title: string) {
-        super("原始数据定义节点");
+        super(title);
         this.properties = { precision: 0, value: 0, step: 10 };
         this.value_widget = this.addWidget(
             "number",

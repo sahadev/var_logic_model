@@ -4,8 +4,8 @@ import { LGraphNode, LiteGraph } from "src/litegraph";
 class OutputNode extends LGraphNode {
     value_widget: any;
 
-    constructor() {
-        super('Output String')
+    constructor(title: string) {
+        super(title)
         this.addInput("Number Input", 'number');
         this.addInput("String Input", 'string');
         this.addInput("Boolean Input", 'boolean');
