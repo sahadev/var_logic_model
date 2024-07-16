@@ -66,6 +66,8 @@ class EqualAssertNode extends LGraphNode {
         this.setOutputData(0, calcResult);
         this.result_widget.value = calcResult;
         this.value_widget.value = expression;
+
+        this.calculateResult = calcResult;
     };
 }
 

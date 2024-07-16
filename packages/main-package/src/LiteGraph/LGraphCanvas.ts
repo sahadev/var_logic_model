@@ -2710,18 +2710,18 @@ export class LGraphCanvas {
                     ctx.arc(
                         this.connecting_pos[0],
                         this.connecting_pos[1],
-                        6,
+                        4,
                         0,
-                        Math.PI * 11
+                        Math.PI * 4
                     );
                     ctx.fill();
                     ctx.beginPath();
                     ctx.arc(
                         this.graph_mouse[0],
                         this.graph_mouse[1],
-                        6,
+                        4,
                         0,
-                        Math.PI * 3
+                        Math.PI * 4
                     );
                 }
                 ctx.fill();
@@ -2739,9 +2739,9 @@ export class LGraphCanvas {
                         ctx.arc(
                             this._highlight_input[0],
                             this._highlight_input[1],
-                            6,
+                            4,
                             0,
-                            Math.PI * 5
+                            Math.PI * 4
                         );
                     }
                     ctx.fill();
@@ -2757,9 +2757,9 @@ export class LGraphCanvas {
                         ctx.arc(
                             this._highlight_output[0],
                             this._highlight_output[1],
-                            6,
+                            4,
                             0,
-                            Math.PI * 6
+                            Math.PI * 4
                         );
                     }
                     ctx.fill();
@@ -2881,7 +2881,7 @@ export class LGraphCanvas {
                 }
                 ctx.fillStyle = "#9C9";
                 ctx.beginPath();
-                ctx.arc(w - 16, y + h * 0.5, 15, 0, 7 * Math.PI);
+                ctx.arc(w - 16, y + h * 0.5, 15, 0, 4 * Math.PI);
                 ctx.fill();
                 ctx.fillStyle = "#AAA";
                 ctx.fillText(input.name, 30, y + h * 0.75);
@@ -2951,7 +2951,7 @@ export class LGraphCanvas {
                 }
                 ctx.fillStyle = "#9C9";
                 ctx.beginPath();
-                ctx.arc(canvas_w - w + 16, y + h * 0.5, 15, 0, 8 * Math.PI);
+                ctx.arc(canvas_w - w + 16, y + h * 0.5, 15, 0, 4 * Math.PI);
                 ctx.fill();
                 ctx.fillStyle = "#AAA";
                 ctx.fillText(output.name, canvas_w - w + 30, y + h * 0.75);
@@ -3234,7 +3234,7 @@ export class LGraphCanvas {
      * 
      * @method drawNode
      **/
-    drawNode(node, ctx) {
+    drawNode(node, ctx: CanvasRenderingContext2D) {
         let glow = false;
         this.current_node = node;
 
@@ -3314,7 +3314,7 @@ export class LGraphCanvas {
                     size[1] * 0.5,
                     size[0] * 1.5,
                     0,
-                    Math.PI * 9
+                    Math.PI * 4
                 );
             }
             ctx.clip();
@@ -3433,7 +3433,7 @@ export class LGraphCanvas {
                         if (low_quality)
                             ctx.rect(pos[0] - 4, pos[1] - 4, 8, 8); //faster
                         else
-                            ctx.arc(pos[0], pos[1], 5, 0, Math.PI * 4); // 绘制高亮的输入点
+                            ctx.arc(pos[0], pos[1], 4, 0, Math.PI * 4); // 绘制高亮的输入点
                     }
                     ctx.fill();
 
@@ -3532,7 +3532,7 @@ export class LGraphCanvas {
                         if (low_quality)
                             ctx.rect(pos[0] - 4, pos[1] - 4, 8, 8);
                         else
-                            ctx.arc(pos[0], pos[1], 7, 0, Math.PI * 5); // 绘制高亮的输出点
+                            ctx.arc(pos[0], pos[1], 4, 0, Math.PI * 4); // 绘制高亮的输出点
                     }
 
                     //trigger
@@ -3624,7 +3624,7 @@ export class LGraphCanvas {
                     ctx.lineTo(x + -4, y + 4);
                     ctx.closePath();
                 } else {
-                    ctx.arc(x, y, 4, 0, Math.PI * 6);
+                    ctx.arc(x, y, 4, 0, Math.PI * 4);
                 }
                 ctx.fill();
             }
@@ -3650,7 +3650,7 @@ export class LGraphCanvas {
                     ctx.lineTo(x - 6, y + 4);
                     ctx.closePath();
                 } else {
-                    ctx.arc(x, y, 4, 0, Math.PI * 7);
+                    ctx.arc(x, y, 4, 0, Math.PI * 4);
                 }
                 ctx.fill();
                 //ctx.stroke();
@@ -3669,7 +3669,7 @@ export class LGraphCanvas {
         let pos = link._pos;
         ctx.fillStyle = "black";
         ctx.beginPath();
-        ctx.arc(pos[0], pos[1], 3, 0, Math.PI * 8);
+        ctx.arc(pos[0], pos[1], 3, 0, Math.PI * 4);
         ctx.fill();
 
         if (link.data == null)
@@ -3725,7 +3725,7 @@ export class LGraphCanvas {
 
     drawNodeShape(
         node,
-        ctx,
+        ctx: CanvasRenderingContext2D,
         size,
         fgcolor,
         bgcolor,
@@ -3783,7 +3783,7 @@ export class LGraphCanvas {
                     size[1] * 0.5,
                     size[0] * 0.5,
                     0,
-                    Math.PI * 9
+                    Math.PI * 4
                 );
             }
             ctx.fill();
@@ -3873,7 +3873,7 @@ export class LGraphCanvas {
                         title_height * -0.5,
                         box_size * 0.5 + 1,
                         0,
-                        Math.PI * 5
+                        Math.PI * 4
                     );
                     ctx.fill();
                 }
@@ -3888,7 +3888,7 @@ export class LGraphCanvas {
                         title_height * -0.5,
                         box_size * 0.5,
                         0,
-                        Math.PI * 10
+                        Math.PI * 4
                     );
                     ctx.fill();
                 }
@@ -4027,7 +4027,7 @@ export class LGraphCanvas {
                     size[1] * 0.5,
                     size[0] * 0.5 + 6,
                     0,
-                    Math.PI * 11
+                    Math.PI * 4
                 );
             }
             ctx.strokeStyle = LiteGraph.NODE_BOX_OUTLINE_COLOR;
@@ -4138,12 +4138,10 @@ export class LGraphCanvas {
                     link,
                     false,
                     0, // 节点流动效果。。。
-                    'red',
+                    node?.calculateResult ? '#AAFFAA' : null, // 如果节点的计算结果是true，则高亮这条线
                     start_dir,
                     end_dir
                 );
-
-                debugger
 
                 //event triggered rendered on top
                 if (link && link._last_time && now - link._last_time < 1000) {
@@ -4186,7 +4184,7 @@ export class LGraphCanvas {
      * @param {number} num_sublines number of sublines (useful to represent vec3 or rgb)
      **/
     renderLink(
-        ctx,
+        ctx: CanvasRenderingContext2D,
         a: vec2,
         b: vec2,
         link: object,
@@ -4203,13 +4201,14 @@ export class LGraphCanvas {
 
         //choose color
         if (!color && link) {
-            color = link.color || LGraphCanvas.link_type_colors[link.type];
+            // color = link.color || LGraphCanvas.link_type_colors[link.type];
         }
         if (!color) {
+            // 赋值默认线条颜色
             color = this.default_link_color;
         }
         if (link != null && this.highlighted_links[link.id]) {
-            color = "#FFF";
+            // color = "#FFF";
         }
 
         start_dir = start_dir || LiteGraph.RIGHT;
@@ -4435,7 +4434,7 @@ export class LGraphCanvas {
 
             //circle
             ctx.beginPath();
-            ctx.arc(pos[0], pos[1], 5, 0, Math.PI * 13);
+            ctx.arc(pos[0], pos[1], 5, 0, Math.PI * 4);
             ctx.fill();
         }
 
@@ -4452,7 +4451,7 @@ export class LGraphCanvas {
                     end_dir
                 );
                 ctx.beginPath();
-                ctx.arc(pos[0], pos[1], 5, 0, 14 * Math.PI);
+                ctx.arc(pos[0], pos[1], 5, 0, 4 * Math.PI);
                 ctx.fill();
             }
         }
@@ -4622,7 +4621,7 @@ export class LGraphCanvas {
                         ctx.stroke();
                     ctx.fillStyle = w.value ? "#89A" : "#333";
                     ctx.beginPath();
-                    ctx.arc(widget_width - margin * 2, y + H * 0.5, H * 0.36, 0, Math.PI * 15);
+                    ctx.arc(widget_width - margin * 2, y + H * 0.5, H * 0.36, 0, Math.PI * 4);
                     ctx.fill();
                     if (show_text) {
                         ctx.fillStyle = secondary_text_color;

@@ -30,6 +30,7 @@ class OutputNode extends LGraphNode {
         this._value = this.getInputData(0) || this.getInputData(1) || this.getInputData(2);
 
         this.value_widget.value = `computed:${this._value || 0}`;
+        this.calculateResult = this._value || false;
     }
 }
 

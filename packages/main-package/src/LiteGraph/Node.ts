@@ -67,6 +67,8 @@ supported callbacks:
  */
 
 export class LGraphNode {
+    calculateResult: boolean;
+
     constructor(title) {
         this._ctor(title);
     }
