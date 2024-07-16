@@ -1,5 +1,5 @@
 {
-  "name": "test-package",
+  "name": "main-package",
   "version": "0.0.1",
   "main": "src/index.js",
   "dependencies": {
