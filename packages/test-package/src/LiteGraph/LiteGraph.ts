@@ -6,7 +6,7 @@
 
 import { CurveEditor } from "./CurveEditor";
 import { ContextMenu } from "./ContextMenu";
-// import { LGraphGroup } from "./Node";
+import { LGraphGroup, LGraphNode } from "./Node";
 
 /**
  * The Global Scope. It contains all the registered node classes.
@@ -973,5 +973,5 @@ LiteGraph.CurveEditor = CurveEditor;
 // @ts-ignore
 LiteGraph.ContextMenu = ContextMenu;
 // @ts-ignore
-// LiteGraph.LGraphGroup = LGraphGroup;
+LiteGraph.LGraphGroup = LGraphGroup;
 

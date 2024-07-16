@@ -8,6 +8,7 @@
 import { useBearStore } from "../store";
 import { LiteGraph } from "./LiteGraph";
 import { DragAndScale } from "./Node";
+import { LGraph } from './LGraph'
 import { distance, isInsideRectangle, overlapBounding } from "./utils";
 
 /* LGraphCanvas render */
@@ -20,6 +21,8 @@ const link_bounding = new Float32Array(4);
 const tempA = new Float32Array(2);
 const tempB = new Float32Array(2);
 
+// 指向当前的绘制canvas
+let activeCanvas: LGraphCanvas | null = null;
 
 /**
  * This class is in charge of rendering one graph inside a canvas. And provides all the interaction required.
@@ -32,7 +35,9 @@ const tempB = new Float32Array(2);
  * @param {Object} options [optional] { skip_rendering, autoresize, viewport }
  */
 export class LGraphCanvas {
-    constructor(canvas, graph, options) {
+    graph: LGraph;
+
+    constructor(canvas: string, graph: LGraph, options) {
         this.options = options = options || {};
 
         //if(graph === undefined)
@@ -642,7 +647,7 @@ export class LGraphCanvas {
 
         let ref_window = this.getCanvasWindow();
         let document = ref_window.document;
-        LGraphCanvas.active_canvas = this;
+        activeCanvas = this;
         let that = this;
 
         let x = e.clientX;
@@ -1139,7 +1144,7 @@ export class LGraphCanvas {
             return;
         }
 
-        LGraphCanvas.active_canvas = this;
+        activeCanvas = this;
         this.adjustMouseEvent(e);
         let mouse = [e.clientX, e.clientY];
         this.mouse[0] = mouse[0];
@@ -1402,7 +1407,7 @@ export class LGraphCanvas {
 
         let window = this.getCanvasWindow();
         let document = window.document;
-        LGraphCanvas.active_canvas = this;
+        activeCanvas = this;
 
         //restore the mousemove event back to the canvas
         if (!this.options.skip_events) {
@@ -4132,11 +4137,13 @@ export class LGraphCanvas {
                     end_node_slotpos,
                     link,
                     false,
-                    0,
-                    null,
+                    0, // 节点流动效果。。。
+                    'red',
                     start_dir,
                     end_dir
                 );
+
+                debugger
 
                 //event triggered rendered on top
                 if (link && link._last_time && now - link._last_time < 1000) {
@@ -4167,6 +4174,7 @@ export class LGraphCanvas {
      * 绘制连接线
      * 
      * @method renderLink
+     * @param Context
      * @param {vec2} a start pos
      * @param {vec2} b end pos
      * @param {Object} link the link object with all the link info
@@ -5167,7 +5175,7 @@ export class LGraphCanvas {
     /* CONTEXT MENU ********************/
 
     onGroupAdd(info, entry, mouse_event) {
-        let canvas = LGraphCanvas.active_canvas;
+        let canvas = activeCanvas;
         let ref_window = canvas.getCanvasWindow();
 
         let group = new LiteGraph.LGraphGroup();
@@ -5230,7 +5238,7 @@ export class LGraphCanvas {
             return;
         }
 
-        const canvas = LGraphCanvas.active_canvas;
+        const canvas = activeCanvas;
         let boundaryNodes = []
         if (align_to === undefined) {
             boundaryNodes = LGraphCanvas.getBoundaryNodes(nodes)
@@ -5272,7 +5280,7 @@ export class LGraphCanvas {
         });
 
         function inner_clicked(value) {
-            LGraphCanvas.alignNodes(LGraphCanvas.active_canvas.selected_nodes, value.toLowerCase(), node);
+            LGraphCanvas.alignNodes(activeCanvas.selected_nodes, value.toLowerCase(), node);
         }
     }
 
@@ -5284,13 +5292,13 @@ export class LGraphCanvas {
         });
 
         function inner_clicked(value) {
-            LGraphCanvas.alignNodes(LGraphCanvas.active_canvas.selected_nodes, value.toLowerCase());
+            LGraphCanvas.alignNodes(activeCanvas.selected_nodes, value.toLowerCase());
         }
     }
 
     onMenuAdd(node, options, e, prev_menu, callback) {
 
-        let canvas = LGraphCanvas.active_canvas;
+        let canvas = activeCanvas;
         let ref_window = canvas.getCanvasWindow();
         let graph = canvas.graph;
         if (!graph)
@@ -5377,7 +5385,7 @@ export class LGraphCanvas {
         }
 
         let that = this;
-        let canvas = LGraphCanvas.active_canvas;
+        let canvas = activeCanvas;
         let ref_window = canvas.getCanvasWindow();
 
         var options = node.optional_inputs;
@@ -5467,7 +5475,7 @@ export class LGraphCanvas {
         }
 
         let that = this;
-        let canvas = LGraphCanvas.active_canvas;
+        let canvas = activeCanvas;
         let ref_window = canvas.getCanvasWindow();
 
         let options = node.optional_outputs;
@@ -5594,7 +5602,7 @@ export class LGraphCanvas {
         }
 
         let that = this;
-        let canvas = LGraphCanvas.active_canvas;
+        let canvas = activeCanvas;
         let ref_window = canvas.getCanvasWindow();
 
         let entries = [];
@@ -5665,7 +5673,7 @@ export class LGraphCanvas {
                 node.onResize(node.size);
         }
 
-        let graphcanvas = LGraphCanvas.active_canvas;
+        let graphcanvas = activeCanvas;
         if (!graphcanvas.selected_nodes || Object.keys(graphcanvas.selected_nodes).length <= 1) {
             fApplyMultiNode(node);
         } else {
@@ -6032,7 +6040,7 @@ export class LGraphCanvas {
             });
         }
 
-        let graphcanvas = LGraphCanvas.active_canvas;
+        let graphcanvas = activeCanvas;
         let canvas = graphcanvas.canvas;
 
         let rect = canvas.getBoundingClientRect();
@@ -6113,7 +6121,7 @@ export class LGraphCanvas {
             }
         };
 
-        let graphcanvas = LGraphCanvas.active_canvas;
+        let graphcanvas = activeCanvas;
         let canvas = graphcanvas.canvas;
         // 添加弹窗到window上
         canvas.parentNode.appendChild(dialog);
@@ -6238,7 +6246,7 @@ export class LGraphCanvas {
 
         let that = this;
         let input_html = "";
-        let graphcanvas = LGraphCanvas.active_canvas;
+        let graphcanvas = activeCanvas;
         let canvas = graphcanvas.canvas;
         let root_document = canvas.ownerDocument || document;
 
@@ -7600,7 +7608,7 @@ export class LGraphCanvas {
             node.collapse();
         }
 
-        let graphcanvas = LGraphCanvas.active_canvas;
+        let graphcanvas = activeCanvas;
         if (!graphcanvas.selected_nodes || Object.keys(graphcanvas.selected_nodes).length <= 1) {
             fApplyMultiNode(node);
         } else {
@@ -7636,7 +7644,7 @@ export class LGraphCanvas {
                 }
             }
 
-            let graphcanvas = LGraphCanvas.active_canvas;
+            let graphcanvas = activeCanvas;
             if (!graphcanvas.selected_nodes || Object.keys(graphcanvas.selected_nodes).length <= 1) {
                 fApplyMultiNode(node);
             } else {
@@ -7740,7 +7748,7 @@ export class LGraphCanvas {
                 node.shape = v;
             }
 
-            let graphcanvas = LGraphCanvas.active_canvas;
+            let graphcanvas = activeCanvas;
             if (!graphcanvas.selected_nodes || Object.keys(graphcanvas.selected_nodes).length <= 1) {
                 fApplyMultiNode(node);
             } else {
@@ -7772,7 +7780,7 @@ export class LGraphCanvas {
             graph.remove(node);
         }
 
-        let graphcanvas = LGraphCanvas.active_canvas;
+        let graphcanvas = activeCanvas;
         if (!graphcanvas.selected_nodes || Object.keys(graphcanvas.selected_nodes).length <= 1) {
             fApplyMultiNode(node);
         } else {
@@ -7787,7 +7795,7 @@ export class LGraphCanvas {
 
     onMenuNodeToSubgraph(value, options, e, menu, node) {
         let graph = node.graph;
-        let graphcanvas = LGraphCanvas.active_canvas;
+        let graphcanvas = activeCanvas;
         if (!graphcanvas) //??
             return;
 
@@ -7824,7 +7832,7 @@ export class LGraphCanvas {
             newSelected[newnode.id] = newnode;
         }
 
-        let graphcanvas = LGraphCanvas.active_canvas;
+        let graphcanvas = activeCanvas;
         if (!graphcanvas.selected_nodes || Object.keys(graphcanvas.selected_nodes).length <= 1) {
             fApplyMultiNode(node);
         } else {
@@ -8044,7 +8052,7 @@ export class LGraphCanvas {
 
     processContextMenu(node, event) {
         let that = this;
-        let canvas = LGraphCanvas.active_canvas;
+        let canvas = activeCanvas;
         let ref_window = canvas.getCanvasWindow();
 
         let menu_info = null;
