@@ -1998,7 +1998,7 @@ export class LGraphNode {
             output.links = [];
         }
         output.links.push(link_info.id);
-        //connect in input
+        //connect in input 这里决定了输入节点只能有一个值
         target_node.inputs[target_slot].link = link_info.id;
         if (this.graph) {
             this.graph._version++;

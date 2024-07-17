@@ -94,5 +94,6 @@ export class EqualAssertNode extends LGraphNode {
     }
 }
 
+debugger
 //register in the system
 LiteGraph.registerNodeType("build/equal", EqualAssertNode);

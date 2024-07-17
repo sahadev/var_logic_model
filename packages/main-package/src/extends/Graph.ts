@@ -3,12 +3,14 @@
 import "./nodes/OutputNode";
 import "./nodes/RawDefineNode";
 import "./nodes/EqualAssertNode";
+import "./nodes/AndOperateNode";
 import { LiteGraph } from "../LiteGraph/LiteGraph";
 import { LGraph } from "../LiteGraph/LGraph";
 import { OutputNode } from "./nodes/OutputNode";
 import { EqualAssertNode } from "./nodes/EqualAssertNode";
 import { RawDefineNode } from "./nodes/RawDefineNode";
 import { LGraphCanvas } from "src/litegraph";
+import { AndOperateNode } from "./nodes/AndOperateNode";
 
 // 网格大小
 const GRID_WIDTH = 300;
@@ -82,6 +84,22 @@ class Graph {
         });
 
         output.pos = gridStartPostion[3][params.position];
+
+        this.graph.add(output);
+        return output;
+    }
+
+    /**
+     * 与操作节点
+     * @param params 
+     * @returns 
+     */
+    addAndNode(params: NodeParams): AndOperateNode {
+        const output = LiteGraph.createNode("basic/and", params.title, {
+            ...params
+        });
+
+        output.pos = gridStartPostion[2][params.position];
 
         this.graph.add(output);
         return output;

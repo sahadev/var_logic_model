@@ -6,6 +6,7 @@ const graphInstance = getInstance();
 let column1Index = 0;
 let column2Index = 0;
 let column3Index = 0;
+let column4Index = 0;
 
 /**
  * 定义原始数据节点
@@ -250,6 +251,17 @@ function defineOutputNode() {
     }
 }
 
+export function defineAndNode() {
+    const upgrade1 = graphInstance.addAndNode({
+        position: column4Index++,
+        title: "升级会员条件1",
+    })
+
+    return {
+        upgrade1
+    }
+}
+
 /**
  * 建立所有节点的联系
  */
@@ -279,6 +291,8 @@ export function relativeNode() {
     const { packageLevelNode, effectiveNode,
         preusePointNode,
         remainPointNode, SDXLNode, remainSpaceNode, preprocessedNode } = defineRawNode();
+
+    const { upgrade1 } = defineAndNode();
 
 
     // 计算会员身份
@@ -321,7 +335,7 @@ export function relativeNode() {
     isExpired.connect(0, myBenefit, 0);
 
     // 免费版 算力不足 选择了SDXL 升级会员 
-    isBasicVip.connect(0, upgrade, 0);
-    isPointDeficiency.connect(0, upgrade, 0);
-    // SDXLNode.connect(0, upgrade, 0);
+    isBasicVip.connect(0, upgrade1, 0);
+    isPointDeficiency.connect(0, upgrade1, 1);
+    SDXLNode.connect(0, upgrade1, 2);
 }
