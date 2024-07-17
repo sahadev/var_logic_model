@@ -2687,6 +2687,11 @@ LGraphGroup.prototype.setDirtyCanvas = setDirtyCanvas;
 
 //Scale and Offset
 export class DragAndScale {
+    visible_area: any;
+    offset: number[];
+    scale: number;
+    element: any;
+    viewport: any;
     constructor(element, skip_events) {
         this.offset = new Float32Array([0, 0]);
         this.scale = 1;

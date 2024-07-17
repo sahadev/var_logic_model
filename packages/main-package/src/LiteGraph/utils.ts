@@ -113,3 +113,23 @@ export function num2hex(triplet) {
     }
     return hex;
 }
+
+export function getPropertyPrintableValue(value, values) {
+    if (!values)
+        return String(value);
+
+    if (values.constructor === Array) {
+        return String(value);
+    }
+
+    if (values.constructor === Object) {
+        let desc_value = "";
+        for (let k in values) {
+            if (values[k] != value)
+                continue;
+            desc_value = k;
+            break;
+        }
+        return String(value) + " (" + desc_value + ")";
+    }
+}

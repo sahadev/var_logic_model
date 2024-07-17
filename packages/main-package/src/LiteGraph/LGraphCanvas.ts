@@ -9,7 +9,7 @@ import { useBearStore } from "../store";
 import { LiteGraph } from "./LiteGraph";
 import { DragAndScale } from "./Node";
 import { LGraph } from './LGraph'
-import { distance, isInsideRectangle, overlapBounding } from "./utils";
+import { distance, getPropertyPrintableValue, isInsideRectangle, overlapBounding } from "./utils";
 
 /* LGraphCanvas render */
 const temp = new Float32Array(4);
@@ -20,6 +20,23 @@ const margin_area = new Float32Array(4);
 const link_bounding = new Float32Array(4);
 const tempA = new Float32Array(2);
 const tempB = new Float32Array(2);
+
+
+const node_colors = {
+    red: { color: "#322", bgcolor: "#533", groupcolor: "#A88" },
+    brown: { color: "#332922", bgcolor: "#593930", groupcolor: "#b06634" },
+    green: { color: "#232", bgcolor: "#353", groupcolor: "#8A8" },
+    blue: { color: "#223", bgcolor: "#335", groupcolor: "#88A" },
+    pale_blue: {
+        color: "#2a363b",
+        bgcolor: "#3f5159",
+        groupcolor: "#3f789e"
+    },
+    cyan: { color: "#233", bgcolor: "#355", groupcolor: "#8AA" },
+    purple: { color: "#323", bgcolor: "#535", groupcolor: "#a1309b" },
+    yellow: { color: "#432", bgcolor: "#653", groupcolor: "#b58b2a" },
+    black: { color: "#222", bgcolor: "#000", groupcolor: "#444" }
+};
 
 // 指向当前的绘制canvas
 let activeCanvas: LGraphCanvas | null = null;
@@ -36,6 +53,168 @@ let activeCanvas: LGraphCanvas | null = null;
  */
 export class LGraphCanvas {
     graph: LGraph;
+    last_mouse_position: number[];
+    visible_area: any;
+    visible_links: any[];
+    options: any;
+    background_image: any;
+    ds: DragAndScale;
+    zoom_modify_alpha: boolean;
+    title_text_font: string;
+    node_title_color: string;
+    default_link_color: string;
+    static DEFAULT_BACKGROUND_IMAGE: any;
+    default_connection_color: {
+        input_off: string; input_on: string; //"#BBD"
+        output_off: string; output_on: string; //"#BBD"
+    };
+    default_connection_color_byType: {};
+    default_connection_color_byTypeOff: {};
+    highquality_render: boolean;
+    use_gradients: boolean;
+    editor_alpha: number;
+    pause_rendering: boolean;
+    clear_background: boolean;
+    clear_background_color: string;
+    read_only: boolean;
+    render_only_selected: boolean;
+    live_mode: boolean;
+    show_info: boolean;
+    allow_dragcanvas: boolean;
+    allow_dragnodes: boolean;
+    allow_interaction: boolean;
+    multi_select: boolean;
+    allow_searchbox: boolean;
+    allow_reconnect_links: boolean;
+    align_to_grid: boolean;
+    drag_mode: boolean;
+    dragging_rectangle: null;
+    filter: null;
+    set_canvas_dirty_on_mouse_event: boolean;
+    always_render_background: boolean;
+    render_shadows: boolean;
+    render_canvas_border: boolean;
+    render_connections_shadows: boolean;
+    render_connections_border: boolean;
+    render_curved_connections: boolean;
+    render_connection_arrows: boolean;
+    render_collapsed_slots: boolean;
+    render_execution_order: boolean;
+    render_title_colored: boolean;
+    render_link_tooltip: boolean;
+    links_render_mode: number;
+    mouse: number[];
+    graph_mouse: number[];
+    canvas_mouse: any;
+    onSearchBox: null;
+    onSearchBoxSelection: null;
+    onMouse: null;
+    onDrawBackground: null;
+    onDrawForeground: null;
+    onDrawOverlay: null;
+    onDrawLinkTooltip: null;
+    onNodeMoved: null;
+    onSelectionChange: null;
+    onConnectingChange: null;
+    onBeforeChange: null;
+    onAfterChange: null;
+    connections_width: number;
+    round_radius: number;
+    current_node: null;
+    node_widget: null;
+    over_link_center: null;
+    viewport: any;
+    autoresize: any;
+    frame: number;
+    last_draw_time: number;
+    render_time: number;
+    fps: number;
+    selected_nodes: {};
+    selected_group: null;
+    visible_nodes: any[];
+    node_dragged: null;
+    node_over: null;
+    node_capturing_input: null;
+    connecting_node: null;
+    highlighted_links: {};
+    dragging_canvas: boolean;
+    dirty_canvas: boolean;
+    dirty_bgcanvas: boolean;
+    dirty_area: null;
+    node_in_panel: null;
+    last_mouse: number[];
+    last_mouseclick: number;
+    pointer_is_down: boolean;
+    pointer_is_double: boolean;
+    onClear: any;
+    _graph_stack: any;
+    canvas: any;
+    bgcanvas: null;
+    ctx: any;
+    _events_binded: any;
+    _mousedown_callback: any;
+    _mousewheel_callback: any;
+    _mousemove_callback: any;
+    _mouseup_callback: any;
+    _key_callback: any;
+    _ondrop_callback: any;
+    gl: any;
+    bgctx: any;
+    is_rendering: any;
+    block_click: boolean;
+    last_click_position: any[];
+    resizing_node: any;
+    connecting_output: any;
+    connecting_pos: any;
+    connecting_slot: number;
+    connecting_input: any;
+    selected_group_resizing: boolean;
+    last_mouse_dragging: boolean;
+    onMouseDown: any;
+    _highlight_input: number[];
+    _highlight_input_slot: any;
+    _highlight_output: number[];
+    node_panel: any;
+    options_panel: any;
+    onDropItem: any;
+    onShowNodePanel: any;
+    onNodeDblClicked: any;
+    onNodeSelected: any;
+    onNodeDeselected: any;
+    onRender: any;
+    onRenderBackground: any;
+    _bg_img: any;
+    _pattern: null;
+    _pattern_img: any;
+    onBackgroundRender: any;
+    inner_text_font: string;
+    static gradients: any;
+    onMenuNodeOutputs: any;
+    prompt_box: null;
+    search_box: null;
+    static search_limit: number;
+    SELECTED_NODE: any;
+    NODEPANEL_IS_OPEN: boolean;
+    getMenuOptions: any;
+    static onGroupAdd: any;
+    static onGroupAlign: any;
+    getExtraMenuOptions: any;
+    static showMenuNodeOptionalInputs: any;
+    static showMenuNodeOptionalOutputs: any;
+    static onShowMenuNodeProperties: any;
+    static onShowPropertyEditor: any;
+    static onMenuNodeMode: any;
+    static onMenuResizeNode: any;
+    static onMenuNodeCollapse: any;
+    static onMenuNodePin: any;
+    static onMenuNodeColors: any;
+    static onMenuNodeShapes: any;
+    static onMenuNodeClone: any;
+    static onMenuNodeToSubgraph: any;
+    static onNodeAlign: any;
+    static onMenuNodeRemove: any;
+    static active_node: any;
+    static link_type_colors: { "-1": string; number: string; node: string; };
 
     constructor(canvas: string, graph: LGraph, options) {
         this.options = options = options || {};
@@ -52,7 +231,7 @@ export class LGraphCanvas {
         this.zoom_modify_alpha = true; //otherwise it generates ugly patterns when scaling down too much
 
         this.title_text_font = "" + LiteGraph.NODE_TEXT_SIZE + "px Arial";
-        this.inner_text_font =
+        this.title_text_font =
             "normal " + LiteGraph.NODE_SUBTEXT_SIZE + "px Arial";
         this.node_title_color = LiteGraph.NODE_TITLE_COLOR;
         this.default_link_color = LiteGraph.LINK_COLOR;
@@ -1260,7 +1439,7 @@ export class LGraphCanvas {
                             //mouse on top of the corner box, don't know what to do
                         } else {
                             //check if I have a slot below de mouse
-                            let slot = this.isOverNodeInput(node, e.canvasX, e.canvasY, pos);
+                            var slot = this.isOverNodeInput(node, e.canvasX, e.canvasY, pos);
                             if (slot != -1 && node.inputs[slot]) {
                                 let slot_type = node.inputs[slot].type;
                                 if (LiteGraph.isValidConnection(this.connecting_output.type, slot_type)) {
@@ -1282,7 +1461,7 @@ export class LGraphCanvas {
                             //mouse on top of the corner box, don't know what to do
                         } else {
                             //check if I have a slot below de mouse
-                            let slot = this.isOverNodeOutput(node, e.canvasX, e.canvasY, pos);
+                            var slot = this.isOverNodeOutput(node, e.canvasX, e.canvasY, pos);
                             if (slot != -1 && node.outputs[slot]) {
                                 let slot_type = node.outputs[slot].type;
                                 if (LiteGraph.isValidConnection(this.connecting_input.type, slot_type)) {
@@ -1543,7 +1722,7 @@ export class LGraphCanvas {
 
                     if (this.connecting_output) {
 
-                        let slot = this.isOverNodeInput(
+                        var slot = this.isOverNodeInput(
                             node,
                             e.canvasX,
                             e.canvasY
@@ -1558,7 +1737,7 @@ export class LGraphCanvas {
 
                     } else if (this.connecting_input) {
 
-                        let slot = this.isOverNodeOutput(
+                        var slot = this.isOverNodeOutput(
                             node,
                             e.canvasX,
                             e.canvasY
@@ -2144,7 +2323,10 @@ export class LGraphCanvas {
         }
 
         return false;
-    };
+    }static getFileExtension(filename: any) {
+        throw new Error("Method not implemented.");
+    }
+;
 
     //called if the graph doesn't have a default drop item behaviour
     checkDropItem(e) {
@@ -2810,7 +2992,10 @@ export class LGraphCanvas {
             //this is a function I use in webgl renderer
             ctx.finish2D();
         }
-    };
+    }visible_rect(ctx: any, visible_rect: any) {
+        throw new Error("Method not implemented.");
+    }
+;
 
     /**
      * draws the panel in the corner that shows subgraph properties
@@ -3358,7 +3543,7 @@ export class LGraphCanvas {
             //input connection slots
             if (node.inputs) {
                 for (let i = 0; i < node.inputs.length; i++) {
-                    let slot = node.inputs[i];
+                    var slot = node.inputs[i];
 
                     let slot_type = slot.type;
                     let slot_shape = slot.shape;
@@ -3458,7 +3643,7 @@ export class LGraphCanvas {
             ctx.strokeStyle = "black";
             if (node.outputs) {
                 for (let i = 0; i < node.outputs.length; i++) {
-                    let slot = node.outputs[i];
+                    var slot = node.outputs[i];
 
                     let slot_type = slot.type;
                     let slot_shape = slot.shape;
@@ -3586,7 +3771,7 @@ export class LGraphCanvas {
             //get first connected slot to render
             if (node.inputs) {
                 for (let i = 0; i < node.inputs.length; i++) {
-                    let slot = node.inputs[i];
+                    var slot = node.inputs[i];
                     if (slot.link == null) {
                         continue;
                     }
@@ -3596,7 +3781,7 @@ export class LGraphCanvas {
             }
             if (node.outputs) {
                 for (let i = 0; i < node.outputs.length; i++) {
-                    let slot = node.outputs[i];
+                    var slot = node.outputs[i];
                     if (!slot.links || !slot.links.length) {
                         continue;
                     }
@@ -5225,6 +5410,9 @@ export class LGraphCanvas {
     boundaryNodesForSelection() {
         return LGraphCanvas.getBoundaryNodes(Object.values(this.selected_nodes));
     }
+    static getBoundaryNodes(arg0: unknown[]) {
+        throw new Error("Method not implemented.");
+    }
 
     /**
      *
@@ -5281,6 +5469,9 @@ export class LGraphCanvas {
         function inner_clicked(value) {
             LGraphCanvas.alignNodes(activeCanvas.selected_nodes, value.toLowerCase(), node);
         }
+    }
+    static alignNodes(selected_nodes: any, arg1: any, node: any) {
+        throw new Error("Method not implemented.");
     }
 
     onGroupAlign(value, options, event, prev_menu) {
@@ -5611,7 +5802,7 @@ export class LGraphCanvas {
                 value = JSON.stringify(value);
             let info = node.getPropertyInfo(i);
             if (info.type == "enum" || info.type == "combo")
-                value = LGraphCanvas.getPropertyPrintableValue(value, info.values);
+                value = getPropertyPrintableValue(value, info.values);
 
             //value could contain invalid html characters, clean that
             value = LGraphCanvas.decodeHTML(value);
@@ -5653,7 +5844,10 @@ export class LGraphCanvas {
         }
 
         return false;
-    };
+    }static decodeHTML(value: any): any {
+        throw new Error("Method not implemented.");
+    }
+;
 
     decodeHTML(str) {
         let e = document.createElement("div");
@@ -5735,7 +5929,10 @@ export class LGraphCanvas {
         }
 
         return false;
-    };
+    }static onMenuAdd(arg0: null, arg1: null, e: any, menu: any, arg4: (node: any) => void) {
+        throw new Error("Method not implemented.");
+    }
+;
 
     createDefaultNodeForSlot(optPass) { // addNodeMenu for connection
         let opts = Object.assign({
@@ -7169,7 +7366,7 @@ export class LGraphCanvas {
                 });
             }
             else if (type == "enum" || type == "combo") {
-                let str_value = LGraphCanvas.getPropertyPrintableValue(value, options.values);
+                let str_value = getPropertyPrintableValue(value, options.values);
                 value_element.innerText = str_value;
 
                 value_element.addEventListener("click", function (event) {
@@ -7210,26 +7407,6 @@ export class LGraphCanvas {
 
         return root;
     };
-
-    getPropertyPrintableValue(value, values) {
-        if (!values)
-            return String(value);
-
-        if (values.constructor === Array) {
-            return String(value);
-        }
-
-        if (values.constructor === Object) {
-            let desc_value = "";
-            for (let k in values) {
-                if (values[k] != value)
-                    continue;
-                desc_value = k;
-                break;
-            }
-            return String(value) + " (" + desc_value + ")";
-        }
-    }
 
     closePanels() {
         let panel = document.querySelector("#node-panel");
@@ -7370,9 +7547,9 @@ export class LGraphCanvas {
                         }
                         break;
                     case "Color":
-                        if (LGraphCanvas.node_colors[value]) {
-                            node.color = LGraphCanvas.node_colors[value].color;
-                            node.bgcolor = LGraphCanvas.node_colors[value].bgcolor;
+                        if (node_colors[value]) {
+                            node.color = node_colors[value].color;
+                            node.bgcolor = node_colors[value].bgcolor;
                         } else {
                             console.warn("unexpected color: " + value);
                         }
@@ -7391,10 +7568,10 @@ export class LGraphCanvas {
 
             let nodeCol = "";
             if (node.color !== undefined) {
-                nodeCol = Object.keys(LGraphCanvas.node_colors).filter(function (nK) { return LGraphCanvas.node_colors[nK].color == node.color; });
+                nodeCol = Object.keys(node_colors).filter(function (nK) { return node_colors[nK].color == node.color; });
             }
 
-            panel.addWidget("combo", "Color", nodeCol, { values: Object.keys(LGraphCanvas.node_colors) }, fUpdate);
+            panel.addWidget("combo", "Color", nodeCol, { values: Object.keys(node_colors) }, fUpdate);
 
             for (let pName in node.properties) {
                 let value = node.properties[pName];
@@ -7849,22 +8026,6 @@ export class LGraphCanvas {
         node.setDirtyCanvas(true, true);
     };
 
-    node_colors = {
-        red: { color: "#322", bgcolor: "#533", groupcolor: "#A88" },
-        brown: { color: "#332922", bgcolor: "#593930", groupcolor: "#b06634" },
-        green: { color: "#232", bgcolor: "#353", groupcolor: "#8A8" },
-        blue: { color: "#223", bgcolor: "#335", groupcolor: "#88A" },
-        pale_blue: {
-            color: "#2a363b",
-            bgcolor: "#3f5159",
-            groupcolor: "#3f789e"
-        },
-        cyan: { color: "#233", bgcolor: "#355", groupcolor: "#8AA" },
-        purple: { color: "#323", bgcolor: "#535", groupcolor: "#a1309b" },
-        yellow: { color: "#432", bgcolor: "#653", groupcolor: "#b58b2a" },
-        black: { color: "#222", bgcolor: "#000", groupcolor: "#444" }
-    };
-
     getCanvasMenuOptions() {
         let options = null;
         let that = this;
@@ -8065,7 +8226,7 @@ export class LGraphCanvas {
             options.title = node.type;
 
         //check if mouse is in input
-        let slot = null;
+        var slot = null;
         if (node) {
             slot = node.getSlotInPosition(event.canvasX, event.canvasY);
             LGraphCanvas.active_node = node;

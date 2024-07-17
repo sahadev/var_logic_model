@@ -24,6 +24,16 @@ import { LGraphGroup } from "./Node";
 export class LGraph {
 
     _nodes: LGraphNode[];
+    _subgraph_node: any;
+    links: any;
+    _nodes_by_id: any;
+    config: any;
+    _last_trigger_time: LGraph;
+    globaltime: any;
+    iteration: string;
+    _version: string;
+    _groups: any;
+    filter: any;
 
     constructor(o) {
         if (LiteGraph.debug) {
