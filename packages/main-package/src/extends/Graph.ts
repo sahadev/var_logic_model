@@ -1,13 +1,14 @@
-// @ts-ignore
-// @ts-nocheck
 
 // import "litegraph/css/litegraph.css";
-import "./nodes/AddNode";
 import "./nodes/OutputNode";
 import "./nodes/RawDefineNode";
 import "./nodes/EqualAssertNode";
 import { LiteGraph } from "../LiteGraph/LiteGraph";
 import { LGraph } from "../LiteGraph/LGraph";
+import { OutputNode } from "./nodes/OutputNode";
+import { EqualAssertNode } from "./nodes/EqualAssertNode";
+import { RawDefineNode } from "./nodes/RawDefineNode";
+import { LGraphCanvas } from "src/litegraph";
 
 // 网格大小
 const GRID_WIDTH = 300;
@@ -15,7 +16,7 @@ const GRID_HEIGHT = 200;
 
 // 构建坐标表格
 const x_num: number = 10,
-    y_num: number = 6;
+    y_num: number = 20;
 
 // 起始坐标偏移量
 const x_offset: number = 100;
@@ -36,6 +37,7 @@ export type NodeParams = {
     title: string; // 节点的标题
     value?: any; // 节点的值，可变更的值。
     widgetType?: any; // 节点控件的类型
+    column?: number; // 节点所在列
 }
 
 class Graph {
@@ -55,33 +57,36 @@ class Graph {
         this.graph.stop(); // 控制真正的渲染间隔
     }
 
-    addRawNode(params: NodeParams) {
+    addRawNode(params: NodeParams): RawDefineNode {
         const output = LiteGraph.createNode("build/raw", params.title, {
             ...params
         });
-        output.pos = gridStartPostion[0][params.position];
+        output.pos = gridStartPostion[params.column || 0][params.position];
         this.graph.add(output);
         return output;
     }
 
-    addEqualNode(params: NodeParams) {
+    addEqualNode(params: NodeParams): EqualAssertNode {
         const output = LiteGraph.createNode("build/equal", params.title, {
             expression: params.value,
             ...params
         });
-        output.pos = gridStartPostion[1][params.position];
+        output.pos = gridStartPostion[params.column || 1][params.position];
         this.graph.add(output);
         return output;
     }
 
-    addOutput(params: NodeParams) {
-        const output = LiteGraph.createNode("basic/output", params.title);
+    addOutput(params: NodeParams): OutputNode {
+        const output = LiteGraph.createNode("basic/output", params.title, {
+            ...params
+        });
 
-        output.pos = gridStartPostion[2][params.position];
+        output.pos = gridStartPostion[3][params.position];
 
         this.graph.add(output);
         return output;
     }
+
 }
 
 let graphInstance: Graph | null = null;

@@ -216,7 +216,7 @@ export class LGraphCanvas {
     static active_node: any;
     static link_type_colors: { "-1": string; number: string; node: string; };
 
-    constructor(canvas: string, graph: LGraph, options) {
+    constructor(canvas: string, graph: LGraph, options?) {
         this.options = options = options || {};
 
         //if(graph === undefined)

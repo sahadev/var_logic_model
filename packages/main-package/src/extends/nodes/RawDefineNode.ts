@@ -12,7 +12,7 @@ export class RawDefineNode extends LGraphNode {
 
     constructor(title: string, options: NodeParams) {
         super(title);
-        this.properties = { precision: 0, value: 0, step: 10 };
+        this.properties = { precision: 0, value: options.value, step: 10 };
 
         let widgetType: string;
         switch (options.widgetType) {

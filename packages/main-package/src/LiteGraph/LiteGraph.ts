@@ -644,7 +644,7 @@ export let LiteGraph = {
      * @param {Object} options to set options
      */
 
-    createNode: function (type, title, options) {
+    createNode: function (type: string, title, options?: object) {
         let base_class = this.registered_node_types[type];
         if (!base_class) {
             if (LiteGraph.debug) {

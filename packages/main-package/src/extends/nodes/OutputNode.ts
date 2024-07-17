@@ -1,19 +1,19 @@
 import { LGraphNode, LiteGraph } from "src/litegraph";
+import { NodeParams } from "../Graph";
 
 //node constructor class
-class OutputNode extends LGraphNode {
+export class OutputNode extends LGraphNode {
     value_widget: any;
 
-    constructor(title: string) {
+    constructor(title: string, options: NodeParams) {
         super(title)
-        this.addInput("Number Input", 'number');
-        this.addInput("String Input", 'string');
-        this.addInput("Boolean Input", 'boolean');
 
-        let properties = { value: 1, disabled: true };
+        this.addInput('input', 'string');
+
+        let properties = { value: options.value, disabled: true };
         this.value_widget = this.addWidget(
-            "string",
-            "Value",
+            'string',
+            title,
             properties.value,
             (v) => {
             },

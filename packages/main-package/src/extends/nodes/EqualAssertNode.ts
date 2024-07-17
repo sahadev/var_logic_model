@@ -9,7 +9,7 @@ export type EqualAssertNodeOptions = NodeParams & {
  * 等式断言节点
  * @param title 表达式含义
  */
-class EqualAssertNode extends LGraphNode {
+export class EqualAssertNode extends LGraphNode {
     exp_widget: any;
     result_widget: any;
     _value: number;
@@ -66,14 +66,18 @@ class EqualAssertNode extends LGraphNode {
         // expression 来自于外部的options
         const expression = this.options.expression;
 
-        let equaltion = expression.replace('input', `${this._value}`);
+        let equaltion = expression;
 
-        if (this._value2 || this._value2 === 0) {
+        if (this._value2 || this._value2 === 0 || !this._value2) {
             equaltion = equaltion.replace('input2', `${this._value2}`);
         }
 
+        // 这一行要在所有的表达式计算之后执行，否则优先匹配input。例如input匹配了input2就会变为2
+        equaltion = equaltion.replace('input', `${this._value}`); 
+        
         try {
             const calcResult = (new Function(`return ${equaltion}`))()
+            // console.info(`this._value2`, this._value2, expression, calcResult)
             // 应该是定时执行的时候需要从这里取值
             this.updateResult(calcResult)
         } catch (error) {

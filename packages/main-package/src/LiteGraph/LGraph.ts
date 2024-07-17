@@ -35,7 +35,7 @@ export class LGraph {
     _groups: any;
     filter: any;
 
-    constructor(o) {
+    constructor(o?) {
         if (LiteGraph.debug) {
             console.log("Graph created");
         }
@@ -662,7 +662,7 @@ export class LGraph {
      * @param {LGraphNode} node the instance of the node
      */
 
-    add(node, skip_compute_order) {
+    add(node: LGraphNode, skip_compute_order?) {
         if (!node) {
             return;
         }
