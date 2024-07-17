@@ -9,6 +9,7 @@ import { LLink } from "./LLink";
 import { LiteGraph } from "./LiteGraph";
 import { isInsideRectangle, overlapBounding } from "./utils";
 
+export const WidgetType = "button" || "toggle" || "slider" || "number" || "combo" || "string" || "text";
 /*
 title: string
 pos: [x,y]
@@ -1387,18 +1388,20 @@ export class LGraphNode {
         return info;
     }
 
+    
+
     /**
      * Defines a widget inside the node, it will be rendered on top of the node, you can control lots of properties
      *
      * @method addWidget
-     * @param {String} type the widget type (could be "number","string","combo"
+     * @param {String} type the widget type (could be "button" || "toggle" || "slider" || "number" || "combo" || "string" || "text"
      * @param {String} name the text to show on the widget
      * @param {String} value the default value
      * @param {Function|String} callback function to call when it changes (optionally, it can be the name of the property to modify)
      * @param {Object} options the object that contains special properties of this widget 
      * @return {Object} the created widget object
      */
-    addWidget(type, name, value, callback, options) {
+    addWidget(type: WidgetType, name: string, value: any, callback: Function | string, options: object): object {
         if (!this.widgets) {
             this.widgets = [];
         }

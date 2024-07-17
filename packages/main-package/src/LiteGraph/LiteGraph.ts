@@ -663,13 +663,13 @@ export let LiteGraph = {
 
         if (LiteGraph.catch_exceptions) {
             try {
-                node = new base_class(title);
+                node = new base_class(title, options);
             } catch (err) {
                 console.error(err);
                 return null;
             }
         } else {
-            node = new base_class(title);
+            node = new base_class(title, options);
         }
 
         node.type = type;

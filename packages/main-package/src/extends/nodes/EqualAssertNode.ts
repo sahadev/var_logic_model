@@ -1,34 +1,39 @@
 import { LGraphNode, LiteGraph } from "src/litegraph";
+import { NodeParams } from "../Graph";
+
+export type EqualAssertNodeOptions = NodeParams & {
+    expression: string;
+}
 
 /**
  * 等式断言节点
  * @param title 表达式含义
  */
 class EqualAssertNode extends LGraphNode {
-    value_widget: any;
+    exp_widget: any;
     result_widget: any;
     _value: number;
     _value2: number;
-    properties: any;
     title: string;
     expression: string;
+    _value3: any;
+    options: EqualAssertNodeOptions
 
-    constructor(title: string) {
+    constructor(title: string, options: EqualAssertNodeOptions) {
         super(title || "等式断言节点");
 
+        this.options = options;
         this.title = title;
 
-        this.properties = { value: "input > 0" };
-
         // 表达式输入框，可以修改表达式的值
-        this.value_widget = this.addWidget(
+        this.exp_widget = this.addWidget(
             "string",
             "表达式",
-            this.properties.value,
+            options.expression,
             (v: any) => {
-                this.setProperty("value", v);
+                this.options.expression = v;
             },
-            this.properties
+            options
         );
 
         // 计算结果展示框，可以修改标题
@@ -49,9 +54,8 @@ class EqualAssertNode extends LGraphNode {
         );
 
         // 外部输入节点
-        this.addInput("Number Input 1", "number");
-        this.addInput("Number Input 2", "number");
-        this.addInput("String Input 2", "string");
+        this.addInput("Input 1", "number");
+        this.addInput("Input 2", "number");
         this.addOutput("输出节点", "boolean");
     }
 
@@ -60,17 +64,30 @@ class EqualAssertNode extends LGraphNode {
         this._value2 = this.getInputData(1);
 
         // expression 来自于外部的options
-        const expression = this.expression || this.properties.value;
+        const expression = this.options.expression;
 
-        const equaltion = expression.replace('input', this._value);
-        const calcResult = (new Function(`return ${equaltion}`))()
-        // 应该是定时执行的时候需要从这里取值
-        this.setOutputData(0, calcResult);
-        this.result_widget.value = calcResult;
-        this.value_widget.value = expression;
+        let equaltion = expression.replace('input', `${this._value}`);
 
-        this.calculateResult = calcResult;
+        if (this._value2 || this._value2 === 0) {
+            equaltion = equaltion.replace('input2', `${this._value2}`);
+        }
+
+        try {
+            const calcResult = (new Function(`return ${equaltion}`))()
+            // 应该是定时执行的时候需要从这里取值
+            this.updateResult(calcResult)
+        } catch (error) {
+            console.info(`运行错误:`, equaltion)
+            this.updateResult(false)
+        }
+        this.exp_widget.value = expression;
     };
+
+    updateResult(result: any) {
+        this.setOutputData(0, result);
+        this.result_widget.value = result;
+        this.calculateResult = result; // 控制输入线是否高亮
+    }
 }
 
 //register in the system

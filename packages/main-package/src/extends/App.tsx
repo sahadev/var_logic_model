@@ -6,6 +6,7 @@ import "@mantine/core/styles.css";
 import "./App.css";
 import { getInstance } from "./Graph";
 import { ModifyModal, Serialize } from "../components/index";
+import { RawDefineNodeTypeEnum } from "./nodes/RawDefineNode";
 const graphInstance = getInstance();
 
 const packageLevelNode = graphInstance.addRawNode({
@@ -18,6 +19,7 @@ const effectiveNode = graphInstance.addRawNode({
   position: 1,
   title: "effective",
   value: 0,
+  widgetType: RawDefineNodeTypeEnum.Boolean
 });
 
 const isNotVip = graphInstance.addEqualNode({
@@ -48,6 +50,11 @@ packageLevelNode.connect(0, isNotVip, 0);
 packageLevelNode.connect(0, isFreeVip, 0);
 packageLevelNode.connect(0, isBasicVip, 0);
 packageLevelNode.connect(0, isProVip, 0);
+
+effectiveNode.connect(0, isNotVip, 1);
+effectiveNode.connect(0, isFreeVip, 1);
+effectiveNode.connect(0, isBasicVip, 1);
+effectiveNode.connect(0, isProVip, 1);
 
 function App() {
   const requestSerlize = useCallback(() => {}, []);

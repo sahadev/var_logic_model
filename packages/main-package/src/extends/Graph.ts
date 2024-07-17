@@ -35,6 +35,7 @@ export type NodeParams = {
     position: number; // 所处的位置顺序
     title: string; // 节点的标题
     value?: any; // 节点的值，可变更的值。
+    widgetType?: any; // 节点控件的类型
 }
 
 class Graph {
@@ -44,11 +45,20 @@ class Graph {
         this.graph = new LGraph();
         const canvas = new LGraphCanvas("#mycanvas", this.graph);
         canvas.resize(window.innerWidth, window.innerHeight);
+    }
+
+    start() {
         this.graph.start(200); // 控制真正的渲染间隔
     }
 
+    stop() {
+        this.graph.stop(); // 控制真正的渲染间隔
+    }
+
     addRawNode(params: NodeParams) {
-        const output = LiteGraph.createNode("build/raw", params.title);
+        const output = LiteGraph.createNode("build/raw", params.title, {
+            ...params
+        });
         output.pos = gridStartPostion[0][params.position];
         this.graph.add(output);
         return output;
@@ -56,7 +66,8 @@ class Graph {
 
     addEqualNode(params: NodeParams) {
         const output = LiteGraph.createNode("build/equal", params.title, {
-            expression: params.value
+            expression: params.value,
+            ...params
         });
         output.pos = gridStartPostion[1][params.position];
         this.graph.add(output);
