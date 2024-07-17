@@ -956,6 +956,7 @@ export class LGraphCanvas {
                                     )
                                 ) {
                                     this.connecting_node = node;
+                                    // 输出连接点
                                     this.connecting_output = output;
                                     this.connecting_output.slot_index = i;
                                     this.connecting_pos = node.getConnectionPos(false, i);
@@ -2826,6 +2827,7 @@ export class LGraphCanvas {
                 ctx.lineWidth = this.connections_width;
                 let link_color = null;
 
+                // 划线
                 let connInOrOut = this.connecting_output || this.connecting_input;
 
                 let connType = connInOrOut.type;
@@ -3551,7 +3553,8 @@ export class LGraphCanvas {
                     ctx.globalAlpha = editor_alpha;
                     //change opacity of incompatible slots when dragging a connection
                     if (this.connecting_output && !LiteGraph.isValidConnection(slot.type, out_slot.type)) {
-                        ctx.globalAlpha = 0.4 * editor_alpha;
+                        // 控制输入节点是否置灰，如果输入输出节点类型不匹配，就会置灰。这个限制应该取消
+                        // ctx.globalAlpha = 0.4 * editor_alpha;
                     }
 
                     ctx.fillStyle =
@@ -3630,6 +3633,7 @@ export class LGraphCanvas {
                             if (horizontal || slot.dir == LiteGraph.UP) {
                                 ctx.fillText(text, pos[0], pos[1] - 10);
                             } else {
+                                // 输入节点的名字
                                 ctx.fillText(text, pos[0] + 10, pos[1] + 5);
                             }
                         }
@@ -3737,6 +3741,7 @@ export class LGraphCanvas {
                             if (horizontal || slot.dir == LiteGraph.DOWN) {
                                 ctx.fillText(text, pos[0], pos[1] - 8);
                             } else {
+                                // 输出节点的名字
                                 ctx.fillText(text, pos[0] - 10, pos[1] + 5);
                             }
                         }

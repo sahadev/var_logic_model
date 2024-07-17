@@ -7,7 +7,8 @@ import { LGraphNode, LiteGraph } from "src/litegraph";
 class EqualAssertNode extends LGraphNode {
     value_widget: any;
     result_widget: any;
-    _value: any;
+    _value: number;
+    _value2: number;
     properties: any;
     title: string;
     expression: string;
@@ -17,7 +18,7 @@ class EqualAssertNode extends LGraphNode {
 
         this.title = title;
 
-        this. properties = { value: "input > 0" };
+        this.properties = { value: "input > 0" };
 
         // 表达式输入框，可以修改表达式的值
         this.value_widget = this.addWidget(
@@ -48,16 +49,17 @@ class EqualAssertNode extends LGraphNode {
         );
 
         // 外部输入节点
-        this.addInput("Number", "number");
-        this.addInput("String", "string");
-        this.addInput("Boolean", "boolean");
+        this.addInput("Number Input 1", "number");
+        this.addInput("Number Input 2", "number");
+        this.addInput("String Input 2", "string");
         this.addOutput("输出节点", "boolean");
     }
 
     onExecute() {
         this._value = this.getInputData(0);
+        this._value2 = this.getInputData(1);
 
-
+        // expression 来自于外部的options
         const expression = this.expression || this.properties.value;
 
         const equaltion = expression.replace('input', this._value);

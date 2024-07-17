@@ -48,7 +48,7 @@ class Graph {
     }
 
     addRawNode(params: NodeParams) {
-        const output = LiteGraph.createNode("build/raw", "packageLevel");
+        const output = LiteGraph.createNode("build/raw", params.title);
         output.pos = gridStartPostion[0][params.position];
         this.graph.add(output);
         return output;

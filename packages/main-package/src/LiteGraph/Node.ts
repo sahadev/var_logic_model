@@ -1147,7 +1147,7 @@ export class LGraphNode {
      * @param {string} type string defining the input type ("vec3","number",...), it its a generic one use 0
      * @param {Object} extra_info this can be used to have special properties of an input (label, color, position, etc)
      */
-    addInput(name, type, extra_info?) {
+    addInput(name: string, type: string, extra_info?: object) {
         type = type || 0;
         var input = { name: name, type: type, link: null };
         if (extra_info) {

@@ -14,60 +14,40 @@ const packageLevelNode = graphInstance.addRawNode({
   value: 0,
 });
 
-packageLevelNode.connect(
-  0,
-  graphInstance.addOutput({
-    position: 0,
-    title: "观察packageLevel",
-  }),
-  0
-);
-
-const isVip = graphInstance.addEqualNode({
+const effectiveNode = graphInstance.addRawNode({
   position: 1,
+  title: "effective",
+  value: 0,
+});
+
+const isNotVip = graphInstance.addEqualNode({
+  position: 0,
   title: "非会员",
   value: "input === 0",
+});
+
+const isFreeVip = graphInstance.addEqualNode({
+  position: 1,
+  title: "免费版会员",
+  value: "input == 1",
 });
 
 const isBasicVip = graphInstance.addEqualNode({
   position: 2,
   title: "基础版会员",
-  value: "input == 1",
-});
-const isProVip = graphInstance.addEqualNode({
-  position: 3,
-  title: "专业版会员",
   value: "input == 2",
 });
 
-packageLevelNode.connect(0, isVip, 0);
+const isProVip = graphInstance.addEqualNode({
+  position: 3,
+  title: "专业版会员",
+  value: "input == 3",
+});
+
+packageLevelNode.connect(0, isNotVip, 0);
+packageLevelNode.connect(0, isFreeVip, 0);
 packageLevelNode.connect(0, isBasicVip, 0);
 packageLevelNode.connect(0, isProVip, 0);
-
-isVip.connect(
-  0,
-  graphInstance.addOutput({
-    position: 1,
-    title: "观察非会员",
-  }),
-  2
-);
-isBasicVip.connect(
-  0,
-  graphInstance.addOutput({
-    position: 2,
-    title: "观察基础版会员",
-  }),
-  2
-);
-isProVip.connect(
-  0,
-  graphInstance.addOutput({
-    position: 3,
-    title: "观察专业版会员",
-  }),
-  2
-);
 
 function App() {
   const requestSerlize = useCallback(() => {}, []);

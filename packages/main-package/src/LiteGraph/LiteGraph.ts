@@ -846,12 +846,17 @@ export let LiteGraph = {
 
     /**
      * Returns if the types of two slots are compatible (taking into account wildcards, etc)
+     * 
+     * 校验两个类型是否相互匹配
+     * 
      * @method isValidConnection
      * @param {String} type_a
      * @param {String} type_b
      * @return {Boolean} true if they can be connected
      */
     isValidConnection: function (type_a, type_b) {
+        return true;
+
         if (type_a == "" || type_a === "*") type_a = 0;
         if (type_b == "" || type_b === "*") type_b = 0;
         if (
