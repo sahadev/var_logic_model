@@ -4,6 +4,7 @@ import "./nodes/OutputNode";
 import "./nodes/RawDefineNode";
 import "./nodes/EqualAssertNode";
 import "./nodes/AndOperateNode";
+import "./nodes/OrOperateNode";
 import { LiteGraph } from "../LiteGraph/LiteGraph";
 import { LGraph } from "../LiteGraph/LGraph";
 import { OutputNode } from "./nodes/OutputNode";
@@ -11,6 +12,7 @@ import { EqualAssertNode } from "./nodes/EqualAssertNode";
 import { RawDefineNode } from "./nodes/RawDefineNode";
 import { LGraphCanvas } from "src/litegraph";
 import { AndOperateNode } from "./nodes/AndOperateNode";
+import { OrOperateNode } from "./nodes/OrOperateNode";
 
 // 网格大小
 const GRID_WIDTH = 300;
@@ -21,7 +23,7 @@ const x_num: number = 10,
     y_num: number = 20;
 
 // 起始坐标偏移量
-const x_offset: number = 100;
+const x_offset: number = 50;
 
 const gridStartPostion = [];
 
@@ -59,6 +61,11 @@ class Graph {
         this.graph.stop(); // 控制真正的渲染间隔
     }
 
+    /**
+     * 原始定义节点
+     * @param params 
+     * @returns 
+     */
     addRawNode(params: NodeParams): RawDefineNode {
         const output = LiteGraph.createNode("build/raw", params.title, {
             ...params
@@ -68,23 +75,17 @@ class Graph {
         return output;
     }
 
+    /**
+     * 断言节点
+     * @param params 
+     * @returns 
+     */
     addEqualNode(params: NodeParams): EqualAssertNode {
         const output = LiteGraph.createNode("build/equal", params.title, {
             expression: params.value,
             ...params
         });
         output.pos = gridStartPostion[params.column || 1][params.position];
-        this.graph.add(output);
-        return output;
-    }
-
-    addOutput(params: NodeParams): OutputNode {
-        const output = LiteGraph.createNode("basic/output", params.title, {
-            ...params
-        });
-
-        output.pos = gridStartPostion[3][params.position];
-
         this.graph.add(output);
         return output;
     }
@@ -100,6 +101,39 @@ class Graph {
         });
 
         output.pos = gridStartPostion[2][params.position];
+
+        this.graph.add(output);
+        return output;
+    }
+
+
+    /**
+     * 或操作节点
+     * @param params 
+     * @returns 
+     */
+    addOrNode(params: NodeParams): OrOperateNode {
+        const output = LiteGraph.createNode("basic/or", params.title, {
+            ...params
+        });
+
+        output.pos = gridStartPostion[4][params.position];
+
+        this.graph.add(output);
+        return output;
+    }
+
+    /**
+     * 末端节点
+     * @param params 
+     * @returns 
+     */
+    addOutput(params: NodeParams): OutputNode {
+        const output = LiteGraph.createNode("basic/output", params.title, {
+            ...params
+        });
+
+        output.pos = gridStartPostion[5][params.position];
 
         this.graph.add(output);
         return output;

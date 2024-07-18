@@ -7,6 +7,7 @@ let column1Index = 0;
 let column2Index = 0;
 let column3Index = 0;
 let column4Index = 0;
+let column5Index = 0;
 
 /**
  * 定义原始数据节点
@@ -71,7 +72,7 @@ function defineRawNode() {
         remainPointNode,
         SDXLNode,
         remainSpaceNode,
-        preprocessedNode
+        preprocessedNode,
     };
 }
 
@@ -104,11 +105,18 @@ function defineVipNode() {
         value: "input !== 3 && input2",
     });
 
+    const isNotFreeVip = graphInstance.addEqualNode({
+        position: column2Index++,
+        title: "非免费版会员",
+        value: "input !== 1 && input2",
+    });
+
     return {
         isNotVip,
         isFreeVip,
         isBasicVip,
         isNotProVip,
+        isNotFreeVip,
     };
 }
 
@@ -152,10 +160,9 @@ function definePointNode() {
 
     return {
         isPointAdequacy,
-        isPointDeficiency
-    }
+        isPointDeficiency,
+    };
 }
-
 
 /**
  * 定义空间是否充足节点
@@ -175,8 +182,8 @@ function defineSpaceNode() {
 
     return {
         isSpaceAdequacy,
-        isSpaceDeficiency
-    }
+        isSpaceDeficiency,
+    };
 }
 
 /**
@@ -190,75 +197,199 @@ function definePreprocessNode() {
     });
 
     return {
-        isNotPreprocess
-    }
+        isNotPreprocess,
+    };
 }
 
 /**
- * 定义末端展示节点
+ * 定义终端展示节点
  */
 function defineOutputNode() {
     const myBenefit = graphInstance.addOutput({
-        position: column3Index++,
+        position: column5Index++,
         title: "我的权益",
-        value: "input"
-    })
+        value: "input",
+    });
 
     const upgrade = graphInstance.addOutput({
-        position: column3Index++,
+        position: column5Index++,
         title: "升级会员",
-        value: "input"
-    })
+        value: "input",
+    });
 
     const freeTrain = graphInstance.addOutput({
-        position: column3Index++,
+        position: column5Index++,
         title: "免费训练",
-        value: "input"
-    })
+        value: "input",
+    });
+
+    const freeTrainDisabled = graphInstance.addOutput({
+        position: column5Index++,
+        title: "免费训练置灰",
+        value: "input",
+    });
 
     const startTrain = graphInstance.addOutput({
-        position: column3Index++,
+        position: column5Index++,
         title: "开始训练",
-        value: "input"
-    })
+        value: "input",
+    });
+
+    const startTrainDisabled = graphInstance.addOutput({
+        position: column5Index++,
+        title: "开始训练置灰",
+        value: "input",
+    });
 
     const purchase = graphInstance.addOutput({
-        position: column3Index++,
+        position: column5Index++,
         title: "开通会员",
-        value: "input"
-    })
+        value: "input",
+    });
 
     const charge = graphInstance.addOutput({
-        position: column3Index++,
+        position: column5Index++,
         title: "算力充值",
-        value: "input"
-    })
+        value: "input",
+    });
 
     const clean = graphInstance.addOutput({
-        position: column3Index++,
+        position: column5Index++,
         title: "清理空间",
-        value: "input"
-    })
+        value: "input",
+    });
 
     return {
         myBenefit,
         upgrade,
         freeTrain,
+        freeTrainDisabled,
         startTrain,
+        startTrainDisabled,
         purchase,
         charge,
-        clean
-    }
+        clean,
+    };
 }
 
 export function defineAndNode() {
-    const upgrade1 = graphInstance.addAndNode({
-        position: column4Index++,
+    const and1 = graphInstance.addAndNode({
+        position: column3Index++,
+        title: "非免费版 && 已过期",
+    });
+
+    const and2 = graphInstance.addAndNode({
+        position: column3Index++,
         title: "免费版 算力不足 选择了SDXL",
-    })
+    });
+
+    const and3 = graphInstance.addAndNode({
+        position: column3Index++,
+        title: "基础版 && 算力不足 && 选择了SDXL",
+    });
+
+    const and4 = graphInstance.addAndNode({
+        position: column3Index++,
+        title: "免费版 && 算力充足 && 空间充足",
+    });
+
+    const and5 = graphInstance.addAndNode({
+        position: column3Index++,
+        title: "基础版 && 算力足够 && 空间不足",
+    });
+
+    const and6 = graphInstance.addAndNode({
+        position: column3Index++,
+        title: "基础版 && 算力足够 && 空间充足",
+    });
+
+    const and7 = graphInstance.addAndNode({
+        position: column3Index++,
+        title: "免费版 && 算力不足 && 空间不足 && 选择了SDXL",
+    });
+
+    const and8 = graphInstance.addAndNode({
+        position: column3Index++,
+        title: "基础版 && 算力不足 && 空间不足",
+    });
+
+    const and9 = graphInstance.addAndNode({
+        position: column3Index++,
+        title: "未完成预处理 && 算力足够 && 空间不足",
+    });
+
+    const and10 = graphInstance.addAndNode({
+        position: column3Index++,
+        title: "已完成预处理 && 非专业版 && 算力足够 && 空间足够",
+    });
+
+    const and11 = graphInstance.addAndNode({
+        position: column3Index++,
+        title: "and1 && and2 && and3 && and4 && and5",
+    });
+
+    const and12 = graphInstance.addAndNode({
+        position: column3Index++,
+        title: "非会员 && and6",
+    });
+
+    const and13 = graphInstance.addAndNode({
+        position: column3Index++,
+        title: "and11 && and12",
+    });
 
     return {
-        upgrade1
+        and1,
+        and2,
+        and3,
+        and4,
+        and5,
+        and6,
+        and7,
+        and8,
+        and9,
+        and10,
+        and11,
+        and12,
+        and13,
+    };
+}
+
+export function defineOrNode() {
+    const upgradeHub = graphInstance.addOrNode({
+        position: column4Index++,
+        title: "展示升级会员",
+    });
+
+    const startTrainHub = graphInstance.addOrNode({
+        position: column4Index++,
+        title: "展示开始训练（蓝）",
+    });
+
+    const startTrainDisableHub = graphInstance.addOrNode({
+        position: column4Index++,
+        title: "展示开始训练（灰）",
+    });
+
+    return {
+        upgradeHub,
+        startTrainHub,
+        startTrainDisableHub,
+    };
+}
+
+/**
+ * 定义取反节点
+ */
+export function defineNotNode() {
+    const otherCase = graphInstance.addEqualNode({
+        position: column2Index++,
+        title: "其余情况",
+        value: "!input", // e
+    });
+
+    return {
+        otherCase
     }
 }
 
@@ -266,14 +397,11 @@ export function defineAndNode() {
  * 建立所有节点的联系
  */
 export function relativeNode() {
-    const { isNotVip, isFreeVip, isBasicVip, isNotProVip } = defineVipNode();
+    const { isNotVip, isFreeVip, isBasicVip, isNotProVip, isNotFreeVip } =
+        defineVipNode();
     const { isNotExpired, isExpired } = defineExpiredNode();
-    const {
-        isPointAdequacy,
-        isPointDeficiency } = definePointNode();
-    const {
-        isSpaceAdequacy,
-        isSpaceDeficiency } = defineSpaceNode();
+    const { isPointAdequacy, isPointDeficiency } = definePointNode();
+    const { isSpaceAdequacy, isSpaceDeficiency } = defineSpaceNode();
 
     const { isNotPreprocess } = definePreprocessNode();
 
@@ -281,19 +409,43 @@ export function relativeNode() {
         myBenefit,
         upgrade,
         freeTrain,
+        freeTrainDisabled,
         startTrain,
+        startTrainDisabled,
         purchase,
         charge,
-        clean
+        clean,
     } = defineOutputNode();
 
-
-    const { packageLevelNode, effectiveNode,
+    const {
+        packageLevelNode,
+        effectiveNode,
         preusePointNode,
-        remainPointNode, SDXLNode, remainSpaceNode, preprocessedNode } = defineRawNode();
+        remainPointNode,
+        SDXLNode,
+        remainSpaceNode,
+        preprocessedNode,
+    } = defineRawNode();
 
-    const { upgrade1 } = defineAndNode();
+    const {
+        and1,
+        and2,
+        and3,
+        and4,
+        and5,
+        and6,
+        and7,
+        and8,
+        and9,
+        and10,
 
+        and11,
+        and12,
+        and13,
+    } = defineAndNode();
+    const { upgradeHub, startTrainHub, startTrainDisableHub } = defineOrNode();
+
+    const { otherCase } = defineNotNode();
 
     // 计算会员身份
     packageLevelNode.connect(0, isNotVip, 0);
@@ -306,7 +458,6 @@ export function relativeNode() {
     packageLevelNode.connect(0, isExpired, 0);
     effectiveNode.connect(0, isNotExpired, 1);
     effectiveNode.connect(0, isExpired, 1);
-
 
     // 计算会员身份
     isExpired.connect(0, isNotVip, 1);
@@ -331,13 +482,100 @@ export function relativeNode() {
     // 预处理
     preprocessedNode.connect(0, isNotPreprocess, 0);
 
-    // 已过期到我的权益
-    // isExpired.connect(0, myBenefit, 0);
+    // ========== 链接And节点 =======================================================
 
-    // 免费版 算力不足 选择了SDXL 升级会员 
-    isFreeVip.connect(0, upgrade1, 0);
-    isPointDeficiency.connect(0, upgrade1, 1);
-    SDXLNode.connect(0, upgrade1, 2);
+    // 非免费版 && 已过期到我的权益
+    isNotFreeVip.connect(0, and1);
+    isExpired.connect(0, and1, 1);
 
-    upgrade1.connect(0, myBenefit);
+    // 免费版 算力不足 选择了SDXL 升级会员
+    isFreeVip.connect(0, and2, 0);
+    isPointDeficiency.connect(0, and2, 1);
+    SDXLNode.connect(0, and2, 2);
+
+    // 免费版 && 算力充足 && 空间充足
+    isFreeVip.connect(0, and3);
+    isPointAdequacy.connect(0, and3, 1);
+    isSpaceAdequacy.connect(0, and3, 2);
+
+    // 基础版 && 算力足够 && 空间不足
+    isBasicVip.connect(0, and4);
+    isPointAdequacy.connect(0, and4, 1);
+    isSpaceDeficiency.connect(0, and4, 2);
+
+    // 基础版 && 算力足够 && 空间充足
+    isBasicVip.connect(0, and5);
+    isPointAdequacy.connect(0, and5, 1);
+    isSpaceAdequacy.connect(0, and5, 2);
+
+    // 免费版 && 算力不足 && 空间不足 && 选择了SDXL
+    isFreeVip.connect(0, and6, 0);
+    isPointDeficiency.connect(0, and6, 1);
+    isSpaceDeficiency.connect(0, and6, 2);
+    SDXLNode.connect(0, and6, 3);
+
+    // 基础版 && 算力不足 && 空间不足
+    isBasicVip.connect(0, and7, 0);
+    isPointDeficiency.connect(0, and7, 0);
+    isSpaceDeficiency.connect(0, and7, 0);
+
+    // 未完成预处理 && 算力足够 && 空间不足
+    isNotPreprocess.connect(0, and8, 0);
+    isPointAdequacy.connect(0, and8, 0);
+    isSpaceDeficiency.connect(0, and8, 0);
+
+    // 未完成预处理 && 算力足够 && 空间不足
+    isNotPreprocess.connect(0, and9, 0);
+    isPointAdequacy.connect(0, and9, 0);
+    isSpaceDeficiency.connect(0, and9, 0);
+
+    // 已完成预处理 && 非专业版 && 算力足够 && 空间足够
+    preprocessedNode.connect(0, and10, 0);
+    isNotProVip.connect(0, and10, 0);
+    isPointAdequacy.connect(0, and10, 0);
+    isSpaceAdequacy.connect(0, and10, 0);
+
+    // 其余情况
+    and1.connect(0, and11, 0);
+    and2.connect(0, and11, 1);
+    and3.connect(0, and11, 2);
+    and4.connect(0, and11, 3);
+    and5.connect(0, and11, 4);
+
+    isNotVip.connect(0, and12, 0);
+    and6.connect(0, and12, 1);
+
+    and11.connect(0, and13, 0);
+    and12.connect(0, and13, 1);
+
+    // ========== 链接Or节点 =======================================================
+
+    // 接入升级会员或
+    and2.connect(0, upgradeHub);
+    and6.connect(0, upgradeHub, 1);
+    and7.connect(0, upgradeHub, 2);
+
+    // 接入开始训练或
+    and5.connect(0, startTrainHub);
+    and10.connect(0, startTrainHub, 1);
+
+    // 接入开始训练灰或
+    and4.connect(0, startTrainDisableHub);
+    and9.connect(0, startTrainDisableHub, 1);
+
+    // ========== 取反节点节点 =======================================================
+    and13.connect(0, otherCase);
+
+    // ========== 直连终端节点 =======================================================
+
+    // 聚合结果控制升级会员
+    upgradeHub.connect(0, upgrade);
+    startTrainHub.connect(0, startTrain);
+    startTrainDisableHub.connect(0, startTrainDisabled);
+    and1.connect(0, myBenefit);
+    and4.connect(0, clean);
+    and8.connect(0, freeTrainDisabled);
+    and3.connect(0, freeTrain);
+    isNotVip.connect(0, purchase);
+    otherCase.connect(0, charge);
 }

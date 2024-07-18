@@ -3,11 +3,11 @@ import { NodeParams } from "../Graph";
 
 const INPUT_NUMBER = 5;
 /**
- * 与操作节点
+ * 或操作节点
  * 
  * 可以将多个输入合并
  */
-export class AndOperateNode extends LGraphNode {
+export class OrOperateNode extends LGraphNode {
     value_widget: any;
     inputNumber: 5;
 
@@ -24,7 +24,7 @@ export class AndOperateNode extends LGraphNode {
 
         this.value_widget = this.addWidget(
             'string',
-            '与运算结果',
+            '或运算结果',
             properties.value,
             (v) => {
             },
@@ -46,7 +46,7 @@ export class AndOperateNode extends LGraphNode {
 
         let equaltion = '';
         if (inputResultArray.length > 0) {
-            equaltion = inputResultArray.join('&&');
+            equaltion = inputResultArray.join('||');
         } else {
             equaltion = 'false';
         }
@@ -60,4 +60,4 @@ export class AndOperateNode extends LGraphNode {
 }
 
 //register in the system
-LiteGraph.registerNodeType("basic/and", AndOperateNode);
+LiteGraph.registerNodeType("basic/or", OrOperateNode);
