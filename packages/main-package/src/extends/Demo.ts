@@ -254,7 +254,7 @@ function defineOutputNode() {
 export function defineAndNode() {
     const upgrade1 = graphInstance.addAndNode({
         position: column4Index++,
-        title: "升级会员条件1",
+        title: "免费版 算力不足 选择了SDXL",
     })
 
     return {
@@ -332,10 +332,12 @@ export function relativeNode() {
     preprocessedNode.connect(0, isNotPreprocess, 0);
 
     // 已过期到我的权益
-    isExpired.connect(0, myBenefit, 0);
+    // isExpired.connect(0, myBenefit, 0);
 
     // 免费版 算力不足 选择了SDXL 升级会员 
-    isBasicVip.connect(0, upgrade1, 0);
+    isFreeVip.connect(0, upgrade1, 0);
     isPointDeficiency.connect(0, upgrade1, 1);
     SDXLNode.connect(0, upgrade1, 2);
+
+    upgrade1.connect(0, myBenefit);
 }

@@ -18,11 +18,13 @@ export class AndOperateNode extends LGraphNode {
             this.addInput('input', 'string');
         }
 
+        this.addOutput('output', 'string');
+
         let properties = { value: false, disabled: true };
 
         this.value_widget = this.addWidget(
             'string',
-            title,
+            '与运算结果',
             properties.value,
             (v) => {
             },
@@ -53,6 +55,7 @@ export class AndOperateNode extends LGraphNode {
 
         this.value_widget.value = `computed:${this._value || 0}`;
         this.calculateResult = this._value || false;
+        this.setOutputData(0, this._value);
     }
 }
 
