@@ -4043,6 +4043,7 @@ export class LGraphCanvas {
                 }
             }
             if (LiteGraph.node_box_coloured_when_on) {
+                // 圆点颜色控制
                 colState = node.action_triggered ? "#FFF" : (node.execute_triggered ? "#AAA" : colState);
             }
 
@@ -4061,18 +4062,20 @@ export class LGraphCanvas {
                     ctx.arc(
                         title_height * 0.5,
                         title_height * -0.5,
-                        box_size * 0.5 + 1,
+                        box_size * 0.5 ,
                         0,
                         Math.PI * 4
                     );
                     ctx.fill();
                 }
 
-                ctx.fillStyle = node.boxcolor || colState || LiteGraph.NODE_DEFAULT_BOXCOLOR;
+                // 圆点的颜色
+                ctx.fillStyle = node.boxcolor || node?.calculateResult && '#AAFFAA' || colState || LiteGraph.NODE_DEFAULT_BOXCOLOR;
                 if (low_quality)
                     ctx.fillRect(title_height * 0.5 - box_size * 0.5, title_height * -0.5 - box_size * 0.5, box_size, box_size);
                 else {
                     ctx.beginPath();
+                    // 标题旁边的圆点
                     ctx.arc(
                         title_height * 0.5,
                         title_height * -0.5,
@@ -4120,7 +4123,7 @@ export class LGraphCanvas {
                     if (selected) {
                         ctx.fillStyle = LiteGraph.NODE_SELECTED_TITLE_COLOR;
                     } else {
-                        ctx.fillStyle =
+                        ctx.fillStyle = node?.calculateResult && '#AAFFAA' ||
                             node.constructor.title_text_color ||
                             this.node_title_color;
                     }
