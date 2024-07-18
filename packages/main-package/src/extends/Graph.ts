@@ -133,7 +133,7 @@ class Graph {
             ...params
         });
 
-        output.pos = gridStartPostion[5][params.position];
+        output.pos = gridStartPostion[7][params.position];
 
         this.graph.add(output);
         return output;

@@ -280,7 +280,7 @@ export function defineAndNode() {
 
     const and2 = graphInstance.addAndNode({
         position: column3Index++,
-        title: "免费版 算力不足 选择了SDXL",
+        title: "基础版 && 算力不足 && 选择了SDXL",
     });
 
     const and3 = graphInstance.addAndNode({
@@ -323,21 +323,6 @@ export function defineAndNode() {
         title: "已完成预处理 && 非专业版 && 算力足够 && 空间足够",
     });
 
-    const and11 = graphInstance.addAndNode({
-        position: column3Index++,
-        title: "and1 && and2 && and3 && and4 && and5",
-    });
-
-    const and12 = graphInstance.addAndNode({
-        position: column3Index++,
-        title: "非会员 && and6",
-    });
-
-    const and13 = graphInstance.addAndNode({
-        position: column3Index++,
-        title: "and11 && and12",
-    });
-
     return {
         and1,
         and2,
@@ -349,9 +334,6 @@ export function defineAndNode() {
         and8,
         and9,
         and10,
-        and11,
-        and12,
-        and13,
     };
 }
 
@@ -371,10 +353,28 @@ export function defineOrNode() {
         title: "展示开始训练（灰）",
     });
 
+    const or11 = graphInstance.addOrNode({
+        position: column4Index++,
+        title: "and1 || and2 || and3 || and4 || and5",
+    });
+
+    const or12 = graphInstance.addOrNode({
+        position: column4Index++,
+        title: "非会员 || and6",
+    });
+
+    const or13 = graphInstance.addOrNode({
+        position: column4Index++,
+        title: "and11 || and12",
+    });
+
     return {
         upgradeHub,
         startTrainHub,
         startTrainDisableHub,
+        or11,
+        or12,
+        or13
     };
 }
 
@@ -383,7 +383,8 @@ export function defineOrNode() {
  */
 export function defineNotNode() {
     const otherCase = graphInstance.addEqualNode({
-        position: column2Index++,
+        column: 4,
+        position: column4Index++,
         title: "其余情况",
         value: "!input", // e
     });
@@ -438,12 +439,8 @@ export function relativeNode() {
         and8,
         and9,
         and10,
-
-        and11,
-        and12,
-        and13,
     } = defineAndNode();
-    const { upgradeHub, startTrainHub, startTrainDisableHub } = defineOrNode();
+    const { upgradeHub, startTrainHub, startTrainDisableHub, or11, or12, or13 } = defineOrNode();
 
     const { otherCase } = defineNotNode();
 
@@ -488,8 +485,8 @@ export function relativeNode() {
     isNotFreeVip.connect(0, and1);
     isExpired.connect(0, and1, 1);
 
-    // 免费版 算力不足 选择了SDXL 升级会员
-    isFreeVip.connect(0, and2, 0);
+    // 基础版 && 算力不足 && 选择了SDXL
+    isBasicVip.connect(0, and2, 0);
     isPointDeficiency.connect(0, and2, 1);
     SDXLNode.connect(0, and2, 2);
 
@@ -516,37 +513,37 @@ export function relativeNode() {
 
     // 基础版 && 算力不足 && 空间不足
     isBasicVip.connect(0, and7, 0);
-    isPointDeficiency.connect(0, and7, 0);
-    isSpaceDeficiency.connect(0, and7, 0);
+    isPointDeficiency.connect(0, and7, 1);
+    isSpaceDeficiency.connect(0, and7, 2);
 
     // 未完成预处理 && 算力足够 && 空间不足
     isNotPreprocess.connect(0, and8, 0);
-    isPointAdequacy.connect(0, and8, 0);
-    isSpaceDeficiency.connect(0, and8, 0);
+    isPointAdequacy.connect(0, and8, 1);
+    isSpaceDeficiency.connect(0, and8, 2);
 
     // 未完成预处理 && 算力足够 && 空间不足
     isNotPreprocess.connect(0, and9, 0);
-    isPointAdequacy.connect(0, and9, 0);
-    isSpaceDeficiency.connect(0, and9, 0);
+    isPointAdequacy.connect(0, and9, 1);
+    isSpaceDeficiency.connect(0, and9, 2);
 
     // 已完成预处理 && 非专业版 && 算力足够 && 空间足够
     preprocessedNode.connect(0, and10, 0);
-    isNotProVip.connect(0, and10, 0);
-    isPointAdequacy.connect(0, and10, 0);
-    isSpaceAdequacy.connect(0, and10, 0);
+    isNotProVip.connect(0, and10, 1);
+    isPointAdequacy.connect(0, and10, 2);
+    isSpaceAdequacy.connect(0, and10, 3);
 
     // 其余情况
-    and1.connect(0, and11, 0);
-    and2.connect(0, and11, 1);
-    and3.connect(0, and11, 2);
-    and4.connect(0, and11, 3);
-    and5.connect(0, and11, 4);
+    and1.connect(0, or11, 0);
+    and2.connect(0, or11, 1);
+    and3.connect(0, or11, 2);
+    and4.connect(0, or11, 3);
+    and5.connect(0, or11, 4);
 
-    isNotVip.connect(0, and12, 0);
-    and6.connect(0, and12, 1);
+    isNotVip.connect(0, or12, 0);
+    and6.connect(0, or12, 1);
 
-    and11.connect(0, and13, 0);
-    and12.connect(0, and13, 1);
+    or11.connect(0, or13, 0);
+    or12.connect(0, or13, 1);
 
     // ========== 链接Or节点 =======================================================
 
@@ -564,7 +561,7 @@ export function relativeNode() {
     and9.connect(0, startTrainDisableHub, 1);
 
     // ========== 取反节点节点 =======================================================
-    and13.connect(0, otherCase);
+    or13.connect(0, otherCase);
 
     // ========== 直连终端节点 =======================================================
 
