@@ -398,6 +398,18 @@ export function defineNotNode() {
  * 建立所有节点的联系
  */
 export function relativeNode() {
+
+    const {
+        packageLevelNode,
+        effectiveNode,
+        preusePointNode,
+        remainPointNode,
+        SDXLNode,
+        remainSpaceNode,
+        preprocessedNode,
+    } = defineRawNode();
+
+    return 
     const { isNotVip, isFreeVip, isBasicVip, isNotProVip, isNotFreeVip } =
         defineVipNode();
     const { isNotExpired, isExpired } = defineExpiredNode();
@@ -417,16 +429,6 @@ export function relativeNode() {
         charge,
         clean,
     } = defineOutputNode();
-
-    const {
-        packageLevelNode,
-        effectiveNode,
-        preusePointNode,
-        remainPointNode,
-        SDXLNode,
-        remainSpaceNode,
-        preprocessedNode,
-    } = defineRawNode();
 
     const {
         and1,

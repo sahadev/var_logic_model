@@ -976,7 +976,5 @@ export let LiteGraph = {
 // @ts-ignore
 LiteGraph.CurveEditor = CurveEditor;
 // @ts-ignore
-LiteGraph.ContextMenu = ContextMenu;
-// @ts-ignore
 LiteGraph.LGraphGroup = LGraphGroup;
 

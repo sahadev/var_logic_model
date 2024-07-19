@@ -8,6 +8,7 @@
 import { LGraphCanvas } from "./LGraphCanvas";
 import { LiteGraph } from "./LiteGraph";
 import { LGraphGroup } from "./Node";
+import '../style/litegraph.css'
 
 /**
  * LGraph is the class that contain a full graph. We instantiate one and add nodes to it, and then we can run the execution loop.
