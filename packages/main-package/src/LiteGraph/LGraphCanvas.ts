@@ -5910,7 +5910,7 @@ export class LGraphCanvas {
         function inner_clicked(v, options, e) {
             switch (v) {
                 case "Add Node":
-                    LGraphCanvas.onMenuAdd(null, null, e, menu, function (node) {
+                    that.onMenuAdd(null, null, e, menu, function (node) {
                         // console.debug("node autoconnect");
                         if (!node.inputs || !node.inputs.length || !node.outputs || !node.outputs.length) {
                             return;
@@ -6171,7 +6171,7 @@ export class LGraphCanvas {
             //console.log("Process showConnectionMenu selection");
             switch (v) {
                 case "Add Node":
-                    LGraphCanvas.onMenuAdd(null, null, e, menu, function (node) {
+                    that.onMenuAdd(null, null, e, menu, function (node) {
                         if (isFrom) {
                             opts.nodeFrom.connectByType(iSlotConn, node, fromSlotType);
                         } else {
@@ -8046,7 +8046,7 @@ export class LGraphCanvas {
                 {
                     content: "Add Node",
                     has_submenu: true,
-                    callback: LGraphCanvas.onMenuAdd
+                    callback: that.onMenuAdd
                 },
                 { content: "Add Group", callback: LGraphCanvas.onGroupAdd },
                 //{ content: "Arrange", callback: that.graph.arrange },

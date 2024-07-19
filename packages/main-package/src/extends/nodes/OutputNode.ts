@@ -10,7 +10,7 @@ export class OutputNode extends LGraphNode {
 
         this.addInput('input', 'string');
 
-        let properties = { value: options.value, disabled: true };
+        let properties = Object.assign({ value: 0, disabled: true }, options);
         this.value_widget = this.addWidget(
             'string',
             title,
@@ -35,4 +35,4 @@ export class OutputNode extends LGraphNode {
 }
 
 //register in the system
-LiteGraph.registerNodeType("basic/output", OutputNode);
+LiteGraph.registerNodeType("basic/output", OutputNode, '终端节点');

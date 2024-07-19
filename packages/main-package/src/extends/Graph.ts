@@ -1,10 +1,10 @@
 
 // import "litegraph/css/litegraph.css";
-import "./nodes/OutputNode";
 import "./nodes/RawDefineNode";
 import "./nodes/EqualAssertNode";
 import "./nodes/AndOperateNode";
 import "./nodes/OrOperateNode";
+import "./nodes/OutputNode";
 import { LiteGraph } from "../LiteGraph/LiteGraph";
 import { LGraph } from "../LiteGraph/LGraph";
 import { OutputNode } from "./nodes/OutputNode";
@@ -67,7 +67,7 @@ class Graph {
      * @returns 
      */
     addRawNode(params: NodeParams): RawDefineNode {
-        const output = LiteGraph.createNode("build/raw", params.title, {
+        const output = LiteGraph.createNode("basic/raw", params.title, {
             ...params
         });
         output.pos = gridStartPostion[params.column || 0][params.position];
@@ -81,7 +81,7 @@ class Graph {
      * @returns 
      */
     addEqualNode(params: NodeParams): EqualAssertNode {
-        const output = LiteGraph.createNode("build/equal", params.title, {
+        const output = LiteGraph.createNode("basic/equal", params.title, {
             expression: params.value,
             ...params
         });

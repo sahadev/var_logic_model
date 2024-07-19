@@ -158,7 +158,7 @@ export let LiteGraph = {
      * @param {Class} base_class class containing the structure of a node
      */
 
-    registerNodeType: function (type, base_class) {
+    registerNodeType: function (type, base_class, name?: string) {
         if (!base_class.prototype) {
             throw "Cannot register a simple object, it must be a class with a prototype";
         }
@@ -168,14 +168,12 @@ export let LiteGraph = {
             console.log("Node registered: " + type);
         }
 
-        const classname = base_class.name;
+        const classname = name || base_class.name;
 
         const pos = type.lastIndexOf("/");
         base_class.category = type.substring(0, pos);
 
-        if (!base_class.title) {
-            base_class.title = classname;
-        }
+        base_class.title = classname;
 
         //extend class
         for (let i in LGraphNode.prototype) {

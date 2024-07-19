@@ -60,4 +60,4 @@ export class OrOperateNode extends LGraphNode {
 }
 
 //register in the system
-LiteGraph.registerNodeType("basic/or", OrOperateNode);
+LiteGraph.registerNodeType("basic/or", OrOperateNode, '或操作节点');

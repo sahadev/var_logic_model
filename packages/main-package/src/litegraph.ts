@@ -6,8 +6,6 @@ export { LiteGraph } from "./LiteGraph/LiteGraph";
 export { LGraphCanvas } from "./LiteGraph/LGraphCanvas";
 export { DragAndScale, LGraphGroup, LGraphNode } from "./LiteGraph/Node";
 
-import './nodes/base';
-
 (function () {
     if (typeof window != "undefined" && !window["requestAnimationFrame"]) {
         window.requestAnimationFrame =

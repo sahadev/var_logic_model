@@ -1,5 +1,3 @@
-// @ts-ignore
-// @ts-nocheck
 export function clamp(v, a, b) {
     return a > v ? a : b < v ? b : v;
 };
@@ -132,4 +130,5 @@ export function getPropertyPrintableValue(value, values) {
         }
         return String(value) + " (" + desc_value + ")";
     }
+    return null;
 }

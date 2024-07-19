@@ -60,4 +60,4 @@ export class AndOperateNode extends LGraphNode {
 }
 
 //register in the system
-LiteGraph.registerNodeType("basic/and", AndOperateNode);
+LiteGraph.registerNodeType("basic/and", AndOperateNode, '与操作节点');

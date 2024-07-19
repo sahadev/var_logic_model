@@ -22,18 +22,20 @@ export class EqualAssertNode extends LGraphNode {
     constructor(title: string, options: EqualAssertNodeOptions) {
         super(title || "等式断言节点");
 
-        this.options = options;
+        this.options = Object.assign({
+            expression: 'input'
+        }, options);
         this.title = title;
 
         // 表达式输入框，可以修改表达式的值
         this.exp_widget = this.addWidget(
             "string",
             "表达式",
-            options.expression,
+            this.options.expression,
             (v: any) => {
                 this.options.expression = v;
             },
-            options
+            this.options
         );
 
         // 计算结果展示框，可以修改标题
@@ -73,8 +75,8 @@ export class EqualAssertNode extends LGraphNode {
         }
 
         // 这一行要在所有的表达式计算之后执行，否则优先匹配input。例如input匹配了input2就会变为2
-        equaltion = equaltion.replace('input', `${this._value}`); 
-        
+        equaltion = equaltion.replace('input', `${this._value}`);
+
         try {
             const calcResult = (new Function(`return ${equaltion}`))()
             // console.info(`this._value2`, this._value2, expression, calcResult)
@@ -95,4 +97,4 @@ export class EqualAssertNode extends LGraphNode {
 }
 
 //register in the system
-LiteGraph.registerNodeType("build/equal", EqualAssertNode);
+LiteGraph.registerNodeType("basic/equal", EqualAssertNode, '等式断言节点');

@@ -9,18 +9,21 @@ export class RawDefineNode extends LGraphNode {
     value_widget: any;
     properties: any;
     widgetType: RawDefineNodeTypeEnum
+    title: string;
 
-    constructor(title: string, options: NodeParams) {
+    constructor(title: string = '原始定义节点', options: NodeParams) {
         super(title);
-        this.properties = { precision: 0, value: options.value, step: 10 };
+        this.properties = Object.assign({ precision: 0, value: 0, step: 10 }, options);
 
         let widgetType: string;
-        switch (options.widgetType) {
+        switch (options?.widgetType) {
             case RawDefineNodeTypeEnum.Boolean:
                 widgetType = 'toggle';
+                this.properties.value = false;
                 break;
             default:
                 widgetType = 'number';
+                this.properties.value = 0;
 
         }
 
@@ -51,5 +54,15 @@ export enum RawDefineNodeTypeEnum {
     Boolean = 'boolean', String = 'string', Number = 'number',
 };
 
+export class RawBooleanDefineNode extends RawDefineNode {
+    constructor(title: string = '布尔定义节点', options: NodeParams) {
+        super(title, {
+            ...options,
+            widgetType: RawDefineNodeTypeEnum.Boolean
+        })
+    }
+}
+
 //register in the system
-LiteGraph.registerNodeType("build/raw", RawDefineNode);
+LiteGraph.registerNodeType("basic/raw", RawDefineNode, '数字定义节点');
+LiteGraph.registerNodeType("basic/raw_bool", RawBooleanDefineNode, '布尔定义节点');
