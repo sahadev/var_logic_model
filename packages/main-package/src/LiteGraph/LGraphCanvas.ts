@@ -2127,6 +2127,9 @@ export class LGraphCanvas {
         }
     };
 
+    /**
+     * 复制序列化结果到剪贴板，只支持选中的节点
+     */
     copyToClipboard() {
         let clipboard_info = {
             nodes: [],

@@ -8,6 +8,7 @@
 import { LGraphCanvas } from "./LGraphCanvas";
 import { LiteGraph } from "./LiteGraph";
 import { LGraphGroup } from "./Node";
+import { LLink } from './LLink'
 import '../style/litegraph.css'
 
 /**
@@ -613,7 +614,7 @@ export class LGraph {
      * @param {String} eventname the name of the event (function to be called)
      * @param {Array} params parameters in array format
      */
-    sendEventToAllNodes(eventname, params, mode) {
+    sendEventToAllNodes(eventname: string, params: Array<any>, mode) {
         mode = mode || LiteGraph.ALWAYS;
 
         var nodes = this._nodes_in_order ? this._nodes_in_order : this._nodes;
@@ -739,7 +740,7 @@ export class LGraph {
      * @param {LGraphNode} node the instance of the node
      */
 
-    remove(node) {
+    remove(node: LGraphNode) {
         if (node.constructor === LiteGraph.LGraphGroup) {
             var index = this._groups.indexOf(node);
             if (index != -1) {
@@ -832,7 +833,7 @@ export class LGraph {
      * @param {Number} id
      */
 
-    getNodeById(id) {
+    getNodeById(id: number) {
         if (id == null) {
             return null;
         }
@@ -845,7 +846,7 @@ export class LGraph {
      * @param {Class} classObject the class itself (not an string)
      * @return {Array} a list with all the nodes of this type
      */
-    findNodesByClass(classObject, result) {
+    findNodesByClass(classObject: Class, result): Array<any> {
         result = result || [];
         result.length = 0;
         for (var i = 0, l = this._nodes.length; i < l; ++i) {
@@ -862,7 +863,7 @@ export class LGraph {
      * @param {String} type the name of the node type
      * @return {Array} a list with all the nodes of this type
      */
-    findNodesByType(type, result) {
+    findNodesByType(type: string, result): Array<any> {
         var type = type.toLowerCase();
         result = result || [];
         result.length = 0;
@@ -880,7 +881,7 @@ export class LGraph {
      * @param {String} name the name of the node to search
      * @return {Node} the node or null
      */
-    findNodeByTitle(title) {
+    findNodeByTitle(title): Node {
         for (var i = 0, l = this._nodes.length; i < l; ++i) {
             if (this._nodes[i].title == title) {
                 return this._nodes[i];
@@ -895,7 +896,7 @@ export class LGraph {
      * @param {String} name the name of the node to search
      * @return {Array} a list with all the nodes with this name
      */
-    findNodesByTitle(title) {
+    findNodesByTitle(title): Array<any> {
         var result = [];
         for (var i = 0, l = this._nodes.length; i < l; ++i) {
             if (this._nodes[i].title == title) {
@@ -913,7 +914,7 @@ export class LGraph {
      * @param {Array} nodes_list a list with all the nodes to search from, by default is all the nodes in the graph
      * @return {LGraphNode} the node at this position or null
      */
-    getNodeOnPos(x, y, nodes_list, margin) {
+    getNodeOnPos(x: number, y: number, nodes_list: Array<any>, margin): LGraphNode {
         nodes_list = nodes_list || this._nodes;
         var nRet = null;
         for (var i = nodes_list.length - 1; i >= 0; i--) {
@@ -937,7 +938,7 @@ export class LGraph {
      * @param {number} y the y coordinate in canvas space
      * @return {LGraphGroup} the group or null
      */
-    getGroupOnPos(x, y) {
+    getGroupOnPos(x: number, y: number): LGraphGroup {
         for (var i = this._groups.length - 1; i >= 0; i--) {
             var g = this._groups[i];
             if (g.isPointInside(x, y, 2, true)) {
@@ -1008,7 +1009,7 @@ export class LGraph {
      * @param {String} type
      * @param {*} value [optional]
      */
-    addInput(name, type, value) {
+    addInput(name: string, type: string, value: any) {
         var input = this.inputs[name];
         if (input) {
             //already exist
@@ -1035,7 +1036,7 @@ export class LGraph {
      * @param {String} name
      * @param {*} data
      */
-    setInputData(name, data) {
+    setInputData(name: string, data: any) {
         var input = this.inputs[name];
         if (!input) {
             return;
@@ -1049,7 +1050,7 @@ export class LGraph {
      * @param {String} name
      * @return {*} the data
      */
-    getInputData(name) {
+    getInputData(name: string): any {
         var input = this.inputs[name];
         if (!input) {
             return null;
@@ -1063,7 +1064,7 @@ export class LGraph {
      * @param {String} old_name
      * @param {String} new_name
      */
-    renameInput(old_name, name) {
+    renameInput(old_name: string, name) {
         if (name == old_name) {
             return;
         }
@@ -1096,7 +1097,7 @@ export class LGraph {
      * @param {String} name
      * @param {String} type
      */
-    changeInputType(name, type) {
+    changeInputType(name: string, type: string) {
         if (!this.inputs[name]) {
             return false;
         }
@@ -1121,7 +1122,7 @@ export class LGraph {
      * @param {String} name
      * @param {String} type
      */
-    removeInput(name) {
+    removeInput(name: string) {
         if (!this.inputs[name]) {
             return false;
         }
@@ -1146,7 +1147,7 @@ export class LGraph {
      * @param {String} type
      * @param {*} value
      */
-    addOutput(name, type, value) {
+    addOutput(name: string, type: string, value: any) {
         this.outputs[name] = { name: name, type: type, value: value };
         this._version++;
 
@@ -1165,7 +1166,7 @@ export class LGraph {
      * @param {String} name
      * @param {String} value
      */
-    setOutputData(name, value) {
+    setOutputData(name: string, value: string) {
         var output = this.outputs[name];
         if (!output) {
             return;
@@ -1179,7 +1180,7 @@ export class LGraph {
      * @param {String} name
      * @return {*} the data
      */
-    getOutputData(name) {
+    getOutputData(name: string): any {
         var output = this.outputs[name];
         if (!output) {
             return null;
@@ -1193,7 +1194,7 @@ export class LGraph {
      * @param {String} old_name
      * @param {String} new_name
      */
-    renameOutput(old_name, name) {
+    renameOutput(old_name: string, name) {
         if (!this.outputs[old_name]) {
             return false;
         }
@@ -1222,7 +1223,7 @@ export class LGraph {
      * @param {String} name
      * @param {String} type
      */
-    changeOutputType(name, type) {
+    changeOutputType(name: string, type: string) {
         if (!this.outputs[name]) {
             return false;
         }
@@ -1247,7 +1248,7 @@ export class LGraph {
      * @method removeOutput
      * @param {String} name
      */
-    removeOutput(name) {
+    removeOutput(name: string) {
         if (!this.outputs[name]) {
             return false;
         }
@@ -1358,7 +1359,7 @@ export class LGraph {
      * @method removeLink
      * @param {Number} link_id
      */
-    removeLink(link_id) {
+    removeLink(link_id: number) {
         var link = this.links[link_id];
         if (!link) {
             return;
@@ -1375,7 +1376,7 @@ export class LGraph {
      * @method serialize
      * @return {Object} value of the node
      */
-    serialize() {
+    serialize(): object {
         var nodes_info = [];
         for (var i = 0, l = this._nodes.length; i < l; ++i) {
             nodes_info.push(this._nodes[i].serialize());
@@ -1521,6 +1522,12 @@ export class LGraph {
         return error;
     }
 
+    /**
+     * 以URL的方式加载配置
+     * @param url 
+     * @param callback 
+     * @returns 
+     */
     load(url, callback) {
         var that = this;
 

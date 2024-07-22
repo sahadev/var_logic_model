@@ -409,15 +409,6 @@ export function relativeNode() {
         preprocessedNode,
     } = defineRawNode();
 
-    return 
-    const { isNotVip, isFreeVip, isBasicVip, isNotProVip, isNotFreeVip } =
-        defineVipNode();
-    const { isNotExpired, isExpired } = defineExpiredNode();
-    const { isPointAdequacy, isPointDeficiency } = definePointNode();
-    const { isSpaceAdequacy, isSpaceDeficiency } = defineSpaceNode();
-
-    const { isNotPreprocess } = definePreprocessNode();
-
     const {
         myBenefit,
         upgrade,
@@ -429,6 +420,15 @@ export function relativeNode() {
         charge,
         clean,
     } = defineOutputNode();
+
+    return 
+    const { isNotVip, isFreeVip, isBasicVip, isNotProVip, isNotFreeVip } =
+        defineVipNode();
+    const { isNotExpired, isExpired } = defineExpiredNode();
+    const { isPointAdequacy, isPointDeficiency } = definePointNode();
+    const { isSpaceAdequacy, isSpaceDeficiency } = defineSpaceNode();
+
+    const { isNotPreprocess } = definePreprocessNode();
 
     const {
         and1,

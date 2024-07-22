@@ -7,7 +7,7 @@ import "./App.css";
 import { ModifyModal, Serialize } from "../components/index";
 import { relativeNode } from "./Demo";
 
-relativeNode();
+// relativeNode();
 
 function App() {
 

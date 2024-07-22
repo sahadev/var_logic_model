@@ -46,11 +46,12 @@ export type NodeParams = {
 
 class Graph {
     graph: LGraph;
+    canvas: LGraphCanvas;
 
     constructor() {
         this.graph = new LGraph();
-        const canvas = new LGraphCanvas("#mycanvas", this.graph);
-        canvas.resize(window.innerWidth, window.innerHeight);
+        this.canvas = new LGraphCanvas("#mycanvas", this.graph);
+        this.canvas.resize(window.innerWidth, window.innerHeight);
     }
 
     start() {
@@ -146,6 +147,7 @@ let graphInstance: Graph | null = null;
 export const getInstance = () => {
     if (!graphInstance) {
         graphInstance = new Graph();
+        global.graphInstance = graphInstance;
     }
     return graphInstance;
 };
