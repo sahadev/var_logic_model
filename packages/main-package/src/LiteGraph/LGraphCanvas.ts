@@ -943,7 +943,13 @@ export class LGraphCanvas {
                     } else {
                         if (isInsideRectangle(e.canvasX, e.canvasY, node.pos[0] + 25, node.pos[1] - LiteGraph.NODE_TITLE_HEIGHT, node.size[0] - 25, LiteGraph.NODE_TITLE_HEIGHT
                         )) {
-                            console.info(`点击了标题`)
+                            useBearStore.getState().onValueModify({
+                                title: '节点标题',
+                                value: node.title,
+                                onCallback: (newTitle: string) => {
+                                    node.title = newTitle
+                                }
+                            });
                         }
 
                         //search for outputs
