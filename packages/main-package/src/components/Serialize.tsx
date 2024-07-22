@@ -3,6 +3,10 @@ import { useDisclosure } from "@mantine/hooks";
 import { useCallback } from "react";
 import { getInstance } from "src/extends/Graph";
 const graphInstance = getInstance();
+import { notifications } from "@mantine/notifications";
+
+import { relativeNode } from "../extends/Demo";
+const CONFIG_SAVE_KEY = "litegrapheditor_clipboard";
 
 /**
  * 提供序列化的入口
@@ -21,15 +25,27 @@ export const Serialize = () => {
   };
 
   const loadConfig = useCallback(async () => {
-    const localConfig = localStorage.getItem("litegrapheditor_clipboard");
+    const localConfig = localStorage.getItem(CONFIG_SAVE_KEY);
     graphInstance.graph.configure(JSON.parse(localConfig), false);
+    notifications.show({
+      title: "已加载",
+      message: "Loaded",
+    });
   }, []);
 
   const save = useCallback(async () => {
     localStorage.setItem(
-      "litegrapheditor_clipboard",
+      CONFIG_SAVE_KEY,
       JSON.stringify(graphInstance.graph.serialize())
     );
+    notifications.show({
+      title: "已保存",
+      message: "Saved",
+    });
+  }, []);
+
+  const loadDemo = useCallback(() => {
+    relativeNode();
   }, []);
 
   return (
@@ -46,6 +62,9 @@ export const Serialize = () => {
       </Button>
       <Button variant="filled" onClick={loadConfig}>
         Load Local Data
+      </Button>
+      <Button variant="filled" onClick={loadDemo}>
+        Load Demo
       </Button>
     </div>
   );
