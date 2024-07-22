@@ -941,6 +941,11 @@ export class LGraphCanvas {
                         this.canvas.style.cursor = "se-resize";
                         skip_action = true;
                     } else {
+                        if (isInsideRectangle(e.canvasX, e.canvasY, node.pos[0] + 25, node.pos[1] - LiteGraph.NODE_TITLE_HEIGHT, node.size[0] - 25, LiteGraph.NODE_TITLE_HEIGHT
+                        )) {
+                            console.info(`点击了标题`)
+                        }
+
                         //search for outputs
                         if (node.outputs) {
                             for (let i = 0, l = node.outputs.length; i < l; ++i) {
@@ -1796,8 +1801,9 @@ export class LGraphCanvas {
                 if (
                     node &&
                     e.click_time < 300 &&
-                    isInsideRectangle(e.canvasX, e.canvasY, node.pos[0], node.pos[1] - LiteGraph.NODE_TITLE_HEIGHT, LiteGraph.NODE_TITLE_HEIGHT, LiteGraph.NODE_TITLE_HEIGHT)
+                    isInsideRectangle(e.canvasX, e.canvasY, node.pos[0], node.pos[1] - LiteGraph.NODE_TITLE_HEIGHT, 20, 20)
                 ) {
+                    // 收起  收缩
                     node.collapse();
                 }
 
@@ -2326,10 +2332,10 @@ export class LGraphCanvas {
         }
 
         return false;
-    }static getFileExtension(filename: any) {
+    } static getFileExtension(filename: any) {
         throw new Error("Method not implemented.");
     }
-;
+    ;
 
     //called if the graph doesn't have a default drop item behaviour
     checkDropItem(e) {
@@ -2996,10 +3002,10 @@ export class LGraphCanvas {
             //this is a function I use in webgl renderer
             ctx.finish2D();
         }
-    }visible_rect(ctx: any, visible_rect: any) {
+    } visible_rect(ctx: any, visible_rect: any) {
         throw new Error("Method not implemented.");
     }
-;
+    ;
 
     /**
      * draws the panel in the corner that shows subgraph properties
@@ -3423,7 +3429,7 @@ export class LGraphCanvas {
      * 
      * @method drawNode
      **/
-    drawNode(node, ctx: CanvasRenderingContext2D) {
+    drawNode(node: LGraphNode, ctx: CanvasRenderingContext2D) {
         let glow = false;
         this.current_node = node;
 
@@ -4064,7 +4070,7 @@ export class LGraphCanvas {
                     ctx.arc(
                         title_height * 0.5,
                         title_height * -0.5,
-                        box_size * 0.5 ,
+                        box_size * 0.5,
                         0,
                         Math.PI * 4
                     );
@@ -4777,6 +4783,7 @@ export class LGraphCanvas {
             if (w.y) {
                 y = w.y;
             }
+            // 记录控件的坐标位置
             w.last_y = y;
             ctx.strokeStyle = outline_color;
             ctx.fillStyle = "#222";
@@ -5854,10 +5861,10 @@ export class LGraphCanvas {
         }
 
         return false;
-    }static decodeHTML(value: any): any {
+    } static decodeHTML(value: any): any {
         throw new Error("Method not implemented.");
     }
-;
+    ;
 
     decodeHTML(str) {
         let e = document.createElement("div");
@@ -5939,10 +5946,10 @@ export class LGraphCanvas {
         }
 
         return false;
-    }static onMenuAdd(arg0: null, arg1: null, e: any, menu: any, arg4: (node: any) => void) {
+    } static onMenuAdd(arg0: null, arg1: null, e: any, menu: any, arg4: (node: any) => void) {
         throw new Error("Method not implemented.");
     }
-;
+    ;
 
     createDefaultNodeForSlot(optPass) { // addNodeMenu for connection
         let opts = Object.assign({

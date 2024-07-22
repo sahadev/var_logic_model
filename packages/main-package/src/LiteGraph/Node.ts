@@ -2306,7 +2306,7 @@ export class LGraphNode {
         is_input,
         slot_number,
         out
-    ) {
+    ): Array<number>[] {
         out = out || new Float32Array(2);
         var num_slots = 0;
         if (is_input && this.inputs) {
@@ -2545,6 +2545,9 @@ function setDirtyCanvas(
 
 /**
  * checks if a point is inside the shape of a node
+ * 
+ * Node有位置坐标，可以计算出来
+ * 
  * @method isPointInside
  * @param {number} x
  * @param {number} y
