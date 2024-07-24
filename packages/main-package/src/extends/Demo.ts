@@ -421,7 +421,6 @@ export function relativeNode() {
         clean,
     } = defineOutputNode();
 
-    return 
     const { isNotVip, isFreeVip, isBasicVip, isNotProVip, isNotFreeVip } =
         defineVipNode();
     const { isNotExpired, isExpired } = defineExpiredNode();

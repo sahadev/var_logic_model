@@ -1,13 +1,12 @@
 // @ts-ignore
 // @ts-nocheck
-
 // *************************************************************
 //   Node CLASS                                          *******
 // *************************************************************
 
 import { LLink } from "./LLink";
 import { LiteGraph } from "./LiteGraph";
-import { isInsideRectangle, overlapBounding } from "./utils";
+import { node_colors, isInsideRectangle, overlapBounding } from "./utils";
 
 export const WidgetType = "button" || "toggle" || "slider" || "number" || "combo" || "string" || "text";
 /*
@@ -1388,7 +1387,7 @@ export class LGraphNode {
         return info;
     }
 
-    
+
 
     /**
      * Defines a widget inside the node, it will be rendered on top of the node, you can control lots of properties
@@ -2597,8 +2596,8 @@ export class LGraphGroup {
     _ctor(title) {
         this.title = title || "Group";
         this.font_size = 24;
-        this.color = LGraphCanvas.node_colors.pale_blue
-            ? LGraphCanvas.node_colors.pale_blue.groupcolor
+        this.color = node_colors.pale_blue
+            ? node_colors.pale_blue.groupcolor
             : "#AAA";
         this._bounding = new Float32Array([10, 10, 140, 80]);
         this._pos = this._bounding.subarray(0, 2);

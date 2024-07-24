@@ -1143,7 +1143,7 @@ export declare class LGraphCanvas {
         }
     );
 
-    static active_canvas: HTMLCanvasElement;
+    static activeCanvas: HTMLCanvasElement;
                            
     allow_dragcanvas: boolean;
     allow_dragnodes: boolean;
