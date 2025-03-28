@@ -28,27 +28,29 @@ export let LiteGraph = {
     NODE_MIN_WIDTH: 50,
     NODE_COLLAPSED_RADIUS: 10,
     NODE_COLLAPSED_WIDTH: 80,
-    NODE_TITLE_COLOR: "#999",
-    NODE_SELECTED_TITLE_COLOR: "#FFF",
-    NODE_TEXT_SIZE: 16,
-    NODE_TEXT_COLOR: "#AAA",
+
+
+    NODE_TITLE_COLOR: "#666",         /* 原#999，稍微加深一点，使标题文字在浅色背景下更清晰 */
+    NODE_SELECTED_TITLE_COLOR: "#007bff", /* 原#FFF，改为蓝色，选中状态更醒目 */
+    NODE_TEXT_SIZE: 14,
+    NODE_TEXT_COLOR: "#444",          /* 原#AAA，稍微加深，提高文字可读性 */
     NODE_SUBTEXT_SIZE: 12,
-    NODE_DEFAULT_COLOR: "#333",
-    NODE_DEFAULT_BGCOLOR: "#353535",
-    NODE_DEFAULT_BOXCOLOR: "#666",
+    NODE_DEFAULT_COLOR: "#e5e5e5",       /* 原#333，稍微加深，使节点文字更清晰 */
+    NODE_DEFAULT_BGCOLOR: "#F1F2F8",    /* 保持白色背景 */
+    NODE_DEFAULT_BOXCOLOR: "#ddd",    /* 原#666，改为浅灰色，使边框更柔和 */
     NODE_DEFAULT_SHAPE: "box",
-    NODE_BOX_OUTLINE_COLOR: "#FFF",
-    DEFAULT_SHADOW_COLOR: "rgba(0,0,0,0.5)",
+    NODE_BOX_OUTLINE_COLOR: "#f8f9fa",/* 原#FFF，改为非常浅的灰色，避免纯白在某些情况下不可见 */
+    DEFAULT_SHADOW_COLOR: "rgba(0,0,0,0.1)", /* 原rgba(0,0,0,0.5)，降低阴影强度，使界面更清爽 */
     DEFAULT_GROUP_FONT: 24,
 
-    WIDGET_BGCOLOR: "#222",
-    WIDGET_OUTLINE_COLOR: "#666",
-    WIDGET_TEXT_COLOR: "white",
-    WIDGET_SECONDARY_TEXT_COLOR: "#999",
+    WIDGET_BGCOLOR: "#f8f9fa",        /* 原#222，改为非常浅的灰色，使小部件背景更明亮 */
+    WIDGET_OUTLINE_COLOR: "#ddd",     /* 原#666，改为浅灰色，使边框更柔和 */
+    WIDGET_TEXT_COLOR: "#333",        /* 原#DDD，改为深灰色，提高文字可读性 */
+    WIDGET_SECONDARY_TEXT_COLOR: "#666", /* 原#999，稍微加深，使次要文字更清晰 */
 
-    LINK_COLOR: "#9A9",
-    EVENT_LINK_COLOR: "#A86",
-    CONNECTING_LINK_COLOR: "#AFA",
+    LINK_COLOR: "#17a2b8",            /* 原#9A9，改为浅蓝色，使链接更醒目 */
+    EVENT_LINK_COLOR: "#A86",      /* 原#A86，改为浅红色，使事件链接更突出 */
+    CONNECTING_LINK_COLOR: "#28a745", /* 原#AFA，改为浅绿色，使连接线更清晰 */
 
     MAX_NUMBER_OF_NODES: 1000, //avoid infinite loops
     DEFAULT_POSITION: [100, 100], //default node position

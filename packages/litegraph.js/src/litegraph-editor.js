@@ -21,7 +21,8 @@ function Editor(container_id, options) {
     //create graph
     var graph = (this.graph = new LGraph());
     var graphcanvas = this.graphcanvas = new LGraphCanvas(canvas, graph);
-    graphcanvas.background_image = "imgs/grid.png";
+    
+    graphcanvas.background_image = "imgs/grid.jpeg";
     graph.onAfterExecute = function() {
         graphcanvas.draw(true);
     };
@@ -221,7 +222,8 @@ Editor.prototype.addMiniWindow = function(w, h) {
 
     var graphcanvas = new LGraphCanvas( canvas, this.graph );
     graphcanvas.show_info = false;
-    graphcanvas.background_image = "imgs/grid.png";
+    
+    graphcanvas.background_image = "imgs/grid.jpeg";
     graphcanvas.scale = 0.25;
     graphcanvas.allow_dragnodes = false;
     graphcanvas.allow_interaction = false;
@@ -275,7 +277,8 @@ Editor.prototype.addMultiview = function()
 	this.graphcanvas.viewport = [0,0,canvas.width*0.5-2,canvas.height];
 
 	var graphcanvas = new LGraphCanvas( canvas, this.graph );
-    graphcanvas.background_image = "imgs/grid.png";
+    
+    graphcanvas.background_image = "imgs/grid.jpeg";
     this.graphcanvas2 = graphcanvas;
 	this.graphcanvas2.viewport = [canvas.width*0.5,0,canvas.width*0.5,canvas.height];
 }

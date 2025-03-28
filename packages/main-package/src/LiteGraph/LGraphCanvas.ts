@@ -5,6 +5,9 @@
 // LGraphCanvas: LGraph renderer CLASS
 //*********************************************************************************
 
+
+const DEFAULT_BACKGROUND_IMAGE = "/grid.jpeg";
+
 import { useBearStore } from "../store";
 import { LiteGraph } from "./LiteGraph";
 import { DragAndScale } from "./Node";
@@ -204,7 +207,7 @@ export class LGraphCanvas {
 
         //if(graph === undefined)
         //	throw ("No graph assigned");
-        this.background_image = this.DEFAULT_BACKGROUND_IMAGE;
+        this.background_image = DEFAULT_BACKGROUND_IMAGE;
 
         if (canvas && canvas.constructor === String) {
             canvas = document.querySelector(canvas);
@@ -240,7 +243,7 @@ export class LGraphCanvas {
         this.editor_alpha = 1; //used for transition
         this.pause_rendering = false;
         this.clear_background = true;
-        this.clear_background_color = "#222";
+        this.clear_background_color = "white"; // 定义背景色
 
         this.read_only = false; //if set to true users cannot modify the graph
         this.render_only_selected = true;
@@ -4541,14 +4544,15 @@ export class LGraphCanvas {
             } //unknown
         }
 
+        // 渲染连接系的外框线
         //rendering the outline of the connection can be a little bit slow
         if (
             this.render_connections_border &&
             this.ds.scale > 0.6 &&
             !skip_border
         ) {
-            ctx.strokeStyle = "rgba(0,0,0,0.5)";
-            ctx.stroke();
+            // ctx.strokeStyle = "rgba(0,0,0,0.5)";
+            // ctx.stroke();
         }
 
         ctx.lineWidth = this.connections_width;
@@ -8391,8 +8395,6 @@ export class LGraphCanvas {
 }
 
 global.LGraphCanvas = LiteGraph.LGraphCanvas = LGraphCanvas;
-
-LGraphCanvas.DEFAULT_BACKGROUND_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQBJREFUeNrs1rEKwjAUhlETUkj3vP9rdmr1Ysammk2w5wdxuLgcMHyptfawuZX4pJSWZTnfnu/lnIe/jNNxHHGNn//HNbbv+4dr6V+11uF527arU7+u63qfa/bnmh8sWLBgwYJlqRf8MEptXPBXJXa37BSl3ixYsGDBMliwFLyCV/DeLIMFCxYsWLBMwSt4Be/NggXLYMGCBUvBK3iNruC9WbBgwYJlsGApeAWv4L1ZBgsWLFiwYJmCV/AK3psFC5bBggULloJX8BpdwXuzYMGCBctgwVLwCl7Be7MMFixYsGDBsu8FH1FaSmExVfAxBa/gvVmwYMGCZbBg/W4vAQYA5tRF9QYlv/QAAAAASUVORK5CYII=";
 
 LGraphCanvas.link_type_colors = {
     "-1": LiteGraph.EVENT_LINK_COLOR,
