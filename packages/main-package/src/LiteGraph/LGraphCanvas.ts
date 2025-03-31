@@ -7,6 +7,7 @@
 
 
 const DEFAULT_BACKGROUND_IMAGE = "/grid.jpeg";
+const HIGH_LIGHT_COLOR = 'red'; // 原值为#AAFFAA
 
 import { useBearStore } from "../store";
 import { LiteGraph } from "./LiteGraph";
@@ -933,14 +934,14 @@ export class LGraphCanvas {
                             console.info(`is_double_click`, is_double_click)
 
                             if (is_double_click) {
-
-                                useBearStore.getState().onValueModify({
-                                    title: '节点标题',
-                                    value: node.title,
-                                    onCallback: (newTitle: string) => {
-                                        node.title = newTitle
-                                    }
-                                });
+                                // 修改节点标题的地方？这里原生提供了编辑的能力，所以就不需要了
+                                // useBearStore.getState().onValueModify({
+                                //     title: '节点标题',
+                                //     value: node.title,
+                                //     onCallback: (newTitle: string) => {
+                                //         node.title = newTitle
+                                //     }
+                                // });
                             }
                         }
 
@@ -4079,7 +4080,7 @@ export class LGraphCanvas {
                 }
 
                 // 圆点的颜色
-                ctx.fillStyle = node.boxcolor || node?.calculateResult && '#AAFFAA' || colState || LiteGraph.NODE_DEFAULT_BOXCOLOR;
+                ctx.fillStyle = node.boxcolor || node?.calculateResult && HIGH_LIGHT_COLOR || colState || LiteGraph.NODE_DEFAULT_BOXCOLOR;
                 if (low_quality)
                     ctx.fillRect(title_height * 0.5 - box_size * 0.5, title_height * -0.5 - box_size * 0.5, box_size, box_size);
                 else {
@@ -4132,7 +4133,7 @@ export class LGraphCanvas {
                     if (selected) {
                         ctx.fillStyle = LiteGraph.NODE_SELECTED_TITLE_COLOR;
                     } else {
-                        ctx.fillStyle = node?.calculateResult && '#AAFFAA' ||
+                        ctx.fillStyle = node?.calculateResult && HIGH_LIGHT_COLOR ||
                             node.constructor.title_text_color ||
                             this.node_title_color;
                     }
@@ -4340,10 +4341,14 @@ export class LGraphCanvas {
                     link,
                     false,
                     0, // 节点流动效果。。。
-                    node?.calculateResult ? '#AAFFAA' : null, // 如果节点的计算结果是true，则高亮这条线
+                    node?.calculateResult ? HIGH_LIGHT_COLOR : null, // 如果节点的计算结果是true，则高亮这条线
                     start_dir,
                     end_dir
                 );
+
+                if (node?.calculateResult) {
+                    // console.info(`render link`, start_node_slotpos, end_node_slotpos, link, false, 0, HIGH_LIGHT_COLOR, start_dir, end_dir)
+                }
 
                 //event triggered rendered on top
                 if (link && link._last_time && now - link._last_time < 1000) {
@@ -5150,8 +5155,6 @@ export class LGraphCanvas {
                 case "text":
                     // 事件甄别
                     if (event.type == LiteGraph.pointerevents_method + "down") {
-
-                        console.info(`is_double_click`, is_double_click)
 
                         let name, value;
                         if (widget?.options.modifyName) {
