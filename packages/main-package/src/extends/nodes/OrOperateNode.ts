@@ -51,6 +51,9 @@ export class OrOperateNode extends LGraphNode {
             equaltion = 'false';
         }
 
+        // 记录每一个输入的运算值
+        this.calculateSubResult = inputResultArray.map((item) => (new Function(`return ${item}`))())
+
         this._value = (new Function(`return ${equaltion}`))()
 
         this.value_widget.value = `computed:${this._value || 0}`;

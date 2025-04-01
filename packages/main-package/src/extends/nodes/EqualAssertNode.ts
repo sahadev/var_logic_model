@@ -56,10 +56,10 @@ export class EqualAssertNode extends LGraphNode {
         );
 
         // 外部输入节点
-        this.addInput("Input 1", "number");
+        this.addInput("Input", "number");
         // 保持原子节点的唯一性，不要做太多事情
         // this.addInput("Input 2", "number");
-        this.addOutput("输出节点", "boolean");
+        this.addOutput("Output", "boolean");
     }
 
     onExecute() {

@@ -22,11 +22,13 @@ import { LLink } from './LLink'
  * @param {Object} o data from previous serialization [optional]
  */
 
+
+
 export class LGraph {
 
     _nodes: LGraphNode[];
     _subgraph_node: any;
-    links: any;
+    links: LLink[];
     _nodes_by_id: any;
     config: any;
     _last_trigger_time: LGraph;

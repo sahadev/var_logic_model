@@ -2,6 +2,17 @@
 // @ts-nocheck
 //this is the class in charge of storing link information
 export class LLink {
+    id: number;
+    type: string;
+    origin_id: number;
+    origin_slot: number;
+    target_id: number;
+    target_slot: number;
+    _data: null;
+    _pos: { [key: string]: number };
+    data: boolean;
+
+
     constructor(id, type, origin_id, origin_slot, target_id, target_slot) {
         this.id = id;
         this.type = type;

@@ -10,7 +10,7 @@ export class OutputNode extends LGraphNode {
 
         this.addInput('input', 'string');
 
-        let properties = Object.assign({ value: 0, disabled: true }, options);
+        let properties = Object.assign({ value: 0, disabled: false }, options);
         this.value_widget = this.addWidget(
             'string',
             title,

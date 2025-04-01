@@ -1,4 +1,3 @@
-// @ts-ignore
 // @ts-nocheck
 
 //*********************************************************************************
@@ -4334,6 +4333,16 @@ export class LGraphCanvas {
                     end_slot.dir ||
                     (node.horizontal ? LiteGraph.UP : LiteGraph.LEFT);
 
+                let lineColor = null;
+                if (node?.calculateSubResult) {
+                    // 或操作节点下只高亮这个值的上游
+                    lineColor = node?.calculateSubResult[link.target_slot] ? HIGH_LIGHT_COLOR : null;
+                } else if (node?.calculateResult) {
+                    // 如果节点的计算结果是true，则高亮这条线
+                    lineColor = HIGH_LIGHT_COLOR;
+                }
+
+                    link.target_slot
                 this.renderLink(
                     ctx,
                     start_node_slotpos,
@@ -4341,13 +4350,13 @@ export class LGraphCanvas {
                     link,
                     false,
                     0, // 节点流动效果。。。
-                    node?.calculateResult ? HIGH_LIGHT_COLOR : null, // 如果节点的计算结果是true，则高亮这条线
+                    lineColor, 
                     start_dir,
                     end_dir
                 );
 
                 if (node?.calculateResult) {
-                    // console.info(`render link`, start_node_slotpos, end_node_slotpos, link, false, 0, HIGH_LIGHT_COLOR, start_dir, end_dir)
+                    // console.info(`render link`, link, start_dir, end_dir, node?.calculateSubResult)
                 }
 
                 //event triggered rendered on top
