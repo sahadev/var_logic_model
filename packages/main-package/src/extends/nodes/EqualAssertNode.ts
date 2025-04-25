@@ -17,14 +17,17 @@ export class EqualAssertNode extends LGraphNode {
     title: string;
     expression: string;
     _value3: any;
-    options: EqualAssertNodeOptions
+    options: EqualAssertNodeOptions;
+    properties: any;
 
     constructor(title: string, options: EqualAssertNodeOptions) {
         super(title || "等式断言节点");
 
-        this.options = Object.assign({
-            expression: 'input'
+        this.properties = this.options = Object.assign({
+            expression: 'input',
+            property: 'expression'
         }, options);
+
         this.title = title;
 
         // 表达式输入框，可以修改表达式的值

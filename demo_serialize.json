@@ -1,0 +1,2090 @@
+{
+  "last_node_id": 36,
+  "last_link_id": 48,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "basic/raw",
+      "pos": {
+        "0": 151,
+        "1": 300,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "输出节点",
+          "type": "number",
+          "links": [
+            1,
+            2,
+            3
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "packageLevel",
+      "properties": {
+        "precision": 0,
+        "value": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": 16,
+      "type": "basic/and",
+      "pos": {
+        "0": 1028,
+        "1": 616,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 138
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 14
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 15
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "string",
+          "links": [
+            16,
+            17
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_not_meet_sdxl_condition",
+      "properties": {}
+    },
+    {
+      "id": 21,
+      "type": "basic/output",
+      "pos": {
+        "0": 1631,
+        "1": 754,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 21
+        }
+      ],
+      "outputs": [],
+      "title": "show_power_insufficient_prompt",
+      "properties": {}
+    },
+    {
+      "id": 18,
+      "type": "basic/output",
+      "pos": {
+        "0": 1628,
+        "1": 639,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 17
+        }
+      ],
+      "outputs": [],
+      "title": "show_sdxl_permission_prompt",
+      "properties": {}
+    },
+    {
+      "id": 9,
+      "type": "basic/or",
+      "pos": {
+        "0": 745,
+        "1": 337,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 138
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 4
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 5
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "string",
+          "links": [
+            26,
+            30
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_basic_or_pro_member",
+      "properties": {}
+    },
+    {
+      "id": 19,
+      "type": "basic/and",
+      "pos": {
+        "0": 1530,
+        "1": 990,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 138
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 19
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 18
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "string",
+          "links": [
+            20,
+            31
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_meet_train_condition",
+      "properties": {}
+    },
+    {
+      "id": 27,
+      "type": "basic/output",
+      "pos": {
+        "0": 2025,
+        "1": -223,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 34
+        }
+      ],
+      "outputs": [],
+      "title": "subscribe_member_txt",
+      "properties": {}
+    },
+    {
+      "id": 28,
+      "type": "basic/output",
+      "pos": {
+        "0": 2028,
+        "1": -112,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 37
+        }
+      ],
+      "outputs": [],
+      "title": "upgrade_member_txt",
+      "properties": {}
+    },
+    {
+      "id": 29,
+      "type": "basic/mulout",
+      "pos": {
+        "0": 2030,
+        "1": 1,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 138
+      },
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 40
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 41
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "title": "start_training_txt",
+      "properties": {}
+    },
+    {
+      "id": 31,
+      "type": "basic/output",
+      "pos": {
+        "0": 2034,
+        "1": 196,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 46
+        }
+      ],
+      "outputs": [],
+      "title": "recharge_power_txt",
+      "properties": {}
+    },
+    {
+      "id": 32,
+      "type": "basic/mulout",
+      "pos": {
+        "0": 2036,
+        "1": 328,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 138
+      },
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 36
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 38
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 47
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "title": "gold_color",
+      "properties": {}
+    },
+    {
+      "id": 22,
+      "type": "basic/and",
+      "pos": {
+        "0": 1628,
+        "1": -340,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 138
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 22
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 23
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "string",
+          "links": [
+            34,
+            35,
+            36
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_non_member_unqualified",
+      "properties": {}
+    },
+    {
+      "id": 23,
+      "type": "basic/and",
+      "pos": {
+        "0": 1628,
+        "1": -143,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 138
+      },
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 24
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 25
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "string",
+          "links": [
+            37,
+            38,
+            39
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_basic_member_unqualified",
+      "properties": {}
+    },
+    {
+      "id": 24,
+      "type": "basic/and",
+      "pos": {
+        "0": 1632,
+        "1": 41,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 138
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 26
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 27
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 28
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "string",
+          "links": [
+            40,
+            42,
+            43
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_basic_or_pro_meet_train_config_pending",
+      "properties": {}
+    },
+    {
+      "id": 25,
+      "type": "basic/and",
+      "pos": {
+        "0": 1632,
+        "1": 223,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 138
+      },
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 30
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 31
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 29
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "string",
+          "links": [
+            41,
+            44,
+            45
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_basic_or_pro_meet_train_config_ready",
+      "properties": {}
+    },
+    {
+      "id": 26,
+      "type": "basic/and",
+      "pos": {
+        "0": 1632,
+        "1": 398,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 138
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 32
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 33
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "string",
+          "links": [
+            46,
+            47,
+            48
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_pro_member_power_insufficient",
+      "properties": {}
+    },
+    {
+      "id": 12,
+      "type": "basic/equal",
+      "pos": {
+        "0": 453,
+        "1": 1029,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 82
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Input",
+          "type": "number",
+          "link": 8
+        },
+        {
+          "name": "Input 2",
+          "type": "number",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": "boolean",
+          "links": [
+            29
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_config_completed",
+      "properties": {
+        "expression": "input",
+        "property": "expression"
+      }
+    },
+    {
+      "id": 33,
+      "type": "basic/output",
+      "pos": {
+        "0": 2036,
+        "1": 521,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 42
+        }
+      ],
+      "outputs": [],
+      "title": "gray_color",
+      "properties": {}
+    },
+    {
+      "id": 34,
+      "type": "basic/output",
+      "pos": {
+        "0": 2035,
+        "1": 627,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 44
+        }
+      ],
+      "outputs": [],
+      "title": "blue_color",
+      "properties": {}
+    },
+    {
+      "id": 35,
+      "type": "basic/output",
+      "pos": {
+        "0": 2035,
+        "1": 744,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 43
+        }
+      ],
+      "outputs": [],
+      "title": "disable",
+      "properties": {}
+    },
+    {
+      "id": 36,
+      "type": "basic/mulout",
+      "pos": {
+        "0": 2034,
+        "1": 861,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 138
+      },
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "link": 35
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 39
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 45
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": 48
+        },
+        {
+          "name": "input",
+          "type": "string",
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "title": "clickable",
+      "properties": {}
+    },
+    {
+      "id": 3,
+      "type": "basic/raw",
+      "pos": {
+        "0": 156,
+        "1": 593,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "输出节点",
+          "type": "number",
+          "links": [
+            10,
+            12
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "remainingPower",
+      "properties": {
+        "precision": 0,
+        "value": 10,
+        "step": 1
+      }
+    },
+    {
+      "id": 2,
+      "type": "basic/raw",
+      "pos": {
+        "0": 154,
+        "1": 469,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "输出节点",
+          "type": "number",
+          "links": [
+            9,
+            11
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "expectedConsumePower",
+      "properties": {
+        "precision": 0,
+        "value": 9,
+        "step": 1
+      }
+    },
+    {
+      "id": 4,
+      "type": "basic/raw_bool",
+      "pos": {
+        "0": 164,
+        "1": 959,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "输出节点",
+          "type": "number",
+          "links": [
+            7,
+            8
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "isPreprocessed",
+      "properties": {
+        "precision": 0,
+        "value": false,
+        "step": 10,
+        "widgetType": "boolean"
+      }
+    },
+    {
+      "id": 5,
+      "type": "basic/raw",
+      "pos": {
+        "0": 162,
+        "1": 1119,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "输出节点",
+          "type": "number",
+          "links": [
+            13
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "currentSelectedModalId",
+      "properties": {
+        "precision": 0,
+        "value": 0.1,
+        "step": 1
+      }
+    },
+    {
+      "id": 7,
+      "type": "basic/equal",
+      "pos": {
+        "0": 459,
+        "1": 308,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 82
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Input",
+          "type": "number",
+          "link": 2
+        },
+        {
+          "name": "Input 2",
+          "type": "number",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": "boolean",
+          "links": [
+            4,
+            24
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_basic_member",
+      "properties": {
+        "expression": "input == 2",
+        "property": "expression"
+      }
+    },
+    {
+      "id": 6,
+      "type": "basic/equal",
+      "pos": {
+        "0": 459,
+        "1": 174,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 82
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Input",
+          "type": "number",
+          "link": 1
+        },
+        {
+          "name": "Input 2",
+          "type": "number",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": "boolean",
+          "links": [
+            22
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_non_member",
+      "properties": {
+        "expression": "input == 0",
+        "property": "expression"
+      }
+    },
+    {
+      "id": 8,
+      "type": "basic/equal",
+      "pos": {
+        "0": 465,
+        "1": 454,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 82
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Input",
+          "type": "number",
+          "link": 3
+        },
+        {
+          "name": "Input 2",
+          "type": "number",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": "boolean",
+          "links": [
+            5,
+            6,
+            32
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_pro_member",
+      "properties": {
+        "expression": "input == 3",
+        "property": "expression"
+      }
+    },
+    {
+      "id": 13,
+      "type": "basic/equal",
+      "pos": {
+        "0": 457,
+        "1": 602,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 82
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Input",
+          "type": "number",
+          "link": 9
+        },
+        {
+          "name": "Input 2",
+          "type": "number",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": "boolean",
+          "links": [
+            18
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_power_enough",
+      "properties": {
+        "expression": "input <= input2",
+        "property": "expression"
+      }
+    },
+    {
+      "id": 14,
+      "type": "basic/equal",
+      "pos": {
+        "0": 456,
+        "1": 742,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 102
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Input",
+          "type": "number",
+          "link": 11
+        },
+        {
+          "name": "Input 2",
+          "type": "number",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": "boolean",
+          "links": [
+            21,
+            33
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_power_not_enough",
+      "properties": {
+        "expression": "input > input2",
+        "property": "expression"
+      }
+    },
+    {
+      "id": 11,
+      "type": "basic/equal",
+      "pos": {
+        "0": 457,
+        "1": 902,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 82
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Input",
+          "type": "number",
+          "link": 7
+        },
+        {
+          "name": "Input 2",
+          "type": "number",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": "boolean",
+          "links": [
+            28
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_config_not_completed",
+      "properties": {
+        "expression": "!input",
+        "property": "expression"
+      }
+    },
+    {
+      "id": 15,
+      "type": "basic/equal",
+      "pos": {
+        "0": 451,
+        "1": 1159,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 102
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Input",
+          "type": "number",
+          "link": 13
+        },
+        {
+          "name": "Input 2",
+          "type": "number",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": "boolean",
+          "links": [
+            15
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_sdxl_selected",
+      "properties": {
+        "expression": "input == 18",
+        "property": "expression"
+      }
+    },
+    {
+      "id": 10,
+      "type": "basic/equal",
+      "pos": {
+        "0": 747,
+        "1": 534,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 82
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Input",
+          "type": "number",
+          "link": 6
+        },
+        {
+          "name": "Input 2",
+          "type": "number",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": "boolean",
+          "links": [
+            14
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_not_pro_member",
+      "properties": {
+        "expression": "!input",
+        "property": "expression"
+      }
+    },
+    {
+      "id": 17,
+      "type": "basic/equal",
+      "pos": {
+        "0": 1262,
+        "1": 826,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 78
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Input",
+          "type": "number",
+          "link": 16
+        },
+        {
+          "name": "Input 2",
+          "type": "number",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": "boolean",
+          "links": [
+            19,
+            27
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_meet_sdxl_condition",
+      "properties": {
+        "expression": "!input",
+        "property": "expression"
+      }
+    },
+    {
+      "id": 20,
+      "type": "basic/equal",
+      "pos": {
+        "0": 1012,
+        "1": 339,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 78
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Input",
+          "type": "number",
+          "link": 20
+        },
+        {
+          "name": "Input 2",
+          "type": "number",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": "boolean",
+          "links": [
+            23,
+            25
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "is_not_meet_train_condition",
+      "properties": {
+        "expression": "!input",
+        "property": "expression"
+      }
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      6,
+      0,
+      "number"
+    ],
+    [
+      2,
+      1,
+      0,
+      7,
+      0,
+      "number"
+    ],
+    [
+      3,
+      1,
+      0,
+      8,
+      0,
+      "number"
+    ],
+    [
+      4,
+      7,
+      0,
+      9,
+      0,
+      "string"
+    ],
+    [
+      5,
+      8,
+      0,
+      9,
+      1,
+      "string"
+    ],
+    [
+      6,
+      8,
+      0,
+      10,
+      0,
+      "number"
+    ],
+    [
+      7,
+      4,
+      0,
+      11,
+      0,
+      "number"
+    ],
+    [
+      8,
+      4,
+      0,
+      12,
+      0,
+      "number"
+    ],
+    [
+      9,
+      2,
+      0,
+      13,
+      0,
+      "number"
+    ],
+    [
+      10,
+      3,
+      0,
+      13,
+      1,
+      "number"
+    ],
+    [
+      11,
+      2,
+      0,
+      14,
+      0,
+      "number"
+    ],
+    [
+      12,
+      3,
+      0,
+      14,
+      1,
+      "number"
+    ],
+    [
+      13,
+      5,
+      0,
+      15,
+      0,
+      "number"
+    ],
+    [
+      14,
+      10,
+      0,
+      16,
+      0,
+      "string"
+    ],
+    [
+      15,
+      15,
+      0,
+      16,
+      1,
+      "string"
+    ],
+    [
+      16,
+      16,
+      0,
+      17,
+      0,
+      "number"
+    ],
+    [
+      17,
+      16,
+      0,
+      18,
+      0,
+      "string"
+    ],
+    [
+      18,
+      13,
+      0,
+      19,
+      1,
+      "string"
+    ],
+    [
+      19,
+      17,
+      0,
+      19,
+      0,
+      "string"
+    ],
+    [
+      20,
+      19,
+      0,
+      20,
+      0,
+      "number"
+    ],
+    [
+      21,
+      14,
+      0,
+      21,
+      0,
+      "string"
+    ],
+    [
+      22,
+      6,
+      0,
+      22,
+      0,
+      "string"
+    ],
+    [
+      23,
+      20,
+      0,
+      22,
+      1,
+      "string"
+    ],
+    [
+      24,
+      7,
+      0,
+      23,
+      0,
+      "string"
+    ],
+    [
+      25,
+      20,
+      0,
+      23,
+      1,
+      "string"
+    ],
+    [
+      26,
+      9,
+      0,
+      24,
+      0,
+      "string"
+    ],
+    [
+      27,
+      17,
+      0,
+      24,
+      1,
+      "string"
+    ],
+    [
+      28,
+      11,
+      0,
+      24,
+      2,
+      "string"
+    ],
+    [
+      29,
+      12,
+      0,
+      25,
+      2,
+      "string"
+    ],
+    [
+      30,
+      9,
+      0,
+      25,
+      0,
+      "string"
+    ],
+    [
+      31,
+      19,
+      0,
+      25,
+      1,
+      "string"
+    ],
+    [
+      32,
+      8,
+      0,
+      26,
+      0,
+      "string"
+    ],
+    [
+      33,
+      14,
+      0,
+      26,
+      1,
+      "string"
+    ],
+    [
+      34,
+      22,
+      0,
+      27,
+      0,
+      "string"
+    ],
+    [
+      35,
+      22,
+      0,
+      36,
+      0,
+      "string"
+    ],
+    [
+      36,
+      22,
+      0,
+      32,
+      0,
+      "string"
+    ],
+    [
+      37,
+      23,
+      0,
+      28,
+      0,
+      "string"
+    ],
+    [
+      38,
+      23,
+      0,
+      32,
+      1,
+      "string"
+    ],
+    [
+      39,
+      23,
+      0,
+      36,
+      1,
+      "string"
+    ],
+    [
+      40,
+      24,
+      0,
+      29,
+      0,
+      "string"
+    ],
+    [
+      41,
+      25,
+      0,
+      29,
+      1,
+      "string"
+    ],
+    [
+      42,
+      24,
+      0,
+      33,
+      0,
+      "string"
+    ],
+    [
+      43,
+      24,
+      0,
+      35,
+      0,
+      "string"
+    ],
+    [
+      44,
+      25,
+      0,
+      34,
+      0,
+      "string"
+    ],
+    [
+      45,
+      25,
+      0,
+      36,
+      2,
+      "string"
+    ],
+    [
+      46,
+      26,
+      0,
+      31,
+      0,
+      "string"
+    ],
+    [
+      47,
+      26,
+      0,
+      32,
+      2,
+      "string"
+    ],
+    [
+      48,
+      26,
+      0,
+      36,
+      3,
+      "string"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
