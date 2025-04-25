@@ -312,6 +312,7 @@ export class LGraphCanvas {
         //link canvas and graph
         if (graph) {
             graph.attachCanvas(this);
+            global.globalGraph = graph;
         }
 
         this.setCanvas(canvas, options.skip_events);
@@ -5593,7 +5594,12 @@ export class LGraphCanvas {
 
     };
 
-    onMenuCollapseAll() { };
+    onMenuCollapseAll() {
+        // 这里获得不到当前的图
+        global.globalGraph._nodes.forEach(element => {
+            element.collapse();
+        });
+    };
 
     onMenuNodeEdit() { };
 
