@@ -3,11 +3,13 @@ import "./nodes/EqualAssertNode";
 import "./nodes/AndOperateNode";
 import "./nodes/OrOperateNode";
 import "./nodes/OutputNode";
+import "./nodes/MultiOutputNode";
 import { LiteGraph } from "../LiteGraph/LiteGraph";
 import { LGraph } from "../LiteGraph/LGraph";
 import { OutputNode } from "./nodes/OutputNode";
 import { EqualAssertNode } from "./nodes/EqualAssertNode";
 import { RawDefineNode } from "./nodes/RawDefineNode";
+import { MultiOutputNode } from "./nodes/MultiOutputNode";
 import { LGraphCanvas } from "src/litegraph";
 import { AndOperateNode } from "./nodes/AndOperateNode";
 import { OrOperateNode } from "./nodes/OrOperateNode";
@@ -129,6 +131,22 @@ class Graph {
      */
     addOutput(params: NodeParams): OutputNode {
         const output = LiteGraph.createNode("basic/output", params.title, {
+            ...params
+        });
+
+        output.pos = gridStartPostion[7][params.position];
+
+        this.graph.add(output);
+        return output;
+    }
+
+    /**
+     * 多输入终端节点
+     * @param params 
+     * @returns 
+     */
+    addMultiOutput(params: NodeParams): MultiOutputNode {
+        const output = LiteGraph.createNode("basic/mulout", params.title, {
             ...params
         });
 

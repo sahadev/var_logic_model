@@ -39,26 +39,26 @@ export class EqualAssertNode extends LGraphNode {
         );
 
         // 计算结果展示框，可以修改标题
-        this.result_widget = this.addWidget(
-            "string",
-            title,
-            false,
-            (v: any) => {
-                // 修改标题
-                // this.setProperty("title", v); // 设置控件的属性，这里是title的属性。如果控件有title的属性，则会更新title这个属性
-                this.result_widget.name = v;
-                this.title = v;
-            },
-            {
-                modifyName: true,
-                title: '' // 申明了title后，才能通过setProperty修改这个属性的值
-            }
-        );
+        // this.result_widget = this.addWidget(
+        //     "string",
+        //     '计算结果',
+        //     false,
+        //     (v: any) => {
+        //         // 修改标题
+        //         // this.setProperty("title", v); // 设置控件的属性，这里是title的属性。如果控件有title的属性，则会更新title这个属性
+        //         this.result_widget.name = v;
+        //         this.title = v;
+        //     },
+        //     {
+        //         modifyName: true,
+        //         title: '' // 申明了title后，才能通过setProperty修改这个属性的值
+        //     }
+        // );
 
         // 外部输入节点
         this.addInput("Input", "number");
         // 保持原子节点的唯一性，不要做太多事情
-        // this.addInput("Input 2", "number");
+        this.addInput("Input 2", "number");
         this.addOutput("Output", "boolean");
     }
 
@@ -92,7 +92,7 @@ export class EqualAssertNode extends LGraphNode {
 
     updateResult(result: any) {
         this.setOutputData(0, result);
-        this.result_widget.value = result;
+        // this.result_widget.value = result;
         this.calculateResult = result; // 控制输入线是否高亮
     }
 }

@@ -29,7 +29,7 @@ export class RawDefineNode extends LGraphNode {
 
         this.value_widget = this.addWidget(
             widgetType,
-            title,
+            '当前值',
             this.properties.value,
             (v) => {
                 this.setProperty("value", v);
