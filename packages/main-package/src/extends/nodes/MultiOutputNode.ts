@@ -63,4 +63,4 @@ export class MultiOutputNode extends LGraphNode {
 }
 
 //register in the system
-LiteGraph.registerNodeType("basic/mulout", MultiOutputNode, '多输入终端节点');
+LiteGraph.registerNodeType("basic/mulout", MultiOutputNode, '终端节点');

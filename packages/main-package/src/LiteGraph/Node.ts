@@ -204,6 +204,8 @@ export class LGraphNode {
         if (this.onConfigure) {
             this.onConfigure(info);
         }
+
+        this.setSize(this.computeSize());
     };
 
     /**
@@ -1254,7 +1256,7 @@ export class LGraphNode {
      * @param {vec2} minHeight
      * @return {vec2} the total size
      */
-    computeSize(out) {
+    computeSize(out?: any) {
         if (this.constructor.size) {
             return this.constructor.size.concat();
         }
@@ -1295,7 +1297,6 @@ export class LGraphNode {
 
         const contentWidth = input_width + output_width + 10;
 
-        // console.info(`node width`, contentWidth, title_width);
         size[0] = Math.max(contentWidth, title_width);
         size[0] = Math.max(size[0], LiteGraph.NODE_WIDTH);
         if (this.widgets && this.widgets.length) {
@@ -1328,7 +1329,7 @@ export class LGraphNode {
             if (!text) {
                 return 0;
             }
-            return font_size * text.length * 1; // 放大节点宽度
+            return font_size * text.length * 0.6; // 放大节点宽度
         }
 
         if (

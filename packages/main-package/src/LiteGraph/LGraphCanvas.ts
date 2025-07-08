@@ -4336,7 +4336,7 @@ export class LGraphCanvas {
 
                 let lineColor = null;
                 if (node?.calculateSubResult) {
-                    // 或操作节点下只高亮这个值的上游
+                    // 终端节点下只高亮这个值的上游
                     lineColor = node?.calculateSubResult[link.target_slot] ? HIGH_LIGHT_COLOR : null;
                 } else if (node?.calculateResult) {
                     // 如果节点的计算结果是true，则高亮这条线
