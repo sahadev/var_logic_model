@@ -538,7 +538,7 @@
           "slot_index": 0
         }
       ],
-      "title": "packageLevel",
+      "title": "accountLevel",
       "properties": { "precision": 0, "value": 2, "step": 1 }
     },
     {

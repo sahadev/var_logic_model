@@ -23,13 +23,13 @@
       "mode": 0,
       "inputs": [],
       "outputs": [{ "name": "输出节点", "type": "number", "links": null }],
-      "title": "packageLevel",
+      "title": "accountLevel",
       "properties": {
         "precision": 0,
         "value": 0,
         "step": 10,
         "position": 0,
-        "title": "packageLevel"
+        "title": "accountLevel"
       }
     },
     {

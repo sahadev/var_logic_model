@@ -13,9 +13,9 @@ let column5Index = 0;
  * 定义原始数据节点
  */
 function defineRawNode() {
-    const packageLevelNode = graphInstance.addRawNode({
+    const accountLevelNode = graphInstance.addRawNode({
         position: column1Index++,
-        title: "packageLevel",
+        title: "accountLevel",
         value: 0,
     });
 
@@ -66,7 +66,7 @@ function defineRawNode() {
     });
 
     return {
-        packageLevelNode,
+        accountLevelNode,
         effectiveNode,
         preusePointNode,
         remainPointNode,
@@ -400,7 +400,7 @@ export function defineNotNode() {
 export function relativeNode() {
 
     const {
-        packageLevelNode,
+        accountLevelNode,
         effectiveNode,
         preusePointNode,
         remainPointNode,
@@ -446,14 +446,14 @@ export function relativeNode() {
     const { otherCase } = defineNotNode();
 
     // 计算会员身份
-    packageLevelNode.connect(0, isNotVip, 0);
-    packageLevelNode.connect(0, isFreeVip, 0);
-    packageLevelNode.connect(0, isBasicVip, 0);
-    packageLevelNode.connect(0, isNotProVip, 0);
+    accountLevelNode.connect(0, isNotVip, 0);
+    accountLevelNode.connect(0, isFreeVip, 0);
+    accountLevelNode.connect(0, isBasicVip, 0);
+    accountLevelNode.connect(0, isNotProVip, 0);
 
     //计算是否过期
-    packageLevelNode.connect(0, isNotExpired, 0);
-    packageLevelNode.connect(0, isExpired, 0);
+    accountLevelNode.connect(0, isNotExpired, 0);
+    accountLevelNode.connect(0, isExpired, 0);
     effectiveNode.connect(0, isNotExpired, 1);
     effectiveNode.connect(0, isExpired, 1);
 

@@ -1,14 +1,14 @@
 // 外部输入变量
-const packageLevel = 0; // 示例值，0: 非会员, 2: 基础会员, 3: 专业会员
+const accountLevel = 0; // 示例值，0: 非会员, 2: 基础会员, 3: 专业会员
 const expectedConsumePower = 9; // 示例值
 const remainingPower = 10; // 示例值
 const isPreprocessed = false; // 示例值
 const currentSelectedModalId = 1; // 示例值
 
 // 原子语义变量，用户会员身份
-const is_non_member = packageLevel === 0;
-const is_basic_member = packageLevel === 1;
-const is_pro_member = packageLevel === 2;
+const is_non_member = accountLevel === 0;
+const is_basic_member = accountLevel === 1;
+const is_pro_member = accountLevel === 2;
 const is_basic_or_pro_member = is_basic_member || is_pro_member;
 const is_not_pro_member = !is_pro_member;
 
