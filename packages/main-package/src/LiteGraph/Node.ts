@@ -68,6 +68,10 @@ supported callbacks:
 
 export class LGraphNode {
     calculateResult: boolean;
+    properties: any;
+    flags: any;
+    title: string;
+    outputs: any[];
 
     constructor(title) {
         this._ctor(title);
@@ -1028,10 +1032,10 @@ export class LGraphNode {
      * @param {Object} extra_info this can be used to have special properties of the property (like values, etc)
      */
     addProperty(
-        name,
-        default_value,
-        type,
-        extra_info
+        name: string,
+        default_value?: any,
+        type?: string,
+        extra_info?: object
     ) {
         var o = { name: name, type: type, default_value: default_value };
         if (extra_info) {
@@ -1401,7 +1405,7 @@ export class LGraphNode {
      * @param {Object} options the object that contains special properties of this widget 
      * @return {Object} the created widget object
      */
-    addWidget(type: WidgetType, name: string, value: any, callback: Function | string, options: object): object {
+    addWidget(type?: WidgetType, name?: string, value?: any, callback?: Function | string, options?: object): object {
         if (!this.widgets) {
             this.widgets = [];
         }

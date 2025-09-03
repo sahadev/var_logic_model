@@ -55,16 +55,16 @@ export const Serialize = () => {
         color={opened ? "red" : ""}
         onClick={() => (opened ? closeTask() : openTask())}
       >
-        {opened ? "停止" : "开始"}
+        {opened ? "停止仿真" : "开始仿真"}
       </Button>
       <Button variant="filled" onClick={save}>
-        Serialize
+        序列化保存
       </Button>
       <Button variant="filled" onClick={loadConfig}>
-        Load Local Data
+        加载序列化数据
       </Button>
       <Button variant="filled" onClick={loadDemo}>
-        Load Demo
+        加载Demo
       </Button>
     </div>
   );
