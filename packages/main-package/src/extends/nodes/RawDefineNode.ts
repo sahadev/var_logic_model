@@ -77,15 +77,15 @@ export class RawStringDefineNode extends RawDefineNode {
 
 //Constant
 export class ConstantNumber extends LGraphNode {
-  static title = "Const Number";
-  static desc = "Const number";
+  static title = "数字定义节点";
+  static desc = "数字定义节点";
   
   widget: any;
   widgets_up: boolean;
   size: [number, number];
 
   constructor() {
-    super("Const Number");
+    super("数字定义节点");
     this.addOutput("value", "number");
     this.addProperty("value", 1.0);
     this.widget = this.addWidget("number", "value", 1, "value");
@@ -115,8 +115,8 @@ export class ConstantNumber extends LGraphNode {
 
 
 export class ConstantBoolean extends LGraphNode {
-  static title = "Const Boolean";
-  static desc = "Const boolean";
+  static title = "布尔定义节点";
+  static desc = "布尔定义节点";
   
   widget: any;
   serialize_widgets: boolean;
@@ -124,7 +124,7 @@ export class ConstantBoolean extends LGraphNode {
   size: [number, number];
 
   constructor() {
-    super("Const Boolean");
+    super("布尔定义节点");
     this.addOutput("bool", "boolean");
     this.addProperty("value", true);
     this.widget = this.addWidget("toggle", "value", true, "value");
@@ -159,15 +159,15 @@ export class ConstantBoolean extends LGraphNode {
 
 
 export class ConstantString extends LGraphNode {
-  static title = "Const String";
-  static desc = "Const string";
+  static title = "字符串定义节点";
+  static desc = "字符串定义节点";
   
   widget: any;
   widgets_up: boolean;
   size: [number, number];
 
   constructor() {
-    super("Const String");
+    super("字符串定义节点");
     this.addOutput("string", "string");
     this.addProperty("value", "");
     this.widget = this.addWidget("text", "value", "", "value");
