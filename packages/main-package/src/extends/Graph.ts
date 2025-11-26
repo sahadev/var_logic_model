@@ -49,6 +49,7 @@ class Graph {
     canvas: LGraphCanvas;
 
     constructor() {
+        console.log("Graph constructor, 初始化");
         this.graph = new LGraph();
         this.canvas = new LGraphCanvas("#mycanvas", this.graph);
         this.canvas.resize(window.innerWidth, window.innerHeight);

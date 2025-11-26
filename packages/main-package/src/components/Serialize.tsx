@@ -176,7 +176,7 @@ export const Serialize = () => {
           }}
         >
           <span className="mr-1.5">💾</span>
-          保存到LS
+          保存到LS及DB
         </Button>
         
         <Button
