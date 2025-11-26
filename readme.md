@@ -1,286 +1,288 @@
-# 面向变量聚合的逻辑建模工具
+# Variable Aggregation Logic Modeling Tool
 
-一个基于 LiteGraph.js 构建的可视化逻辑建模和仿真工具，支持通过节点图的方式构建复杂的逻辑关系模型。
+> [中文文档](README.zh-CN.md) | English
 
-## 📋 目录
+A visual logic modeling and simulation tool built on LiteGraph.js, supporting the construction of complex logical relationship models through node graphs.
 
-- [项目简介](#项目简介)
-- [功能特性](#功能特性)
-- [技术栈](#技术栈)
-- [快速开始](#快速开始)
-- [项目结构](#项目结构)
-- [核心功能](#核心功能)
-- [节点类型](#节点类型)
-- [数据管理](#数据管理)
-- [部署信息](#部署信息)
+## 📋 Table of Contents
 
-## 🎯 项目简介
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Quick Start](#quick-start)
+- [Project Structure](#project-structure)
+- [Core Features](#core-features)
+- [Node Types](#node-types)
+- [Data Management](#data-management)
+- [Deployment](#deployment)
 
-本项目是一个基于浏览器的可视化逻辑建模工具，允许用户通过拖拽节点的方式构建复杂的逻辑关系图。系统支持实时仿真、数据持久化存储、以及灵活的导入导出功能。
+## 🎯 Project Overview
 
-## ✨ 功能特性
+This project is a browser-based visual logic modeling tool that allows users to build complex logical relationship graphs by dragging and dropping nodes. The system supports real-time simulation, persistent data storage, and flexible import/export functionality.
 
-### 1. 可视化节点编辑
-- 基于 LiteGraph.js 的强大节点图编辑器
-- 支持拖拽、缩放、平移等交互操作
-- 实时连接节点构建逻辑关系
-- 网格对齐和自动布局
+## ✨ Features
 
-### 2. 逻辑仿真
-- 一键启动/停止仿真
-- 实时计算节点输出
-- 支持复杂逻辑链路的执行
+### 1. Visual Node Editing
+- Powerful node graph editor based on LiteGraph.js
+- Interactive operations: drag, zoom, pan
+- Real-time node connection for building logical relationships
+- Grid alignment and automatic layout
 
-### 3. 数据管理
-- **本地存储**：数据保存到 localStorage
-- **IndexedDB 存储**：支持大量数据记录存储
-- **数据记录列表**：左侧面板显示所有保存的记录
-  - 显示保存时间（智能相对时间显示）
-  - 支持编辑记录标题
-  - 一键快速导入历史记录
-  - 支持删除记录
+### 2. Logic Simulation
+- One-click start/stop simulation
+- Real-time node output calculation
+- Support for complex logic chain execution
 
-### 4. 导入导出
-- **复制到剪贴板**：一键复制当前图表数据（JSON 格式）
-- **粘贴导入**：从剪贴板粘贴 JSON 数据并导入
-- **序列化保存**：保存到本地存储和 IndexedDB
-- **从本地存储加载**：快速加载最近保存的数据
+### 3. Data Management
+- **Local Storage**: Data saved to localStorage
+- **IndexedDB Storage**: Support for large-scale data record storage
+- **Data Record List**: Left panel displays all saved records
+  - Smart relative time display (just now, X minutes ago, X hours ago, etc.)
+  - Edit record titles
+  - One-click quick import of historical records
+  - Delete records support
 
-### 5. 用户界面
-- 现代化的 UI 设计（基于 Mantine UI）
-- 美化的按钮样式，不同功能使用不同颜色区分
-- 响应式布局设计
-- 友好的错误提示和成功通知
+### 4. Import/Export
+- **Copy to Clipboard**: One-click copy of current graph data (JSON format)
+- **Paste Import**: Paste JSON data from clipboard and import
+- **Serialization Save**: Save to local storage and IndexedDB
+- **Load from Local Storage**: Quickly load recently saved data
 
-## 🛠 技术栈
+### 5. User Interface
+- Modern UI design (based on Mantine UI)
+- Beautiful button styles with different colors for different functions
+- Responsive layout design
+- Friendly error prompts and success notifications
 
-- **前端框架**: React 18.3.1
-- **UI 组件库**: Mantine 7.11.1
-- **图形引擎**: LiteGraph.js
-- **样式**: Tailwind CSS 3.4.4
-- **状态管理**: Zustand 4.5.4
-- **数据存储**: IndexedDB, localStorage
-- **构建工具**: React Scripts 5.0.1
-- **语言**: TypeScript
+## 🛠 Tech Stack
 
-## 🚀 快速开始
+- **Frontend Framework**: React 18.3.1
+- **UI Component Library**: Mantine 7.11.1
+- **Graphics Engine**: LiteGraph.js
+- **Styling**: Tailwind CSS 3.4.4
+- **State Management**: Zustand 4.5.4
+- **Data Storage**: IndexedDB, localStorage
+- **Build Tool**: React Scripts 5.0.1
+- **Language**: TypeScript
 
-### 环境要求
+## 🚀 Quick Start
+
+### Requirements
 
 - Node.js >= 14.0.0
-- npm 或 yarn
+- npm or yarn
 
-### 安装依赖
+### Install Dependencies
 
 ```bash
-# 使用 yarn（推荐）
+# Using yarn (recommended)
 yarn install
 
-# 或使用 npm
+# Or using npm
 npm install
 ```
 
-### 启动开发服务器
+### Start Development Server
 
 ```bash
 cd packages/main-package
 npm run start
 ```
 
-项目将在 `http://localhost:3000` 启动。
+The project will start at `http://localhost:3000`.
 
-### 构建生产版本
+### Build for Production
 
 ```bash
 cd packages/main-package
 npm run build
 ```
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
 use-lite-graph/
 ├── packages/
-│   ├── main-package/          # 主应用包
+│   ├── main-package/          # Main application package
 │   │   ├── src/
-│   │   │   ├── components/    # React 组件
-│   │   │   │   ├── Serialize.tsx          # 序列化控制组件
-│   │   │   │   ├── DataRecordList.tsx     # 数据记录列表
-│   │   │   │   └── ModifyModal.tsx        # 修改模态框
-│   │   │   ├── extends/       # 扩展功能
-│   │   │   │   ├── Graph.ts              # 图表实例管理
-│   │   │   │   ├── Demo.ts               # 示例节点定义
-│   │   │   │   ├── nodes/                # 自定义节点
-│   │   │   │   │   ├── RawDefineNode.ts      # 原始定义节点
-│   │   │   │   │   ├── EqualAssertNode.ts    # 断言节点
-│   │   │   │   │   ├── AndOperateNode.ts     # 与操作节点
-│   │   │   │   │   ├── OrOperateNode.ts      # 或操作节点
-│   │   │   │   │   ├── OutputNode.ts         # 输出节点
-│   │   │   │   │   └── MultiOutputNode.ts    # 多输出节点
-│   │   │   │   └── App.tsx               # 主应用组件
-│   │   │   ├── LiteGraph/     # LiteGraph 核心库
-│   │   │   ├── utils/         # 工具函数
-│   │   │   │   └── indexedDB.ts          # IndexedDB 管理
-│   │   │   └── store/         # 状态管理
-│   │   └── public/            # 静态资源
-│   └── litegraph.js/          # LiteGraph 库源码
+│   │   │   ├── components/    # React components
+│   │   │   │   ├── Serialize.tsx          # Serialization control component
+│   │   │   │   ├── DataRecordList.tsx     # Data record list
+│   │   │   │   └── ModifyModal.tsx        # Modify modal
+│   │   │   ├── extends/       # Extended features
+│   │   │   │   ├── Graph.ts              # Graph instance management
+│   │   │   │   ├── Demo.ts               # Example node definitions
+│   │   │   │   ├── nodes/                # Custom nodes
+│   │   │   │   │   ├── RawDefineNode.ts      # Raw definition node
+│   │   │   │   │   ├── EqualAssertNode.ts    # Assertion node
+│   │   │   │   │   ├── AndOperateNode.ts     # AND operation node
+│   │   │   │   │   ├── OrOperateNode.ts      # OR operation node
+│   │   │   │   │   ├── OutputNode.ts         # Output node
+│   │   │   │   │   └── MultiOutputNode.ts    # Multi-output node
+│   │   │   │   └── App.tsx               # Main application component
+│   │   │   ├── LiteGraph/     # LiteGraph core library
+│   │   │   ├── utils/         # Utility functions
+│   │   │   │   └── indexedDB.ts          # IndexedDB management
+│   │   │   └── store/         # State management
+│   │   └── public/            # Static resources
+│   └── litegraph.js/          # LiteGraph library source code
 ├── package.json
 └── readme.md
 ```
 
-## 🎨 核心功能
+## 🎨 Core Features
 
-### 节点图编辑
+### Node Graph Editing
 
-在画布上可以：
-- 右键点击创建新节点
-- 拖拽节点调整位置
-- 连接节点的输入输出端口
-- 双击节点编辑属性
-- 使用滚轮缩放画布
-- 拖拽画布平移视图
+On the canvas you can:
+- Right-click to create new nodes
+- Drag nodes to adjust position
+- Connect node input/output ports
+- Double-click nodes to edit properties
+- Use mouse wheel to zoom canvas
+- Drag canvas to pan view
 
-### 数据序列化
+### Data Serialization
 
-所有图表数据可以序列化为 JSON 格式，包含：
-- 节点信息（位置、属性、连接）
-- 链接关系
-- 配置信息
-- 版本信息
+All graph data can be serialized to JSON format, including:
+- Node information (position, properties, connections)
+- Link relationships
+- Configuration information
+- Version information
 
-### 数据记录管理
+### Data Record Management
 
-左侧数据记录列表提供：
-- **自动保存**：点击"保存到LS及DB"时自动添加到记录列表
-- **时间显示**：智能显示相对时间（刚刚、X分钟前、X小时前等）
-- **标题编辑**：点击编辑图标可修改记录标题
-- **快速导入**：点击记录项即可导入到画布
-- **删除记录**：支持删除不需要的记录
+The left data record list provides:
+- **Auto-save**: Automatically added to record list when clicking "Save to LS & DB"
+- **Time Display**: Smart relative time display (just now, X minutes ago, X hours ago, etc.)
+- **Title Editing**: Click edit icon to modify record title
+- **Quick Import**: Click record item to import to canvas
+- **Delete Records**: Support for deleting unwanted records
 
-## 🔧 节点类型
+## 🔧 Node Types
 
-### 1. RawDefineNode（原始定义节点）
-- **功能**：定义原始变量值
-- **输入**：无
-- **输出**：变量值（数字或布尔值）
-- **属性**：可设置数值、精度、步长等
+### 1. RawDefineNode (Raw Definition Node)
+- **Function**: Define raw variable values
+- **Input**: None
+- **Output**: Variable value (number or boolean)
+- **Properties**: Can set value, precision, step, etc.
 
-### 2. EqualAssertNode（断言节点）
-- **功能**：执行条件断言，判断输入是否满足表达式
-- **输入**：变量值
-- **输出**：布尔值（true/false）
-- **属性**：可编辑表达式（使用 `input` 代表输入变量）
+### 2. EqualAssertNode (Assertion Node)
+- **Function**: Execute conditional assertion, judge if input satisfies expression
+- **Input**: Variable value
+- **Output**: Boolean value (true/false)
+- **Properties**: Editable expression (use `input` to represent input variable)
 
-### 3. AndOperateNode（与操作节点）
-- **功能**：执行逻辑与操作
-- **输入**：多个布尔值
-- **输出**：所有输入的逻辑与结果
+### 3. AndOperateNode (AND Operation Node)
+- **Function**: Execute logical AND operation
+- **Input**: Multiple boolean values
+- **Output**: Logical AND result of all inputs
 
-### 4. OrOperateNode（或操作节点）
-- **功能**：执行逻辑或操作
-- **输入**：多个布尔值
-- **输出**：所有输入的逻辑或结果
+### 4. OrOperateNode (OR Operation Node)
+- **Function**: Execute logical OR operation
+- **Input**: Multiple boolean values
+- **Output**: Logical OR result of all inputs
 
-### 5. OutputNode（输出节点）
-- **功能**：输出最终结果
-- **输入**：计算结果
-- **输出**：显示在节点上
+### 5. OutputNode (Output Node)
+- **Function**: Output final result
+- **Input**: Calculation result
+- **Output**: Displayed on the node
 
-### 6. MultiOutputNode（多输出节点）
-- **功能**：支持多个输出端口
-- **输入**：多个输入值
-- **输出**：多个输出值
+### 6. MultiOutputNode (Multi-Output Node)
+- **Function**: Support multiple output ports
+- **Input**: Multiple input values
+- **Output**: Multiple output values
 
-## 💾 数据管理
+## 💾 Data Management
 
-### 保存数据
+### Save Data
 
-点击"保存到LS及DB"按钮：
-1. 数据保存到 localStorage（键名：`litegrapheditor_clipboard`）
-2. 数据同时保存到 IndexedDB
-3. 自动添加到左侧数据记录列表
-4. 显示保存成功通知
+Click "Save to LS & DB" button:
+1. Data saved to localStorage (key: `litegrapheditor_clipboard`)
+2. Data simultaneously saved to IndexedDB
+3. Automatically added to left data record list
+4. Display save success notification
 
-### 加载数据
+### Load Data
 
-**方式一：从本地存储加载**
-- 点击"从LS加载"按钮
-- 加载最近保存到 localStorage 的数据
+**Method 1: Load from Local Storage**
+- Click "Load from LS" button
+- Load recently saved data from localStorage
 
-**方式二：从记录列表导入**
-- 在左侧记录列表中点击任意记录
-- 自动导入到画布
+**Method 2: Import from Record List**
+- Click any record in the left record list
+- Automatically import to canvas
 
-**方式三：粘贴导入**
-- 点击"导入"按钮
-- 在弹窗中粘贴 JSON 数据
-- 点击"导入"完成加载
+**Method 3: Paste Import**
+- Click "Import" button
+- Paste JSON data in the popup
+- Click "Import" to complete loading
 
-### 导出数据
+### Export Data
 
-**复制到剪贴板**
-- 点击"复制"按钮
-- 当前图表数据以格式化的 JSON 复制到剪贴板
-- 可以粘贴到其他应用或保存为文件
+**Copy to Clipboard**
+- Click "Copy" button
+- Current graph data copied to clipboard as formatted JSON
+- Can be pasted to other applications or saved as file
 
-## 🎮 操作指南
+## 🎮 User Guide
 
-### 基本操作
+### Basic Operations
 
-1. **创建节点**：右键点击画布，选择节点类型
-2. **连接节点**：从输出端口拖拽到输入端口
-3. **编辑节点**：双击节点打开编辑面板
-4. **删除节点**：选中节点后按 Delete 键
-5. **移动节点**：拖拽节点到新位置
+1. **Create Node**: Right-click canvas, select node type
+2. **Connect Nodes**: Drag from output port to input port
+3. **Edit Node**: Double-click node to open edit panel
+4. **Delete Node**: Select node and press Delete key
+5. **Move Node**: Drag node to new position
 
-### 仿真操作
+### Simulation Operations
 
-1. **开始仿真**：点击"▶ 开始仿真"按钮
-2. **停止仿真**：点击"⏹ 停止仿真"按钮
-3. 仿真过程中节点会实时计算并更新输出
+1. **Start Simulation**: Click "▶ Start Simulation" button
+2. **Stop Simulation**: Click "⏹ Stop Simulation" button
+3. Nodes will calculate and update output in real-time during simulation
 
-### 数据操作
+### Data Operations
 
-1. **保存**：点击"💾 保存到LS及DB"
-2. **加载**：点击"📂 从LS加载"或从记录列表选择
-3. **复制**：点击"📋 复制"复制到剪贴板
-4. **导入**：点击"📥 导入"粘贴 JSON 数据
-5. **加载示例**：点击"🎯 加载Demo"加载示例节点
+1. **Save**: Click "💾 Save to LS & DB"
+2. **Load**: Click "📂 Load from LS" or select from record list
+3. **Copy**: Click "📋 Copy" to copy to clipboard
+4. **Import**: Click "📥 Import" to paste JSON data
+5. **Load Example**: Click "🎯 Load Demo" to load example nodes
 
-## 🌐 部署信息
+## 🌐 Deployment
 
-项目已部署至：[http://var_logic_model.surge.sh](http://var_logic_model.surge.sh)
+Project deployed at: [http://var_logic_model.surge.sh](http://var_logic_model.surge.sh)
 
-### 本地部署
+### Local Deployment
 
 ```bash
 cd packages/main-package
 npm run build
-# 构建产物在 build/ 目录
+# Build artifacts in build/ directory
 ```
 
-## 📝 开发说明
+## 📝 Development Guide
 
-### 添加新节点类型
+### Adding New Node Types
 
-1. 在 `src/extends/nodes/` 目录创建新节点文件
-2. 继承 `LGraphNode` 类
-3. 实现节点的输入输出和计算逻辑
-4. 在 `src/extends/Graph.ts` 中注册节点类型
-5. 在 `src/extends/Demo.ts` 中添加示例（可选）
+1. Create new node file in `src/extends/nodes/` directory
+2. Extend `LGraphNode` class
+3. Implement node input/output and calculation logic
+4. Register node type in `src/extends/Graph.ts`
+5. Add example in `src/extends/Demo.ts` (optional)
 
-### 自定义样式
+### Custom Styling
 
-项目使用 Tailwind CSS，可以在组件中使用 Tailwind 类名。全局样式在 `src/extends/App.css` 中定义。
+The project uses Tailwind CSS, you can use Tailwind class names in components. Global styles are defined in `src/extends/App.css`.
 
-## 🤝 贡献
+## 🤝 Contributing
 
-欢迎提交 Issue 和 Pull Request！
+Issues and Pull Requests are welcome!
 
-## 📄 许可证
+## 📄 License
 
-本项目基于 LiteGraph.js 构建，请参考相关许可证文件。
+This project is built on LiteGraph.js, please refer to the relevant license files.
 
 ---
 
-**注意**：本项目代码位于 `packages/main-package` 目录下。
+**Note**: The project code is located in the `packages/main-package` directory.
