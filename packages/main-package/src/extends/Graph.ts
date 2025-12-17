@@ -4,6 +4,7 @@ import "./nodes/AndOperateNode";
 import "./nodes/OrOperateNode";
 import "./nodes/OutputNode";
 import "./nodes/MultiOutputNode";
+import "./nodes/PassThroughNode";
 import { LiteGraph } from "../LiteGraph/LiteGraph";
 import { LGraph } from "../LiteGraph/LGraph";
 import { OutputNode } from "./nodes/OutputNode";

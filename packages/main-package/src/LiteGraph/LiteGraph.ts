@@ -52,7 +52,7 @@ export let LiteGraph = {
     EVENT_LINK_COLOR: "#A86",      /* 原#A86，改为浅红色，使事件链接更突出 */
     CONNECTING_LINK_COLOR: "#28a745", /* 原#AFA，改为浅绿色，使连接线更清晰 */
 
-    MAX_NUMBER_OF_NODES: 1000, //avoid infinite loops
+    MAX_NUMBER_OF_NODES: 10000, //avoid infinite loops
     DEFAULT_POSITION: [100, 100], //default node position
     VALID_SHAPES: ["default", "box", "round", "card"], //,"circle"
 
