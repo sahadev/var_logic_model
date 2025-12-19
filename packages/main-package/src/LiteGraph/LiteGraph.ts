@@ -48,7 +48,7 @@ export let LiteGraph = {
     WIDGET_TEXT_COLOR: "#333",        /* 原#DDD，改为深灰色，提高文字可读性 */
     WIDGET_SECONDARY_TEXT_COLOR: "#666", /* 原#999，稍微加深，使次要文字更清晰 */
 
-    LINK_COLOR: "#17a2b8",            /* 原#9A9，改为浅蓝色，使链接更醒目 */
+    LINK_COLOR: "#CCCCCC",            /* 浅灰色连接线 */
     EVENT_LINK_COLOR: "#A86",      /* 原#A86，改为浅红色，使事件链接更突出 */
     CONNECTING_LINK_COLOR: "#28a745", /* 原#AFA，改为浅绿色，使连接线更清晰 */
 
